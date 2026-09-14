@@ -354,6 +354,12 @@ input[type="range"].p-range::-moz-range-thumb{
 
 .q-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
 
+/* transcript */
+.transcript-box summary{list-style:none;}
+.transcript-box summary::-webkit-details-marker{display:none;}
+.transcript-box summary::before{content:"▸ ";display:inline-block;transition:transform .2s;}
+.transcript-box[open] summary::before{content:"▾ ";}
+
 /* =========================================================
    STATS / DASHBOARD
    ========================================================= */
@@ -408,6 +414,8 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
 }
 .blank:focus{background:#dbeafe;border-bottom-color:var(--blue-d);}
 .blank:disabled{background:#f1f5f9;border-bottom-color:var(--line2);color:var(--ink2);}
+.blank.is-correct{background:var(--green-l);border-bottom-color:var(--green);color:#14532d;}
+.blank.is-wrong{background:var(--red-l);border-bottom-color:var(--red);color:#7f1d1d;}
 
 /* =========================================================
    PRONUNCIATION / SPEAKING
@@ -618,8 +626,9 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div class="card">
         <h3 class="card-title">ℹ️ Cách ứng dụng chấm điểm</h3>
         <ul style="font-size:.9rem;color:var(--ink2)">
-          <li><strong>Bài có đáp án xác định</strong> (Getting Ready, Review, Final Test, và một số câu trong Listening 2 &amp; 3) được chấm tự động.</li>
-          <li><strong>Bài không có đáp án đã kiểm chứng</strong> (Listening 1, phần lớn Listening 2 &amp; 3, Dictation) chạy ở <strong>Practice Mode — self-check</strong>. Ứng dụng ghi lại câu trả lời nhưng <em>không</em> tự bịa đáp án.</li>
+          <li><strong>Bài có đáp án xác định</strong> (Getting Ready, Listening 1, Listening 2, Listening 3 — Task 1, Dictation, Review, Final Test) được chấm tự động.</li>
+          <li><strong>Bài không có đáp án đã kiểm chứng</strong> (Listening 3 — Task 2, câu 2–6) chạy ở <strong>Practice Mode — self-check</strong>. Ứng dụng ghi lại câu trả lời nhưng <em>không</em> tự bịa đáp án.</li>
+          <li>Sau khi Submit, bạn có thể bấm <strong>“Xem transcript”</strong> để đối chiếu với audio.</li>
           <li>Tiến độ, XP, điểm và lỗi được lưu tự động trong trình duyệt (localStorage).</li>
         </ul>
       </div>
@@ -684,7 +693,7 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
           Khi nghe small talk, bạn <strong>không cần hiểu 100% từng từ</strong>. Người bản xứ cũng bỏ qua nhiều từ.
           Điều quan trọng là nắm được <em>ý chính</em> và <em>chức năng</em> của câu nói.
         </p>
-        <div class="explain-vi" style="background:#f0f9ff;border:1px solid #bae6fd;border-left:5px solid var(--sky);padding:14px 16px;border-radius:10px;font-size:.9rem;color:#0c4a6e;">
+        <div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:5px solid var(--sky);padding:14px 16px;border-radius:10px;font-size:.9rem;color:#0c4a6e;">
           <strong>Mẹo:</strong> Thay vì cố dịch, hãy tự hỏi “Người này đang <em>làm gì</em>?” — chào, giới thiệu, hỏi thăm, hay muốn kết thúc câu chuyện?
         </div>
       </div>
@@ -835,7 +844,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div class="card">
         <p style="font-size:.9rem;color:var(--muted);margin:0">
           Phần ôn tập gồm nhiều dạng câu hỏi: trắc nghiệm, đúng/sai, nối, điền từ.
-          Chỉ những câu có <strong>đáp án xác định</strong> mới được đưa vào đây.
         </p>
       </div>
       <div id="mount-review"></div>
@@ -862,7 +870,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
           <p class="mb-0" style="font-size:.88rem;color:var(--muted)">
             Chỉ những câu hỏi <strong>có đáp án xác định</strong> bị trả lời sai mới được lưu.
-            Câu hỏi Practice Mode không được lưu vì không có đáp án đã kiểm chứng.
           </p>
           <button class="btn btn-danger btn-sm" data-action="clear-mistakes">🗑 Clear Mistakes</button>
         </div>
@@ -887,14 +894,64 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
 "use strict";
 
 /* =========================================================================
-   1. DATA — AUDIO
+   1. DATA — AUDIO (kèm transcript đã xác minh từ audio scripts)
    ========================================================================= */
 const AUDIO = {
-  l1  : { cd:"CD 1-2", file:"02) Unit 1.mp3", src:"audio/02%29%20Unit%201.mp3" },
-  l2  : { cd:"CD 1-3", file:"03) Unit 1.mp3", src:"audio/03%29%20Unit%201.mp3" },
-  l3  : { cd:"CD 1-4", file:"04) Unit 1.mp3", src:"audio/04%29%20Unit%201.mp3" },
-  pron: { cd:"CD 1-5", file:"05) Unit 1.mp3", src:"audio/05%29%20Unit%201.mp3" },
-  dict: { cd:"CD 1-6", file:"06) Unit 1.mp3", src:"audio/06%29%20Unit%201.mp3" }
+  l1: {
+    cd: "CD 1-2", file: "02) Unit 1.mp3", src: "audio/02%29%20Unit%201.mp3",
+    transcript: [
+      { sp:"1", line:"A: Hi. I don't think we've met, have we? — B: No, I don't think so. My name's Mia. — A: Nice to meet you, Mia. I'm Tim Clark." },
+      { sp:"2", line:"A: Hey, you're Mike Thompson, right? — B: That's right. And you're Jenny? — A: Yeah! Jenny Lindsay. — B: Oh, sure. We met at Jake's wedding. — A: It's great to see you again!" },
+      { sp:"3", line:"A: Haven't we met somewhere? — B: No, I don't think so. — A: Are you from around here? — B: No, my name is Greg Brown. — A: Oh, I'm sorry. I was positive we'd met before." },
+      { sp:"4", line:"A: Jeff! Hi. Remember me? — B: Oh, hi! It's... uh... — A: Tara. That's right. We were in that computer class together." },
+      { sp:"5", line:"A: Oh, hi, you're Jonathan, aren't you? — B: Yes, and you're Wendy. — A: Yeah. We met at the conference in Hawaii last summer." },
+      { sp:"6", line:"A: Hi! Don't we work in the same building? — B: Yes, I think we do. — A: I'm Gary James. I'm in accounting. — B: Hi, Gary. I'm William Jones. I'm in marketing." }
+    ]
+  },
+  l2: {
+    cd: "CD 1-3", file: "03) Unit 1.mp3", src: "audio/03%29%20Unit%201.mp3",
+    transcript: [
+      { sp:"1", line:"A: Hey, Annie, that looks really nice on you. Is it new? — B: Yeah, I got it on sale at George Brothers Department Store... That color looks great. — A: Oh! Look at the time. I've got to run. Good seeing you!" },
+      { sp:"2", line:"A: What are you taking this year? — B: Mostly literature courses. — A: Oh, really? Are they any good? — B: They're not bad. Professor Scott's class... but his tests are so hard. — A: Really? Are they essay or short answer tests?" },
+      { sp:"3", line:"A: What an awful month we are having. — B: It's pretty bad, isn't it? So hot and humid... — A: That's true. Well, I think I'm going to get some more drinks. Enjoy the party!" },
+      { sp:"4", line:"A: So tell me, Kim. What's he like? — B: Well, he's a real character... always giving me little presents. — A: Yeah, probably. So how long have you known him, anyway?" },
+      { sp:"5", line:"A: So are you still doing the same thing, David? — B: Yeah, I am, unfortunately... stuck in that office. — A: No, it's not. The worst thing about it is you still have to hear about any jobs. I'll let you know." },
+      { sp:"6", line:"A: So, everybody's fine at home, Sarah? — B: Yes... My sister Jenny's getting married! — A: Sounds great. And how about your brother? What's he been doing lately?" }
+    ]
+  },
+  l3: {
+    cd: "CD 1-4", file: "04) Unit 1.mp3", src: "audio/04%29%20Unit%201.mp3",
+    transcript: [
+      { sp:"1", line:"Yes, I do. I really enjoy living here. So far the weather's been great, and people here are really pretty, and I love all the cafes and restaurants. The other thing I like is that the town's small, so it's easy to get to know people." },
+      { sp:"2", line:"Yes, I do. It's a very difficult language to learn. I've been studying it for two years. I tried to learn Japanese once, and it was really hard. These days, though, it's easier to learn a foreign language because you can buy some fantastic courses online and on DVD." },
+      { sp:"3", line:"I have two children, a girl and a boy. They're both going to school, so they keep us very busy. My husband comes from a big family and would love to have more children, but I think two is enough." },
+      { sp:"4", line:"I have a small design company. We design kitchens and bathrooms and things like that. There are just three of us in the company. Last year was a very quiet year for us, but it looks as if business is really improving this year." },
+      { sp:"5", line:"Oh, yeah. I've been having a great time since I arrived. Everyone's been very helpful, and I've made some wonderful new friends. I still have a few more days here, and I'm thinking of renting a car and driving up to the mountains." },
+      { sp:"6", line:"I'm from a town called Cairns, on the northeast coast of Australia. It's a small town, but I enjoy living there. It's not far from the Great Barrier Reef, which is one of the most beautiful places in the world. You should go there sometime." }
+    ]
+  },
+  pron: {
+    cd:"CD 1-5", file:"05) Unit 1.mp3", src:"audio/05%29%20Unit%201.mp3",
+    transcript: [
+      { sp:"1", line:"Where does he go to school?" },
+      { sp:"2", line:"I have to call his teacher." },
+      { sp:"3", line:"What's her job?" },
+      { sp:"4", line:"Have you known him for a long time?" }
+    ]
+  },
+  dict: {
+    cd:"CD 1-6", file:"06) Unit 1.mp3", src:"audio/06%29%20Unit%201.mp3",
+    transcript: [
+      { sp:"A", line:"Hi, haven't we met before?" },
+      { sp:"B", line:"Yeah, I think we met at Kate's wedding." },
+      { sp:"A", line:"That's right! Have you seen her lately?" },
+      { sp:"B", line:"No, I haven't seen her in months. But I talked with her husband last week." },
+      { sp:"A", line:"Oh, really? How's he doing?" },
+      { sp:"B", line:"He's doing really well. He told me that he's got a great new job." },
+      { sp:"A", line:"I'm happy to hear that. Well, I've got to go, but it was great to see you." },
+      { sp:"B", line:"Yeah, you too! If you see John again, tell him I said hello." }
+    ]
+  }
 };
 
 /* =========================================================================
@@ -917,7 +974,6 @@ const SECTIONS = [
   { id:"progress",      label:"Progress",            icon:"📊" }
 ];
 
-/* Sections counted for the overall progress bar */
 const TRACKABLE = [
   "getting-ready","listening-1","listening-2","listening-3",
   "pronunciation","dictation","conversation","review","final-test"
@@ -935,10 +991,7 @@ const LEVELS = [
 ];
 
 /* =========================================================================
-   4. DATA — QUIZZES
-   -------------------------------------------------------------------------
-   item.type : "mc" | "tf" | "fill" | "match"
-   item.answer === null  ->  PRACTICE MODE (không có đáp án đã kiểm chứng)
+   4. DATA — QUIZZES (đã điền đáp án xác minh)
    ========================================================================= */
 const QUIZZES = {
 
@@ -961,38 +1014,43 @@ const QUIZZES = {
         explanation:"Nói tên của mình (“My name’s Kate”) là hành động <strong>tự giới thiệu</strong>." },
       { id:"gr4", type:"mc", question:"Hi, nice to see you again.",
         options:["Greet","Introduce"], answer:0,
-        explanation:"Từ “<strong>again</strong>” cho thấy hai người đã gặp nhau trước đó → đây là lời <strong>chào</strong>, không phải tự giới thiệu." },
+        explanation:"Từ “<strong>again</strong>” cho thấy hai người đã gặp nhau trước đó → đây là lời <strong>chào</strong>." },
       { id:"gr5", type:"mc", question:"Hi. I’m Don. I just started working here.",
         options:["Greet","Introduce"], answer:1,
-        explanation:"Nói tên và giới thiệu hoàn cảnh của mình (“I just started working here”) → <strong>tự giới thiệu</strong>." },
+        explanation:"Nói tên và giới thiệu hoàn cảnh (“I just started working here”) → <strong>tự giới thiệu</strong>." },
       { id:"gr6", type:"mc", question:"Betsy! How are you doing?",
         options:["Greet","Introduce"], answer:0,
         explanation:"Gọi tên người kia và hỏi thăm (“How are you doing?”) → <strong>chào</strong> một người đã quen." },
       { id:"gr7", type:"mc", question:"Hey, aren’t you in my class? I’m Tom Crane.",
         options:["Greet","Introduce"], answer:1,
-        explanation:"Người nói nêu tên mình (“I’m Tom Crane”) để người kia biết mình là ai → <strong>tự giới thiệu</strong>." }
+        explanation:"Người nói nêu tên mình (“I’m Tom Crane”) → <strong>tự giới thiệu</strong>." }
     ]
   },
 
-  /* -------------------- LISTENING 1 (all practice) -------------------- */
+  /* -------------------- LISTENING 1 (graded — đã có đáp án) -------------------- */
   "listening-1": {
     section:"listening-1",
     title:"Listening 1 — Have they met before?",
     subtitle:"CD 1-2 · 02) Unit 1.mp3",
     instruction:"People are talking at a party. Have they met before? Listen and check (✓) the correct answer.",
-    practice:true,
     xp:15,
     items:[
-      { id:"l1q1", type:"mc", question:"Conversation 1", options:["Have met","Haven’t met"], answer:null },
-      { id:"l1q2", type:"mc", question:"Conversation 2", options:["Have met","Haven’t met"], answer:null },
-      { id:"l1q3", type:"mc", question:"Conversation 3", options:["Have met","Haven’t met"], answer:null },
-      { id:"l1q4", type:"mc", question:"Conversation 4", options:["Have met","Haven’t met"], answer:null },
-      { id:"l1q5", type:"mc", question:"Conversation 5", options:["Have met","Haven’t met"], answer:null },
-      { id:"l1q6", type:"mc", question:"Conversation 6", options:["Have met","Haven’t met"], answer:null }
+      { id:"l1q1", type:"mc", question:"Conversation 1", options:["Have met","Haven’t met"], answer:1,
+        explanation:"“I don’t think we’ve met, have we?” → hai người chưa từng gặp nhau." },
+      { id:"l1q2", type:"mc", question:"Conversation 2", options:["Have met","Haven’t met"], answer:0,
+        explanation:"“We met at Jake’s wedding” → đã gặp nhau trước đây." },
+      { id:"l1q3", type:"mc", question:"Conversation 3", options:["Have met","Haven’t met"], answer:1,
+        explanation:"“No, I don’t think so… I was positive we’d met before” → thực ra chưa gặp." },
+      { id:"l1q4", type:"mc", question:"Conversation 4", options:["Have met","Haven’t met"], answer:0,
+        explanation:"“We were in that computer class together” → đã gặp nhau." },
+      { id:"l1q5", type:"mc", question:"Conversation 5", options:["Have met","Haven’t met"], answer:0,
+        explanation:"“We met at the conference in Hawaii last summer” → đã gặp." },
+      { id:"l1q6", type:"mc", question:"Conversation 6", options:["Have met","Haven’t met"], answer:1,
+        explanation:"Hai người giới thiệu tên với nhau → chưa từng gặp." }
     ]
   },
 
-  /* -------------------- LISTENING 2 — TASK 1 -------------------- */
+  /* -------------------- LISTENING 2 — TASK 1 (graded) -------------------- */
   "listening-2-t1": {
     section:"listening-2",
     title:"Listening 2 — Task 1",
@@ -1001,17 +1059,21 @@ const QUIZZES = {
     xp:15,
     items:[
       { id:"l2t1q1", type:"mc", question:"Conversation 1", options:["clothes","school","work"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
-      { id:"l2t1q2", type:"mc", question:"Conversation 2", options:["work","school","friends"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
-      { id:"l2t1q3", type:"mc", question:"Conversation 3", options:["the weather","a vacation","health problems"], answer:null },
-      { id:"l2t1q4", type:"mc", question:"Conversation 4", options:["school","work","a new boyfriend"], answer:null },
-      { id:"l2t1q5", type:"mc", question:"Conversation 5", options:["school","work","apartments"], answer:null },
-      { id:"l2t1q6", type:"mc", question:"Conversation 6", options:["work","family","school"], answer:null }
+        explanation:"“that looks really nice on you… color looks great” → nói về quần áo." },
+      { id:"l2t1q2", type:"mc", question:"Conversation 2", options:["work","school","friends"], answer:1,
+        explanation:"“literature courses… Professor Scott’s class… tests” → nói về trường học." },
+      { id:"l2t1q3", type:"mc", question:"Conversation 3", options:["the weather","a vacation","health problems"], answer:0,
+        explanation:"“So hot and humid… not usually this hot in the fall” → nói về thời tiết." },
+      { id:"l2t1q4", type:"mc", question:"Conversation 4", options:["school","work","a new boyfriend"], answer:2,
+        explanation:"“What’s he like?… giving me little presents” → nói về bạn trai mới." },
+      { id:"l2t1q5", type:"mc", question:"Conversation 5", options:["school","work","apartments"], answer:1,
+        explanation:"“still doing the same thing… stuck in that office” → nói về công việc." },
+      { id:"l2t1q6", type:"mc", question:"Conversation 6", options:["work","family","school"], answer:1,
+        explanation:"“My sister Jenny’s getting married… your brother?” → nói về gia đình." }
     ]
   },
 
-  /* -------------------- LISTENING 2 — TASK 2 -------------------- */
+  /* -------------------- LISTENING 2 — TASK 2 (graded) -------------------- */
   "listening-2-t2": {
     section:"listening-2",
     title:"Listening 2 — Task 2",
@@ -1020,16 +1082,21 @@ const QUIZZES = {
     xp:15,
     items:[
       { id:"l2t2q1", type:"mc", question:"Conversation 1", options:["Continue","End"], answer:1,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
-      { id:"l2t2q2", type:"mc", question:"Conversation 2", options:["Continue","End"], answer:null },
-      { id:"l2t2q3", type:"mc", question:"Conversation 3", options:["Continue","End"], answer:null },
-      { id:"l2t2q4", type:"mc", question:"Conversation 4", options:["Continue","End"], answer:null },
-      { id:"l2t2q5", type:"mc", question:"Conversation 5", options:["Continue","End"], answer:null },
-      { id:"l2t2q6", type:"mc", question:"Conversation 6", options:["Continue","End"], answer:null }
+        explanation:"“Oh! Look at the time… I’ve got to run. Good seeing you!” → kết thúc." },
+      { id:"l2t2q2", type:"mc", question:"Conversation 2", options:["Continue","End"], answer:0,
+        explanation:"“Really? Are they essay or short answer tests?” → hỏi tiếp → tiếp tục." },
+      { id:"l2t2q3", type:"mc", question:"Conversation 3", options:["Continue","End"], answer:1,
+        explanation:"“Well, I think I’m going to get some more drinks. Enjoy the party!” → kết thúc." },
+      { id:"l2t2q4", type:"mc", question:"Conversation 4", options:["Continue","End"], answer:0,
+        explanation:"“So how long have you known him, anyway?” → hỏi tiếp → tiếp tục." },
+      { id:"l2t2q5", type:"mc", question:"Conversation 5", options:["Continue","End"], answer:0,
+        explanation:"“I’ll let you know” → giữ liên lạc, chưa kết thúc rõ ràng." },
+      { id:"l2t2q6", type:"mc", question:"Conversation 6", options:["Continue","End"], answer:0,
+        explanation:"“And how about your brother? What’s he been doing lately?” → hỏi tiếp → tiếp tục." }
     ]
   },
 
-  /* -------------------- LISTENING 3 — TASK 1 -------------------- */
+  /* -------------------- LISTENING 3 — TASK 1 (graded — đã sửa Q2) -------------------- */
   "listening-3-t1": {
     section:"listening-3",
     title:"Listening 3 — Task 1",
@@ -1039,21 +1106,31 @@ const QUIZZES = {
     items:[
       { id:"l3t1q1", type:"mc", question:"Conversation 1",
         options:["Are you here on vacation?","Do you like living here?"], answer:1,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“Yes, I do. I really enjoy living here… the town’s small” → trả lời cho câu hỏi Yes/No “Do you like living here?”." },
+
       { id:"l3t1q2", type:"mc", question:"Conversation 2",
-        options:["Do you think English is difficult?","Why are you studying English?"], answer:null },
+        options:["Do you think English is difficult?","Why are you studying English?"], answer:0,
+        explanation:"“Yes, I do. It’s a very difficult language to learn…” → câu trả lời Yes/No. “Why are you studying English?” là câu hỏi mở, không thể trả lời bằng “Yes, I do”." },
+
       { id:"l3t1q3", type:"mc", question:"Conversation 3",
-        options:["How old are your children?","How many children do you have?"], answer:null },
+        options:["How old are your children?","How many children do you have?"], answer:1,
+        explanation:"“I have two children, a girl and a boy” → trả lời về <strong>số lượng</strong> con." },
+
       { id:"l3t1q4", type:"mc", question:"Conversation 4",
-        options:["What kind of work do you do?","What kind of work would you like?"], answer:null },
+        options:["What kind of work do you do?","What kind of work would you like?"], answer:0,
+        explanation:"“I have a small design company. We design kitchens and bathrooms” → mô tả <strong>công việc hiện tại</strong>." },
+
       { id:"l3t1q5", type:"mc", question:"Conversation 5",
-        options:["When did you arrive?","Have you been having fun here?"], answer:null },
+        options:["When did you arrive?","Have you been having fun here?"], answer:1,
+        explanation:"“Oh, yeah. I’ve been having a great time since I arrived” → câu hỏi Yes/No về trải nghiệm." },
+
       { id:"l3t1q6", type:"mc", question:"Conversation 6",
-        options:["Where did you go on vacation?","Where are you from?"], answer:null }
+        options:["Where did you go on vacation?","Where are you from?"], answer:1,
+        explanation:"“I’m from a town called Cairns, on the northeast coast of Australia” → trả lời về <strong>quê quán</strong>." }
     ]
   },
 
-  /* -------------------- LISTENING 3 — TASK 2 -------------------- */
+  /* -------------------- LISTENING 3 — TASK 2 (practice) -------------------- */
   "listening-3-t2": {
     section:"listening-3",
     title:"Listening 3 — Task 2",
@@ -1099,27 +1176,27 @@ const QUIZZES = {
       { id:"rv3", type:"mc",
         question:"Listening 2, Task 1 — Conversation 1: what are the speakers talking about?",
         options:["clothes","school","work"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“that looks really nice on you… color looks great” → quần áo." },
 
       { id:"rv4", type:"mc",
         question:"Listening 2, Task 1 — Conversation 2: what are the speakers talking about?",
-        options:["work","school","friends"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        options:["work","school","friends"], answer:1,
+        explanation:"“literature courses… Professor Scott’s class” → trường học." },
 
       { id:"rv5", type:"tf",
         question:"Listening 2, Task 2 — Conversation 1: the last speaker wants to end the conversation.",
         options:["True","False"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“I’ve got to run. Good seeing you!” → kết thúc." },
 
       { id:"rv6", type:"mc",
         question:"Listening 3, Task 1 — Conversation 1: which question are they answering?",
         options:["Are you here on vacation?","Do you like living here?"], answer:1,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“I really enjoy living here” → hỏi có thích sống ở đây không." },
 
       { id:"rv7", type:"mc",
-        question:"Listening 3, Task 2 — Conversation 1: which is the best response?",
-        options:["I’m glad you like it here.","That’s too bad.","Me, neither."], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        question:"Listening 3, Task 1 — Conversation 2: which question are they answering?",
+        options:["Do you think English is difficult?","Why are you studying English?"], answer:0,
+        explanation:"“Yes, I do. It’s a very difficult language to learn” → trả lời câu hỏi Yes/No." },
 
       { id:"rv8", type:"mc",
         question:"In natural connected speech, “What’s he like?” often sounds like…",
@@ -1181,7 +1258,6 @@ const QUIZZES = {
     xp:50,
     passMark:70,
     items:[
-      /* --- 10 multiple choice: expressions & functions --- */
       { id:"ft1", type:"mc", topic:"Greetings & Introductions",
         question:"“I don’t think we’ve met.” — What is this expression used for?",
         options:["Greeting someone you already know","Introducing yourself to someone you don’t know","Ending a conversation"],
@@ -1232,33 +1308,31 @@ const QUIZZES = {
         options:["salary","the weather","age"],
         answer:1, explanation:"Thời tiết là chủ đề trung tính, an toàn nhất. Lương và tuổi thường bị coi là riêng tư." },
 
-      /* --- 5 listening / comprehension (verified source answers only) --- */
       { id:"ft11", type:"mc", topic:"Listening comprehension",
         question:"Listening 2, Task 1 — Conversation 1: what are the speakers talking about?",
         options:["clothes","school","work"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“that looks really nice on you… color looks great” → quần áo." },
 
       { id:"ft12", type:"mc", topic:"Listening comprehension",
         question:"Listening 2, Task 1 — Conversation 2: what are the speakers talking about?",
-        options:["work","school","friends"], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        options:["work","school","friends"], answer:1,
+        explanation:"“literature courses… Professor Scott’s class” → trường học." },
 
       { id:"ft13", type:"mc", topic:"Listening comprehension",
         question:"Listening 2, Task 2 — Conversation 1: what does the last speaker want to do?",
         options:["Continue the conversation","End the conversation"], answer:1,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“I’ve got to run. Good seeing you!” → kết thúc." },
 
       { id:"ft14", type:"mc", topic:"Listening comprehension",
         question:"Listening 3, Task 1 — Conversation 1: which question are they answering?",
         options:["Are you here on vacation?","Do you like living here?"], answer:1,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"“I really enjoy living here” → hỏi có thích sống ở đây không." },
 
       { id:"ft15", type:"mc", topic:"Listening comprehension",
         question:"Listening 3, Task 2 — Conversation 1: which is the best response?",
         options:["I’m glad you like it here.","That’s too bad.","Me, neither."], answer:0,
         explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
 
-      /* --- 5 language use / pronunciation awareness --- */
       { id:"ft16", type:"mc", topic:"Pronunciation awareness",
         question:"In natural connected speech, “What’s he like?” often sounds like…",
         options:["What’s ’e like?","What is he like?","What’s heee like?"], answer:0,
@@ -1288,7 +1362,7 @@ const QUIZZES = {
 };
 
 /* =========================================================================
-   5. DATA — DICTATION
+   5. DATA — DICTATION (đã điền đáp án, chuyển sang chế độ chấm điểm)
    ========================================================================= */
 const DICTATION_LINES = [
   { sp:"A", seg:["Hi, haven’t we met before?"] },
@@ -1301,6 +1375,27 @@ const DICTATION_LINES = [
   { sp:"B", seg:["Yeah, you too! If you see John again, ", {b:14}, " ", {b:15}, " ", {b:16}, " said hello."] }
 ];
 const DICT_BLANKS = 16;
+
+/* Đáp án chính xác — verify từ audio script CD 1-6 */
+const DICT_ANSWERS = [
+  null,
+  { accept:["you"], answer:"you" },
+  { accept:["seen"], answer:"seen" },
+  { accept:["talked"], answer:"talked" },
+  { accept:["with"], answer:"with" },
+  { accept:["her"], answer:"her" },
+  { accept:["how's","hows","how is"], answer:"How's" },
+  { accept:["he"], answer:"he" },
+  { accept:["doing"], answer:"doing" },
+  { accept:["he's","hes","he is"], answer:"he's" },
+  { accept:["got"], answer:"got" },
+  { accept:["a"], answer:"a" },
+  { accept:["happy"], answer:"happy" },
+  { accept:["to"], answer:"to" },
+  { accept:["tell"], answer:"tell" },
+  { accept:["him"], answer:"him" },
+  { accept:["i"], answer:"I" }
+];
 
 const DICT_CONVERSATION = [
   { sp:"A", line:"Hi, haven’t we met before?" },
@@ -1411,16 +1506,16 @@ const LANGUAGE_BANK = [
 /* =========================================================================
    9. STATE
    ========================================================================= */
-const STORE_KEY = "unit1_smalltalk_app_v1";
+const STORE_KEY = "unit1_smalltalk_app_v3";
 
 function defaultState(){
   return {
     xp: 0,
-    awarded: {},          /* chống cộng XP trùng */
-    completed: {},        /* { sectionId: true } */
-    scores: {},           /* { quizId: {correct,graded,pct,total} } */
-    quizState: {},        /* { quizId: {answers:{}, submitted:bool} } */
-    mistakes: [],         /* danh sách lỗi */
+    awarded: {},
+    completed: {},
+    scores: {},
+    quizState: {},
+    mistakes: [],
     dictation: { answers:{}, submitted:false },
     pron: { index:0, hidden:false, practised:[], checks:{} },
     conversation: { situation:0, practised:[], started:false },
@@ -1438,7 +1533,6 @@ function loadState(){
     if(!raw) return defaultState();
     const parsed = JSON.parse(raw);
     const base = defaultState();
-    /* merge sâu 1 cấp */
     Object.keys(parsed).forEach(function(k){
       if(parsed[k] && typeof parsed[k] === "object" && !Array.isArray(parsed[k])
          && base[k] && typeof base[k] === "object" && !Array.isArray(base[k])){
@@ -1478,7 +1572,6 @@ function fmtTime(t){
   return m + ":" + (s < 10 ? "0" : "") + s;
 }
 
-/* Chuẩn hoá câu trả lời dạng text: bỏ hoa/thường, dấu câu, khoảng trắng thừa */
 function normalizeText(s){
   return String(s == null ? "" : s)
     .toLowerCase()
@@ -1497,6 +1590,28 @@ function quizHasPractice(items){
 }
 function quizHasGraded(items){
   return items.some(function(i){ return !isPracticeItem(i); });
+}
+
+/* Kiểm tra một ô dictation */
+function checkDictBlank(n, val){
+  const spec = DICT_ANSWERS[n];
+  if(!spec) return true;
+  const v = normalizeText(val);
+  return spec.accept.some(function(a){ return normalizeText(a) === v; });
+}
+
+/* Tạo block transcript */
+function transcriptHTML(audioKey){
+  const a = AUDIO[audioKey];
+  if(!a || !a.transcript) return "";
+  return '<details class="transcript-box" style="margin-top:14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 16px">' +
+           '<summary style="cursor:pointer;font-weight:800;color:var(--blue-d);font-size:.92rem">📖 Xem transcript (audio script)</summary>' +
+           '<div style="margin-top:12px;font-size:.88rem;line-height:1.75">' +
+             a.transcript.map(function(t){
+               return '<p style="margin:0 0 8px"><strong style="color:var(--blue-d)">' + esc(t.sp) + ':</strong> ' + esc(t.line) + '</p>';
+             }).join("") +
+           '</div>' +
+         '</details>';
 }
 
 /* =========================================================================
@@ -1553,7 +1668,6 @@ function initPlayers(){
     const volEl    = box.querySelector('[data-p="volume"]');
     const errEl    = box.querySelector(".p-err");
 
-    /* volume & speed từ settings */
     audio.volume = state.settings.volume;
     audio.playbackRate = state.settings.speed;
     volEl.value = state.settings.volume;
@@ -1568,7 +1682,7 @@ function initPlayers(){
     toggleEl.addEventListener("click", function(){
       if(audio.paused){
         const p = audio.play();
-        if(p && p.catch) p.catch(function(){ /* lỗi phát -> đã có xử lý error */ });
+        if(p && p.catch) p.catch(function(){});
       } else {
         audio.pause();
       }
@@ -1651,7 +1765,7 @@ function injectPlayers(){
 /* =========================================================================
    12. QUIZ ENGINE
    ========================================================================= */
-const quizRuntime = {};   /* { quizId: { answers:{}, submitted:bool } } */
+const quizRuntime = {};
 
 function getQuizState(quizId){
   if(!quizRuntime[quizId]){
@@ -1670,7 +1784,14 @@ function persistQuiz(quizId){
   saveState();
 }
 
-/* ---------- render item theo type ---------- */
+const AUDIO_KEY_MAP = {
+  "listening-1":"l1",
+  "listening-2-t1":"l2",
+  "listening-2-t2":"l2",
+  "listening-3-t1":"l3",
+  "listening-3-t2":"l3"
+};
+
 function renderItem(quizId, item, idx, st){
   let h = '<li class="q-item" data-item="' + idx + '">';
   h += '<div class="q-text"><span class="q-num" aria-hidden="true">' + (idx+1) + '</span><span>' + item.question + '</span></div>';
@@ -1740,13 +1861,11 @@ function renderItem(quizId, item, idx, st){
   return h;
 }
 
-/* ---------- feedback từng câu ---------- */
 function feedbackHTML(quizId, item, idx, st){
   if(!st.submitted) return '<div class="fb-slot"></div>';
 
   const ans = st.answers[idx];
 
-  /* PRACTICE MODE */
   if(isPracticeItem(item)){
     let msg;
     if(ans === undefined || ans === null || ans === "" ||
@@ -1761,7 +1880,6 @@ function feedbackHTML(quizId, item, idx, st){
            '</div>';
   }
 
-  /* GRADED */
   if(item.type === "match"){
     const sel = ans || {};
     const allOk = item.pairs.every(function(p, pi){ return sel[pi] === p.right; });
@@ -1781,7 +1899,6 @@ function feedbackHTML(quizId, item, idx, st){
            '</div>';
   }
 
-  /* fill */
   if(item.type === "fill"){
     const ok = checkFill(item, ans);
     return '<div class="fb ' + (ok ? "fb-ok" : "fb-err") + '">' +
@@ -1793,7 +1910,6 @@ function feedbackHTML(quizId, item, idx, st){
            '</div>';
   }
 
-  /* mc / tf */
   const hasAns = ans !== undefined && ans !== null;
   if(!hasAns){
     return '<div class="fb fb-err">' +
@@ -1821,7 +1937,6 @@ function checkFill(item, val){
   return accepts.indexOf(normalizeText(val)) !== -1;
 }
 
-/* ---------- render toàn bộ quiz ---------- */
 function renderQuiz(quizId){
   const qz = QUIZZES[quizId];
   const st = getQuizState(quizId);
@@ -1839,9 +1954,8 @@ function renderQuiz(quizId){
   if(allPractice){
     h += '<div class="practice-note">' +
            '<strong>Practice Mode — self-check.</strong> ' +
-           'Hoạt động này <strong>không có đáp án đã được kiểm chứng</strong> trong giáo trình, ' +
-           'và ứng dụng không tự suy đoán đáp án từ audio. Câu trả lời của bạn sẽ được ghi lại để bạn ' +
-           'tự đối chiếu với file MP3 / sách.' +
+           'Hoạt động này <strong>không có đáp án đã được kiểm chứng</strong>, ' +
+           'và ứng dụng không tự suy đoán đáp án. Câu trả lời của bạn sẽ được ghi lại.' +
          '</div>';
   } else if(quizHasPractice(qz.items)){
     h += '<div class="practice-note">' +
@@ -1863,11 +1977,14 @@ function renderQuiz(quizId){
 
   h += '<div id="result-' + quizId + '" aria-live="polite">' + renderResult(quizId) + '</div>';
 
+  if(st.submitted && AUDIO_KEY_MAP[quizId]){
+    h += transcriptHTML(AUDIO_KEY_MAP[quizId]);
+  }
+
   h += '</div>';
   return h;
 }
 
-/* ---------- tính điểm ---------- */
 function computeScore(quizId){
   const qz = QUIZZES[quizId];
   const st = getQuizState(quizId);
@@ -1909,8 +2026,7 @@ function renderResult(quizId){
     return '<div class="result practice">' +
              '<div class="res-title">📝 Practice session recorded</div>' +
              '<div class="res-score">Đã ghi lại ' + r.practiceAnswered + ' / ' + qz.items.length + ' câu trả lời</div>' +
-             '<div class="res-note">Hoạt động này không được chấm điểm vì không có đáp án đã kiểm chứng. ' +
-             'Hãy tự đối chiếu với file MP3 và sách.</div>' +
+             '<div class="res-note">Hoạt động này không được chấm điểm vì không có đáp án đã kiểm chứng.</div>' +
            '</div>';
   }
 
@@ -1931,7 +2047,6 @@ function renderResult(quizId){
     h += '<div class="res-note">Ngoài ra bạn đã ghi lại ' + r.practiceAnswered + ' câu ở Practice Mode (không tính điểm).</div>';
   }
 
-  /* Weak areas cho Final Test */
   if(quizId === "final-test"){
     const topics = {};
     qz.items.forEach(function(item, i){
@@ -1972,7 +2087,6 @@ function renderResult(quizId){
   return h;
 }
 
-/* ---------- submit / reset ---------- */
 function submitQuiz(quizId){
   const qz = QUIZZES[quizId];
   const st = getQuizState(quizId);
@@ -1980,7 +2094,6 @@ function submitQuiz(quizId){
 
   st.submitted = true;
 
-  /* chấm điểm & lưu lỗi (chỉ câu có đáp án) */
   qz.items.forEach(function(item, i){
     if(isPracticeItem(item)) return;
     const ans = st.answers[i];
@@ -2004,7 +2117,6 @@ function submitQuiz(quizId){
 
   const r = computeScore(quizId);
 
-  /* XP */
   if(r.graded > 0){
     addXP(qz.xp || 10, "quiz-" + quizId);
     if(r.pct === 100) addXP(20, "perfect-" + quizId);
@@ -2025,10 +2137,7 @@ function submitQuiz(quizId){
   }
 
   persistQuiz(quizId);
-
-  /* đánh dấu section hoàn thành */
   markSectionDone(quizId);
-
   rerenderQuiz(quizId);
   refreshUI();
 }
@@ -2050,7 +2159,6 @@ function rerenderQuiz(quizId){
   if(host) host.innerHTML = renderQuiz(quizId);
 }
 
-/* nhóm quiz -> section */
 function markSectionDone(quizId){
   const qz = QUIZZES[quizId];
   if(!qz) return;
@@ -2130,7 +2238,7 @@ function removeMistake(quizId, itemId){
   if(state.mistakes.length !== before) saveState();
 }
 
-const retryBox = {};   /* mistakeId -> {answer, checked} */
+const retryBox = {};
 
 function renderMistakes(){
   const host = document.getElementById("mistakesList");
@@ -2161,39 +2269,64 @@ function renderMistakes(){
     if(m.explanation) h += '<div class="mk-vi">' + m.explanation + '</div>';
 
     h += '<div class="mk-retry">';
-    if(!rs){
-      h += '<button class="btn btn-ghost btn-sm" data-action="mistake-retry" data-mid="' + esc(m.id) + '">🔁 Practice Again</button>';
-    } else {
-      h += '<div class="options" role="radiogroup" aria-label="Làm lại câu hỏi">';
-      (m.options || []).forEach(function(opt, oi){
-        let cls = "opt";
-        if(rs.checked){
-          if(opt === m.correctText) cls += " is-correct";
-          else if(rs.answer === oi) cls += " is-wrong";
-        }
-        h += '<label class="' + cls + '">' +
-               '<input type="radio" name="retry-' + esc(m.id) + '" value="' + oi + '"' +
-               ' data-action="retry-pick" data-mid="' + esc(m.id) + '"' +
-               (rs.answer === oi ? " checked" : "") + (rs.checked ? " disabled" : "") + '>' +
-               '<span class="opt-text">' + esc(opt) + '</span>' +
-             '</label>';
-      });
-      h += '</div>';
-
-      if(!rs.checked){
-        h += '<div class="btn-row" style="margin-top:12px">' +
-               '<button class="btn btn-primary btn-sm" data-action="mistake-check" data-mid="' + esc(m.id) + '">Check answer</button>' +
-               '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Cancel</button>' +
-             '</div>';
-      } else if(rs.result === "correct"){
-        h += '<div class="fb fb-ok"><div class="fb-line"><span class="fb-icon">✓</span>' +
-             '<strong>Correct!</strong> Câu này đã được xoá khỏi danh sách lỗi.</div></div>';
+    if(!m.options){
+      if(!rs){
+        h += '<button class="btn btn-ghost btn-sm" data-action="mistake-retry" data-mid="' + esc(m.id) + '">🔁 Practice Again</button>';
       } else {
-        h += '<div class="fb fb-err"><div class="fb-line"><span class="fb-icon">✗</span><strong>Vẫn chưa đúng</strong></div>' +
-             '<div class="fb-row"><span class="lbl">Correct answer:</span> <strong>' + esc(m.correctText) + '</strong></div></div>';
-        h += '<div class="btn-row" style="margin-top:12px">' +
-               '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button>' +
-             '</div>';
+        const v = rs.answer || "";
+        h += '<label class="sr-only">Nhập lại câu trả lời</label>';
+        h += '<input class="fill-input" type="text" data-action="retry-fill" data-mid="' + esc(m.id) + '" value="' + esc(v) + '"' +
+             (rs.checked ? " disabled" : "") + ' placeholder="Nhập lại…">';
+        if(!rs.checked){
+          h += '<div class="btn-row" style="margin-top:12px">' +
+                 '<button class="btn btn-primary btn-sm" data-action="mistake-check" data-mid="' + esc(m.id) + '">Check answer</button>' +
+                 '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Cancel</button>' +
+               '</div>';
+        } else if(rs.result === "correct"){
+          h += '<div class="fb fb-ok"><div class="fb-line"><span class="fb-icon">✓</span><strong>Correct!</strong> Đã xoá khỏi danh sách lỗi.</div></div>';
+        } else {
+          h += '<div class="fb fb-err"><div class="fb-line"><span class="fb-icon">✗</span><strong>Vẫn chưa đúng</strong></div>' +
+               '<div class="fb-row"><span class="lbl">Correct answer:</span> <strong>' + esc(m.correctText) + '</strong></div></div>';
+          h += '<div class="btn-row" style="margin-top:12px">' +
+                 '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button>' +
+               '</div>';
+        }
+      }
+    } else {
+      if(!rs){
+        h += '<button class="btn btn-ghost btn-sm" data-action="mistake-retry" data-mid="' + esc(m.id) + '">🔁 Practice Again</button>';
+      } else {
+        h += '<div class="options" role="radiogroup" aria-label="Làm lại câu hỏi">';
+        (m.options || []).forEach(function(opt, oi){
+          let cls = "opt";
+          if(rs.checked){
+            if(opt === m.correctText) cls += " is-correct";
+            else if(rs.answer === oi) cls += " is-wrong";
+          }
+          h += '<label class="' + cls + '">' +
+                 '<input type="radio" name="retry-' + esc(m.id) + '" value="' + oi + '"' +
+                 ' data-action="retry-pick" data-mid="' + esc(m.id) + '"' +
+                 (rs.answer === oi ? " checked" : "") + (rs.checked ? " disabled" : "") + '>' +
+                 '<span class="opt-text">' + esc(opt) + '</span>' +
+               '</label>';
+        });
+        h += '</div>';
+
+        if(!rs.checked){
+          h += '<div class="btn-row" style="margin-top:12px">' +
+                 '<button class="btn btn-primary btn-sm" data-action="mistake-check" data-mid="' + esc(m.id) + '">Check answer</button>' +
+                 '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Cancel</button>' +
+               '</div>';
+        } else if(rs.result === "correct"){
+          h += '<div class="fb fb-ok"><div class="fb-line"><span class="fb-icon">✓</span>' +
+               '<strong>Correct!</strong> Câu này đã được xoá khỏi danh sách lỗi.</div></div>';
+        } else {
+          h += '<div class="fb fb-err"><div class="fb-line"><span class="fb-icon">✗</span><strong>Vẫn chưa đúng</strong></div>' +
+               '<div class="fb-row"><span class="lbl">Correct answer:</span> <strong>' + esc(m.correctText) + '</strong></div></div>';
+          h += '<div class="btn-row" style="margin-top:12px">' +
+                 '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button>' +
+               '</div>';
+        }
       }
     }
     h += '</div>';
@@ -2262,8 +2395,6 @@ function averageScore(){
 /* =========================================================================
    15. SECTION RENDERERS
    ========================================================================= */
-
-/* ---------- DASHBOARD ---------- */
 function renderDashboard(){
   const pct = overallProgress();
   const avg = averageScore();
@@ -2293,7 +2424,6 @@ function renderDashboard(){
            '</div>';
   }).join("");
 
-  /* progress bars */
   const bars = [
     { n:"Listening", p:listeningPct },
     { n:"Pronunciation", p:pronPct },
@@ -2317,7 +2447,6 @@ function renderDashboard(){
   }
   host.innerHTML = barsHTML;
 
-  /* Continue Learning */
   const next = TRACKABLE.find(function(s){ return !state.completed[s]; });
   const txt = document.getElementById("continueText");
   const btn = document.getElementById("continueBtn");
@@ -2333,7 +2462,6 @@ function renderDashboard(){
   }
 }
 
-/* ---------- PRONUNCIATION ---------- */
 function renderSpeak(){
   const p = state.pron;
   const idx = Math.max(0, Math.min(p.index, PRON_SENTENCES.length - 1));
@@ -2347,7 +2475,6 @@ function renderSpeak(){
   const toggleBtn = document.querySelector('[data-action="speak-toggle"]');
   if(toggleBtn) toggleBtn.textContent = p.hidden ? "👁 Show Sentence" : "🙈 Hide Sentence";
 
-  /* checklist */
   const checks = p.checks[idx] || [false,false,false,false];
   document.getElementById("speakChecklist").innerHTML = PRON_CHECKLIST.map(function(c, i){
     return '<li><label>' +
@@ -2373,7 +2500,6 @@ function markPronPractised(){
   refreshUI();
 }
 
-/* ---------- DICTATION ---------- */
 function renderDictation(){
   const host = document.getElementById("mount-dictation");
   if(!host) return;
@@ -2383,11 +2509,20 @@ function renderDictation(){
   let h = '<div class="card">';
   h += '<h2 class="q-title">Task 1 — Listen and write the missing words</h2>';
   h += '<p class="q-inst">Listen to the conversation. Write the missing words.</p>';
-  h += '<div class="practice-note">' +
-         '<strong>Practice Mode — self-check.</strong> Ứng dụng <strong>không có đáp án đã kiểm chứng</strong> ' +
-         'cho phần dictation này, và sẽ không tự suy đoán. Hãy nghe kỹ file MP3, điền từ, rồi ' +
-         'tự đối chiếu với audio / sách giáo khoa.' +
-       '</div>';
+
+  if(d.submitted){
+    let correct = 0;
+    for(let i = 1; i <= DICT_BLANKS; i++){
+      if(checkDictBlank(i, d.answers[i] || "")) correct++;
+    }
+    const pct = Math.round((correct / DICT_BLANKS) * 100);
+    const passed = pct >= 70;
+    h += '<div class="result ' + (passed ? "ok" : "no") + '" style="margin-top:0">' +
+           '<div class="res-title">' + (passed ? "🏆 Kết quả tốt!" : "📊 Kết quả") + '</div>' +
+           '<div class="res-score">' + correct + ' / ' + DICT_BLANKS + ' đúng · ' + pct + '%</div>' +
+           '<div class="res-note">Chấp nhận: không phân biệt hoa/thường, khoảng trắng thừa, dấu câu.</div>' +
+         '</div>';
+  }
 
   h += '<div class="dict-box">';
   DICTATION_LINES.forEach(function(line){
@@ -2396,15 +2531,37 @@ function renderDictation(){
       if(typeof part === "string"){
         h += '<span>' + esc(part) + '</span>';
       } else {
-        const v = d.answers[part.b] || "";
-        h += '<input class="blank" type="text" data-blank="' + part.b + '" value="' + esc(v) + '"' +
-             ' aria-label="Từ còn thiếu ' + part.b + '" autocomplete="off" spellcheck="false"' +
+        const n = part.b;
+        const v = d.answers[n] || "";
+        const ok = d.submitted ? checkDictBlank(n, v) : null;
+        let cls = "blank";
+        if(d.submitted) cls += ok ? " is-correct" : " is-wrong";
+        h += '<input class="' + cls + '" type="text" data-blank="' + n + '" value="' + esc(v) + '"' +
+             ' aria-label="Từ còn thiếu ' + n + '" autocomplete="off" spellcheck="false"' +
              (d.submitted ? " disabled" : "") + '>';
       }
     });
     h += '</p>';
   });
   h += '</div>';
+
+  if(d.submitted){
+    h += '<div class="card" style="background:#f8fafc;margin-top:14px">';
+    h += '<h3 class="card-title">📖 Đáp án chi tiết</h3>';
+    h += '<div class="table-wrap"><table class="tbl"><thead><tr><th>#</th><th>Your answer</th><th>Correct answer</th><th></th></tr></thead><tbody>';
+    for(let i = 1; i <= DICT_BLANKS; i++){
+      const user = d.answers[i] || "(trống)";
+      const spec = DICT_ANSWERS[i];
+      const ok = checkDictBlank(i, d.answers[i] || "");
+      h += '<tr>' +
+             '<td>' + i + '</td>' +
+             '<td>' + esc(user) + '</td>' +
+             '<td><strong>' + esc(spec.answer) + '</strong></td>' +
+             '<td style="font-weight:900;color:' + (ok ? 'var(--green)' : 'var(--red)') + '">' + (ok ? "✓" : "✗") + '</td>' +
+           '</tr>';
+    }
+    h += '</tbody></table></div></div>';
+  }
 
   const filled = Object.keys(d.answers).filter(function(k){
     return String(d.answers[k] || "").trim() !== "";
@@ -2413,26 +2570,17 @@ function renderDictation(){
        filled + ' / ' + DICT_BLANKS + ' ô đã điền</div>';
 
   h += '<div class="q-actions">';
-  h += '<button class="btn btn-primary" data-action="dict-submit"' + (d.submitted ? " disabled" : "") + '>📝 Ghi lại câu trả lời</button>';
+  h += '<button class="btn btn-primary" data-action="dict-submit"' + (d.submitted ? " disabled" : "") + '>✅ Submit Dictation</button>';
   h += '<button class="btn btn-ghost" data-action="dict-reset">↺ Reset Exercise</button>';
   h += '</div>';
 
   if(d.submitted){
-    h += '<div class="result practice">' +
-           '<div class="res-title">📝 Practice session recorded</div>' +
-           '<div class="res-note">Bạn đã điền ' + filled + ' / ' + DICT_BLANKS + ' ô. ' +
-           'Hãy tự so sánh với file MP3 để kiểm tra chính tả và thì của động từ.</div>' +
-           '<div class="res-list"><strong>Câu trả lời của bạn:</strong><ul>';
-    for(let i = 1; i <= DICT_BLANKS; i++){
-      h += '<li>Ô ' + i + ': <strong>' + esc(d.answers[i] || "(trống)") + '</strong></li>';
-    }
-    h += '</ul></div></div>';
+    h += transcriptHTML("dict");
   }
 
   h += '</div>';
   host.innerHTML = h;
 
-  /* Task 2 */
   const host2 = document.getElementById("mount-dict-task2");
   if(host2) host2.innerHTML = renderDictTask2();
 }
@@ -2473,7 +2621,6 @@ function renderDictTask2(){
   return h;
 }
 
-/* ---------- CONVERSATION CORNER ---------- */
 function renderConversation(){
   const c = state.conversation;
   document.getElementById("situationText").textContent = SITUATIONS[c.situation % SITUATIONS.length];
@@ -2491,7 +2638,6 @@ function renderConversation(){
   }).join("");
 }
 
-/* ---------- LANGUAGE BANK ---------- */
 function renderBank(){
   const host = document.getElementById("bankBody");
   if(!host) return;
@@ -2514,7 +2660,6 @@ function renderBank(){
   }).join("");
 }
 
-/* ---------- PROGRESS ---------- */
 function renderProgress(){
   const host = document.getElementById("progressBody");
   if(!host) return;
@@ -2549,7 +2694,6 @@ function renderProgress(){
   h += '<div class="stat"><div class="stat-label">Final Test</div><div class="stat-value">' + (fr ? fr.pct + "<small>%</small>" : "—") + '</div><div class="stat-sub">' + (fr ? (fr.passed ? "Đã đạt" : "Chưa đạt") : "Chưa làm") + '</div></div>';
   h += '</div>';
 
-  /* chi tiết từng phần */
   h += '<div class="card"><h3 class="card-title">📋 Chi tiết từng phần</h3>';
   SECTIONS.forEach(function(s){
     if(s.id === "dashboard" || s.id === "mistakes" || s.id === "progress") return;
@@ -2573,7 +2717,6 @@ function renderProgress(){
   });
   h += '</div>';
 
-  /* levels */
   h += '<div class="card"><h3 class="card-title">⭐ Levels</h3><div class="level-track">';
   const cur = levelIndex(state.xp);
   LEVELS.forEach(function(l, i){
@@ -2586,9 +2729,8 @@ function renderProgress(){
   });
   h += '</div></div>';
 
-  /* reset */
   h += '<div class="card"><h3 class="card-title">⚙️ Dữ liệu</h3>' +
-       '<p style="font-size:.88rem;color:var(--muted)">Toàn bộ tiến độ, điểm, XP và lỗi được lưu trong trình duyệt của bạn (localStorage). Không có dữ liệu nào được gửi lên máy chủ.</p>' +
+       '<p style="font-size:.88rem;color:var(--muted)">Toàn bộ tiến độ, điểm, XP và lỗi được lưu trong trình duyệt của bạn (localStorage).</p>' +
        '<div class="btn-row"><button class="btn btn-danger" data-action="reset-all">🗑 Reset All Progress</button></div>' +
        '</div>';
 
@@ -2626,7 +2768,6 @@ function showSection(id){
   state.lastSection = id;
   saveState();
 
-  /* render nội dung theo section */
   if(id === "dashboard") renderDashboard();
   if(id === "pronunciation") renderSpeak();
   if(id === "dictation") renderDictation();
@@ -2658,7 +2799,6 @@ function refreshUI(){
   });
 }
 
-/* mobile sidebar */
 function openSidebar(){
   document.getElementById("sidebar").classList.add("open");
   document.getElementById("hamburger").setAttribute("aria-expanded","true");
@@ -2687,7 +2827,6 @@ function resetAll(){
   Object.keys(retryBox).forEach(function(k){ delete retryBox[k]; });
   dictTask2.mode = "A"; dictTask2.visible = true; dictTask2.line = 0;
 
-  /* render lại toàn bộ quiz */
   Object.keys(QUIZZES).forEach(function(qid){
     const host = document.getElementById("mount-" + qid);
     if(host) host.innerHTML = renderQuiz(qid);
@@ -2709,7 +2848,6 @@ function resetAll(){
 document.addEventListener("change", function(e){
   const t = e.target;
 
-  /* radio của quiz */
   if(t.matches('input[type="radio"][data-quiz]')){
     const qid = t.dataset.quiz;
     const idx = Number(t.dataset.item);
@@ -2717,7 +2855,6 @@ document.addEventListener("change", function(e){
     if(st.submitted) return;
     st.answers[idx] = Number(t.value);
     persistQuiz(qid);
-    /* cập nhật class is-checked */
     const li = t.closest(".q-item");
     if(li){
       $$(".opt", li).forEach(function(o){ o.classList.remove("is-checked"); });
@@ -2726,7 +2863,6 @@ document.addEventListener("change", function(e){
     return;
   }
 
-  /* select của match */
   if(t.matches("select.match-sel[data-quiz]")){
     const qid = t.dataset.quiz;
     const idx = Number(t.dataset.item);
@@ -2739,7 +2875,6 @@ document.addEventListener("change", function(e){
     return;
   }
 
-  /* fill input */
   if(t.matches('input.fill-input[data-quiz]')){
     const qid = t.dataset.quiz;
     const idx = Number(t.dataset.item);
@@ -2750,7 +2885,6 @@ document.addEventListener("change", function(e){
     return;
   }
 
-  /* dictation blanks */
   if(t.matches("input.blank[data-blank]")){
     const n = Number(t.dataset.blank);
     state.dictation.answers[n] = t.value;
@@ -2759,7 +2893,6 @@ document.addEventListener("change", function(e){
     return;
   }
 
-  /* checklist pronunciation */
   if(t.matches('input[data-action="pron-check"]')){
     const idx = Number(t.dataset.idx);
     const ci = Number(t.dataset.ci);
@@ -2769,7 +2902,6 @@ document.addEventListener("change", function(e){
     return;
   }
 
-  /* retry radio */
   if(t.matches('input[data-action="retry-pick"]')){
     const mid = t.dataset.mid;
     if(!retryBox[mid]) retryBox[mid] = {};
@@ -2779,7 +2911,6 @@ document.addEventListener("change", function(e){
   }
 });
 
-/* input event cho dictation (cập nhật bộ đếm realtime) */
 document.addEventListener("input", function(e){
   const t = e.target;
   if(t.matches("input.blank[data-blank]")){
@@ -2793,6 +2924,11 @@ document.addEventListener("input", function(e){
     const st = getQuizState(qid);
     if(st.submitted) return;
     st.answers[idx] = t.value;
+  }
+  if(t.matches('input[data-action="retry-fill"]')){
+    const mid = t.dataset.mid;
+    if(!retryBox[mid]) retryBox[mid] = {};
+    retryBox[mid].answer = t.value;
   }
 });
 
@@ -2830,18 +2966,60 @@ document.addEventListener("click", function(e){
       resetQuiz(el.dataset.quiz);
       break;
 
-    /* ---- dictation ---- */
-    case "dict-submit":
+    case "dict-submit": {
+      if(state.dictation.submitted) break;
       state.dictation.submitted = true;
+
+      let correct = 0;
+      for(let i = 1; i <= DICT_BLANKS; i++){
+        const ok = checkDictBlank(i, state.dictation.answers[i] || "");
+        if(ok) correct++;
+        else {
+          const spec = DICT_ANSWERS[i];
+          const mid = "dictation::blank" + i;
+          const existing = state.mistakes.find(function(m){ return m.id === mid; });
+          const userVal = state.dictation.answers[i] || "(trống)";
+          if(existing){
+            existing.attempts = (existing.attempts || 1) + 1;
+            existing.learnerText = userVal;
+            existing.date = new Date().toISOString();
+          } else {
+            state.mistakes.push({
+              id: mid,
+              quizId: "dictation",
+              itemId: "blank" + i,
+              activity: "Dictation — Task 1",
+              question: "Blank " + i + " (CD 1-6)",
+              options: null,
+              type: "fill",
+              learnerText: userVal,
+              correctText: spec.answer,
+              explanation: "Chấp nhận: " + spec.accept.join(" / "),
+              date: new Date().toISOString(),
+              attempts: 1
+            });
+          }
+        }
+      }
+
+      const pct = Math.round((correct / DICT_BLANKS) * 100);
+      state.scores["dictation"] = {
+        correct: correct, graded: DICT_BLANKS, pct: pct,
+        label:"Dictation", date: new Date().toISOString()
+      };
+
       addXP(20, "dictation");
+      if(pct === 100) addXP(20, "perfect-dictation");
       markComplete("dictation");
       saveState();
       renderDictation();
       refreshUI();
       break;
+    }
 
     case "dict-reset":
       state.dictation = { answers:{}, submitted:false };
+      delete state.scores["dictation"];
       saveState();
       renderDictation();
       refreshUI();
@@ -2878,7 +3056,6 @@ document.addEventListener("click", function(e){
       el.disabled = true;
       break;
 
-    /* ---- pronunciation ---- */
     case "speak-prev":
       state.pron.index = (state.pron.index - 1 + PRON_SENTENCES.length) % PRON_SENTENCES.length;
       saveState(); renderSpeak();
@@ -2898,7 +3075,6 @@ document.addEventListener("click", function(e){
       markPronPractised();
       break;
 
-    /* ---- conversation ---- */
     case "conv-new":
       state.conversation.situation = (state.conversation.situation + 1) % SITUATIONS.length;
       saveState();
@@ -2935,7 +3111,6 @@ document.addEventListener("click", function(e){
       break;
     }
 
-    /* ---- mistakes ---- */
     case "mistake-retry": {
       const mid = el.dataset.mid;
       retryBox[mid] = { answer: undefined, checked:false };
@@ -2947,10 +3122,21 @@ document.addEventListener("click", function(e){
       const mid = el.dataset.mid;
       const rs = retryBox[mid];
       const m = state.mistakes.find(function(x){ return x.id === mid; });
-      if(!rs || !m || rs.answer === undefined) return;
+      if(!rs || !m) return;
+
+      let isCorrect = false;
+      if(m.options){
+        if(rs.answer === undefined) return;
+        const chosenText = m.options[rs.answer];
+        isCorrect = (chosenText === m.correctText);
+      } else {
+        const userVal = normalizeText(rs.answer || "");
+        const correctVal = normalizeText(m.correctText);
+        isCorrect = (userVal === correctVal) && userVal !== "";
+      }
+
       rs.checked = true;
-      const chosenText = (m.options || [])[rs.answer];
-      if(chosenText === m.correctText){
+      if(isCorrect){
         rs.result = "correct";
         state.mistakes = state.mistakes.filter(function(x){ return x.id !== mid; });
         addXP(5, "retry-" + mid);
@@ -2984,7 +3170,6 @@ document.addEventListener("click", function(e){
   }
 });
 
-/* keyboard */
 document.addEventListener("keydown", function(e){
   if(e.key === "Escape") closeSidebar();
 });
@@ -2996,7 +3181,6 @@ function boot(){
   injectPlayers();
   buildNav();
 
-  /* render quiz vào các mount point */
   Object.keys(QUIZZES).forEach(function(qid){
     const host = document.getElementById("mount-" + qid);
     if(host) host.innerHTML = renderQuiz(qid);
@@ -3011,16 +3195,13 @@ function boot(){
   renderDashboard();
   refreshUI();
 
-  /* mobile menu */
   document.getElementById("hamburger").addEventListener("click", toggleSidebar);
   document.getElementById("backdrop").addEventListener("click", closeSidebar);
 
-  /* khôi phục phần học cuối */
   const start = SECTIONS.some(function(s){ return s.id === state.lastSection; })
     ? state.lastSection : "dashboard";
   showSection(start);
 
-  /* cập nhật lại dashboard sau khi render */
   renderDashboard();
   refreshUI();
 }
