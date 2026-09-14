@@ -10,52 +10,22 @@
    DESIGN TOKENS
    ========================================================= */
 :root{
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --ink:#0f172a;
-  --ink2:#334155;
-  --muted:#64748b;
-  --line:#e4e9f2;
-  --line2:#cbd5e1;
-
-  --blue:#1d4ed8;
-  --blue-d:#1e3a8a;
-  --blue-l:#dbeafe;
-  --sky:#0ea5e9;
-
-  --green:#15803d;
-  --green-l:#dcfce7;
-  --green-b:#86efac;
-
-  --red:#b91c1c;
-  --red-l:#fee2e2;
-  --red-b:#fca5a5;
-
-  --amber:#b45309;
-  --amber-l:#fef3c7;
-  --amber-b:#fcd34d;
-
-  --r:14px;
-  --r-sm:10px;
+  --bg:#f5f7fb; --card:#ffffff; --ink:#0f172a; --ink2:#334155; --muted:#64748b;
+  --line:#e4e9f2; --line2:#cbd5e1;
+  --blue:#1d4ed8; --blue-d:#1e3a8a; --blue-l:#dbeafe; --sky:#0ea5e9;
+  --green:#15803d; --green-l:#dcfce7; --green-b:#86efac;
+  --red:#b91c1c; --red-l:#fee2e2; --red-b:#fca5a5;
+  --amber:#b45309; --amber-l:#fef3c7; --amber-b:#fcd34d;
+  --r:14px; --r-sm:10px;
   --sh:0 1px 2px rgba(15,23,42,.05), 0 8px 22px rgba(15,23,42,.06);
   --sh-sm:0 1px 2px rgba(15,23,42,.06);
   --sidebar-w:266px;
 }
-
-/* =========================================================
-   BASE
-   ========================================================= */
 *,*::before,*::after{box-sizing:border-box;}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
+body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
-  font-size:16px;
-  line-height:1.62;
-  overflow-x:hidden;
-}
+  font-size:16px;line-height:1.62;overflow-x:hidden;}
 h1,h2,h3,h4{margin:0 0 .5em;line-height:1.25;font-weight:700;}
 p{margin:0 0 .8em;}
 ul,ol{margin:0 0 .9em;padding-left:1.25em;}
@@ -63,78 +33,43 @@ button{font-family:inherit;font-size:inherit;}
 select,input{font-family:inherit;}
 :focus-visible{outline:3px solid #93c5fd;outline-offset:2px;border-radius:6px;}
 [hidden]{display:none !important;}
-
 .skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--blue-d);padding:10px 16px;z-index:300;border-radius:0 0 8px 0;font-weight:700;}
 .skip:focus{left:0;}
-
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}}
 
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
-}
-
-/* =========================================================
-   TOP BAR
-   ========================================================= */
-.topbar{
-  position:sticky;top:0;z-index:80;
-  height:62px;display:flex;align-items:center;gap:12px;
-  padding:0 16px;background:#fff;border-bottom:1px solid var(--line);
-  box-shadow:0 1px 3px rgba(15,23,42,.05);
-}
-.hamburger{
-  display:none;width:44px;height:44px;flex:0 0 44px;
-  border:1px solid var(--line2);border-radius:11px;background:#fff;cursor:pointer;
-  flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;
-}
+.topbar{position:sticky;top:0;z-index:80;height:62px;display:flex;align-items:center;gap:12px;
+  padding:0 16px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(15,23,42,.05);}
+.hamburger{display:none;width:44px;height:44px;flex:0 0 44px;border:1px solid var(--line2);border-radius:11px;background:#fff;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;}
 .hamburger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s;}
 .hamburger[aria-expanded="true"]{background:var(--blue-l);border-color:var(--blue);}
-
 .brand{display:flex;align-items:center;gap:11px;min-width:0;}
-.brand-mark{
-  width:40px;height:40px;flex:0 0 40px;border-radius:12px;
-  background:linear-gradient(135deg,#1d4ed8,#0ea5e9);
-  color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.03em;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(29,78,216,.3);
-}
+.brand-mark{width:40px;height:40px;flex:0 0 40px;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#0ea5e9);
+  color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.03em;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(29,78,216,.3);}
 .brand-t{font-weight:800;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .brand-s{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
 .top-right{margin-left:auto;display:flex;align-items:center;gap:9px;}
-.chip{
-  display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;border:1px solid var(--line);
-  border-radius:999px;padding:7px 13px;font-size:.79rem;font-weight:700;color:var(--ink2);white-space:nowrap;
-}
+.chip{display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;border:1px solid var(--line);
+  border-radius:999px;padding:7px 13px;font-size:.79rem;font-weight:700;color:var(--ink2);white-space:nowrap;}
 .chip-lvl{background:linear-gradient(135deg,#eff6ff,#e0f2fe);border-color:#bfdbfe;color:var(--blue-d);}
 
-/* =========================================================
-   LAYOUT
-   ========================================================= */
 .backdrop{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:88;border:0;padding:0;cursor:pointer;}
-
-.sidebar{
-  position:fixed;top:62px;left:0;bottom:0;width:var(--sidebar-w);
-  background:#0f172a;color:#cbd5e1;overflow-y:auto;padding:16px 12px 26px;z-index:70;
-  scrollbar-width:thin;
-}
+.sidebar{position:fixed;top:62px;left:0;bottom:0;width:var(--sidebar-w);background:#0f172a;color:#cbd5e1;
+  overflow-y:auto;padding:16px 12px 26px;z-index:70;scrollbar-width:thin;}
 .sidebar::-webkit-scrollbar{width:8px;}
 .sidebar::-webkit-scrollbar-thumb{background:#334155;border-radius:8px;}
-
 .side-box{background:#1e293b;border-radius:var(--r-sm);padding:12px;margin-bottom:14px;}
 .side-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;font-weight:800;margin-bottom:8px;}
 .side-val{font-size:.78rem;color:#e2e8f0;font-weight:700;margin-top:6px;text-align:right;}
-
 .bar{height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;}
 .sidebar .bar{background:#334155;}
 .bar > i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#2563eb,#0ea5e9);transition:width .45s ease;}
-
 .nav-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;}
-.nav-btn{
-  width:100%;display:flex;align-items:center;gap:10px;background:transparent;border:0;
-  color:#cbd5e1;padding:10px 12px;border-radius:10px;cursor:pointer;text-align:left;
-  font-size:.87rem;font-weight:600;transition:background .15s,color .15s;
-}
+.nav-btn{width:100%;display:flex;align-items:center;gap:10px;background:transparent;border:0;
+  color:#cbd5e1;padding:10px 12px;border-radius:10px;cursor:pointer;text-align:left;font-size:.87rem;font-weight:600;
+  transition:background .15s,color .15s;}
 .nav-btn:hover{background:#1e293b;color:#fff;}
 .nav-btn.active{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;box-shadow:0 4px 14px rgba(29,78,216,.35);}
 .nav-ico{font-size:1rem;width:20px;text-align:center;flex:0 0 20px;}
@@ -148,31 +83,18 @@ select,input{font-family:inherit;}
 .section{animation:fadeUp .28s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 
-/* =========================================================
-   COMPONENTS
-   ========================================================= */
-.card{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  padding:20px;box-shadow:var(--sh-sm);margin-bottom:18px;
-  transition:box-shadow .2s;
-}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  box-shadow:var(--sh-sm);margin-bottom:18px;transition:box-shadow .2s;}
 .card:hover{box-shadow:var(--sh);}
-.card-lg{padding:24px;}
-
 .sec-head{margin-bottom:18px;}
-.sec-badge{
-  display:inline-block;font-size:.67rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--blue-d);background:var(--blue-l);border-radius:999px;padding:5px 13px;margin-bottom:10px;
-}
+.sec-badge{display:inline-block;font-size:.67rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue-d);background:var(--blue-l);border-radius:999px;padding:5px 13px;margin-bottom:10px;}
 .sec-head h1,.sec-head h2{font-size:clamp(1.3rem,3.4vw,1.6rem);letter-spacing:.01em;}
 .sec-sub{color:var(--muted);font-size:.9rem;margin:0;font-weight:600;}
 
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:46px;padding:10px 20px;border-radius:11px;border:1px solid transparent;
-  font-weight:700;font-size:.92rem;cursor:pointer;text-decoration:none;
-  transition:transform .08s,background .15s,box-shadow .15s,border-color .15s,color .15s;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;
+  border-radius:11px;border:1px solid transparent;font-weight:700;font-size:.92rem;cursor:pointer;text-decoration:none;
+  transition:transform .08s,background .15s,box-shadow .15s,border-color .15s,color .15s;}
 .btn:active{transform:translateY(1px);}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(29,78,216,.28);}
@@ -184,110 +106,60 @@ select,input{font-family:inherit;}
 .btn-danger{background:#fff;color:var(--red);border-color:var(--red-b);}
 .btn-danger:hover:not(:disabled){background:var(--red-l);}
 .btn-sm{min-height:38px;padding:7px 14px;font-size:.83rem;border-radius:9px;}
-.btn-block{width:100%;}
 .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
 
 .divider{height:1px;background:var(--line);margin:20px 0;border:0;}
-.mt-0{margin-top:0;}
-.mb-0{margin-bottom:0;}
 .mt-16{margin-top:16px;}
 
-/* =========================================================
-   AUDIO PLAYER
-   ========================================================= */
-.player{
-  background:linear-gradient(135deg,#0f172a,#1e293b);
-  border-radius:var(--r);padding:16px 18px;margin-bottom:18px;
-  box-shadow:0 12px 30px rgba(15,23,42,.2);color:#e2e8f0;
-}
+.player{background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:var(--r);padding:16px 18px;
+  margin-bottom:18px;box-shadow:0 12px 30px rgba(15,23,42,.2);color:#e2e8f0;}
 .player-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
-.p-badge{
-  font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  background:rgba(56,189,248,.16);color:#7dd3fc;border:1px solid rgba(56,189,248,.3);
-  border-radius:999px;padding:4px 11px;
-}
+.p-badge{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(56,189,248,.16);color:#7dd3fc;border:1px solid rgba(56,189,248,.3);border-radius:999px;padding:4px 11px;}
 .p-file{font-size:.85rem;color:#cbd5e1;font-weight:600;word-break:break-all;}
 .p-hint{font-size:.75rem;color:#94a3b8;margin-left:auto;}
-
 .player audio{display:none;}
-
 .p-main{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-.p-btn{
-  width:48px;height:48px;flex:0 0 48px;border-radius:50%;border:0;cursor:pointer;
-  background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;font-size:1.1rem;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 5px 16px rgba(37,99,235,.4);transition:transform .12s,filter .15s;
-}
+.p-btn{width:48px;height:48px;flex:0 0 48px;border-radius:50%;border:0;cursor:pointer;
+  background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 5px 16px rgba(37,99,235,.4);transition:transform .12s,filter .15s;}
 .p-btn:hover{filter:brightness(1.1);}
 .p-btn:active{transform:scale(.94);}
-.p-btn.small{
-  width:42px;height:42px;flex:0 0 42px;font-size:.95rem;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);box-shadow:none;
-}
+.p-btn.small{width:42px;height:42px;flex:0 0 42px;font-size:.95rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);box-shadow:none;}
 .p-btn.small:hover{background:rgba(255,255,255,.2);}
-
 .p-time{font-size:.82rem;font-variant-numeric:tabular-nums;color:#cbd5e1;font-weight:700;min-width:44px;text-align:center;}
-
-input[type="range"].p-range{
-  -webkit-appearance:none;appearance:none;flex:1 1 140px;min-width:110px;height:6px;border-radius:999px;
-  background:rgba(255,255,255,.18);outline:none;cursor:pointer;
-}
-input[type="range"].p-range::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;
-  background:#38bdf8;border:2px solid #fff;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.35);
-}
-input[type="range"].p-range::-moz-range-thumb{
-  width:16px;height:16px;border-radius:50%;background:#38bdf8;border:2px solid #fff;cursor:pointer;
-}
-
+input[type="range"].p-range{-webkit-appearance:none;appearance:none;flex:1 1 140px;min-width:110px;height:6px;border-radius:999px;
+  background:rgba(255,255,255,.18);outline:none;cursor:pointer;}
+input[type="range"].p-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;
+  background:#38bdf8;border:2px solid #fff;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.35);}
+input[type="range"].p-range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#38bdf8;border:2px solid #fff;cursor:pointer;}
 .p-sub{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.1);}
 .p-vol{display:flex;align-items:center;gap:8px;flex:0 1 170px;min-width:130px;}
 .p-vol input[type="range"].p-range{flex:1 1 auto;min-width:70px;}
 .p-vol span{font-size:.9rem;}
-
 .p-speeds{display:flex;gap:6px;flex-wrap:wrap;}
-.spd{
-  min-height:36px;padding:6px 13px;border-radius:999px;cursor:pointer;font-size:.79rem;font-weight:700;
-  background:rgba(255,255,255,.08);color:#cbd5e1;border:1px solid rgba(255,255,255,.14);
-  transition:background .15s,color .15s,border-color .15s;
-}
+.spd{min-height:36px;padding:6px 13px;border-radius:999px;cursor:pointer;font-size:.79rem;font-weight:700;
+  background:rgba(255,255,255,.08);color:#cbd5e1;border:1px solid rgba(255,255,255,.14);transition:background .15s,color .15s,border-color .15s;}
 .spd:hover{background:rgba(255,255,255,.18);color:#fff;}
 .spd.active{background:#2563eb;color:#fff;border-color:#2563eb;}
-
-.p-err{
-  margin-top:14px;background:rgba(239,68,68,.14);border:1px solid rgba(248,113,113,.45);
-  border-radius:10px;padding:12px 14px;font-size:.85rem;color:#fecaca;
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-}
+.p-err{margin-top:14px;background:rgba(239,68,68,.14);border:1px solid rgba(248,113,113,.45);border-radius:10px;
+  padding:12px 14px;font-size:.85rem;color:#fecaca;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .p-err .btn{background:#fff;color:#991b1b;border-color:#fff;}
 
-/* =========================================================
-   QUIZ
-   ========================================================= */
 .q-head{margin-bottom:6px;}
 .q-title{font-size:1.2rem;margin:0 0 4px;}
 .q-sub{font-size:.88rem;color:var(--muted);margin:0 0 6px;font-weight:600;}
 .q-inst{font-size:.98rem;color:var(--ink2);font-weight:600;margin:10px 0 6px;}
-
-.practice-note{
-  background:var(--amber-l);border:1px solid var(--amber-b);color:#78350f;
-  border-radius:10px;padding:11px 14px;font-size:.84rem;margin:12px 0 6px;
-}
+.practice-note{background:var(--amber-l);border:1px solid var(--amber-b);color:#78350f;border-radius:10px;padding:11px 14px;font-size:.84rem;margin:12px 0 6px;}
 .practice-note strong{color:#92400e;}
-
 .q-list{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:16px;}
 .q-item{border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;background:#fcfdff;transition:border-color .2s;}
 .q-text{font-weight:600;font-size:.97rem;color:var(--ink);margin-bottom:11px;display:flex;gap:10px;align-items:flex-start;}
-.q-num{
-  flex:0 0 26px;height:26px;border-radius:50%;background:var(--blue-l);color:var(--blue-d);
-  font-size:.76rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:1px;
-}
+.q-num{flex:0 0 26px;height:26px;border-radius:50%;background:var(--blue-l);color:var(--blue-d);font-size:.76rem;font-weight:800;
+  display:inline-flex;align-items:center;justify-content:center;margin-top:1px;}
 .options{display:flex;flex-direction:column;gap:8px;}
-.opt{
-  display:flex;align-items:center;gap:11px;border:1px solid var(--line2);border-radius:10px;
-  padding:11px 14px;background:#fff;cursor:pointer;font-size:.92rem;min-height:48px;
-  transition:border-color .15s,background .15s;
-}
+.opt{display:flex;align-items:center;gap:11px;border:1px solid var(--line2);border-radius:10px;padding:11px 14px;background:#fff;
+  cursor:pointer;font-size:.92rem;min-height:48px;transition:border-color .15s,background .15s;}
 .opt:hover{background:#f8fafc;border-color:#94a3b8;}
 .opt input[type="radio"]{width:20px;height:20px;flex:0 0 20px;accent-color:var(--blue);cursor:pointer;margin:0;}
 .opt input[type="radio"]:disabled{cursor:default;}
@@ -298,26 +170,17 @@ input[type="range"].p-range::-moz-range-thumb{
 .opt.is-wrong{border-color:var(--red-b) !important;background:var(--red-l) !important;}
 .opt.is-correct .opt-letter::after{content:" ✓";color:var(--green);font-weight:900;}
 .opt.is-wrong .opt-letter::after{content:" ✗";color:var(--red);font-weight:900;}
-
-/* fill in the blank */
-.fill-input{
-  width:100%;min-height:46px;border:1px solid var(--line2);border-radius:10px;
-  padding:9px 13px;font-size:.95rem;color:var(--ink);background:#fff;outline:none;
-  transition:border-color .15s,background .15s;
-}
+.fill-input{width:100%;min-height:46px;border:1px solid var(--line2);border-radius:10px;padding:9px 13px;font-size:.95rem;
+  color:var(--ink);background:#fff;outline:none;transition:border-color .15s,background .15s;}
 .fill-input:focus{border-color:var(--blue);background:#f8fbff;}
 .fill-input:disabled{background:#f1f5f9;color:var(--ink2);}
 .fill-input.is-correct{border-color:var(--green-b);background:var(--green-l);}
 .fill-input.is-wrong{border-color:var(--red-b);background:var(--red-l);}
-
-/* match */
 .match-rows{display:flex;flex-direction:column;gap:9px;}
 .match-row{display:flex;gap:11px;align-items:center;flex-wrap:wrap;}
 .match-left{flex:1 1 210px;font-size:.92rem;font-weight:600;color:var(--ink2);}
-.match-sel{
-  flex:0 1 240px;min-height:44px;border:1px solid var(--line2);border-radius:10px;
-  padding:8px 11px;font-size:.89rem;background:#fff;color:var(--ink);cursor:pointer;
-}
+.match-sel{flex:0 1 240px;min-height:44px;border:1px solid var(--line2);border-radius:10px;padding:8px 11px;font-size:.89rem;
+  background:#fff;color:var(--ink);cursor:pointer;}
 .match-sel:disabled{background:#f1f5f9;color:var(--ink2);}
 .match-sel.is-correct{border-color:var(--green-b);background:var(--green-l);}
 .match-sel.is-wrong{border-color:var(--red-b);background:var(--red-l);}
@@ -325,7 +188,6 @@ input[type="range"].p-range::-moz-range-thumb{
 .match-mark.ok{color:var(--green);}
 .match-mark.no{color:var(--red);}
 
-/* feedback */
 .fb{border-radius:10px;padding:11px 14px;font-size:.87rem;margin-top:12px;border:1px solid transparent;}
 .fb-line{display:flex;align-items:center;gap:8px;font-weight:700;flex-wrap:wrap;}
 .fb-icon{font-weight:900;font-size:1rem;}
@@ -338,7 +200,6 @@ input[type="range"].p-range::-moz-range-thumb{
 .fb-err .fb-icon{color:var(--red);}
 .fb-practice{background:var(--amber-l);border-color:var(--amber-b);color:#78350f;}
 
-/* result */
 .result{border-radius:12px;padding:16px 18px;margin-top:18px;border:1px solid var(--line);background:#f8fafc;}
 .result.ok{background:var(--green-l);border-color:var(--green-b);}
 .result.no{background:var(--red-l);border-color:var(--red-b);}
@@ -351,161 +212,120 @@ input[type="range"].p-range::-moz-range-thumb{
 .res-note{font-size:.83rem;color:var(--muted);margin-top:6px;}
 .res-list{margin-top:12px;font-size:.86rem;color:var(--ink2);}
 .res-list li{margin-bottom:4px;}
-
 .q-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
 
-/* transcript */
 .transcript-box summary{list-style:none;}
 .transcript-box summary::-webkit-details-marker{display:none;}
 .transcript-box summary::before{content:"▸ ";display:inline-block;transition:transform .2s;}
 .transcript-box[open] summary::before{content:"▾ ";}
 
-/* =========================================================
-   STATS / DASHBOARD
-   ========================================================= */
-.hero{
-  background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 52%,#0ea5e9 100%);
-  border-radius:var(--r);padding:30px 26px;color:#fff;margin-bottom:20px;
-  box-shadow:0 16px 36px rgba(29,78,216,.26);position:relative;overflow:hidden;
-}
+.hero{background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 52%,#0ea5e9 100%);border-radius:var(--r);padding:30px 26px;
+  color:#fff;margin-bottom:20px;box-shadow:0 16px 36px rgba(29,78,216,.26);position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;background:rgba(255,255,255,.08);border-radius:50%;}
 .hero-kicker{font-size:.71rem;font-weight:800;letter-spacing:.24em;color:#bae6fd;margin-bottom:6px;}
 .hero-title{font-size:clamp(1.9rem,5.2vw,2.6rem);margin:0 0 8px;letter-spacing:.02em;}
 .hero-sub{font-size:.95rem;color:#e0f2fe;margin:0 0 16px;max-width:660px;}
 .hero-goals{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
 .goal{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:5px 13px;font-size:.76rem;font-weight:700;}
-
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:14px;margin-bottom:18px;}
-.stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh-sm);transition:transform .15s,box-shadow .15s;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh-sm);
+  transition:transform .15s,box-shadow .15s;}
 .stat:hover{transform:translateY(-2px);box-shadow:var(--sh);}
 .stat-label{font-size:.69rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:800;margin-bottom:6px;}
 .stat-value{font-size:1.5rem;font-weight:800;color:var(--ink);line-height:1.15;}
 .stat-value small{font-size:.78rem;color:var(--muted);font-weight:700;}
 .stat-sub{font-size:.76rem;color:var(--muted);margin-top:4px;}
-
 .card-title{font-size:1.05rem;display:flex;align-items:center;gap:9px;margin-bottom:12px;}
-
 .progress-row{margin-bottom:14px;}
 .progress-row .pr-top{display:flex;justify-content:space-between;font-size:.85rem;font-weight:700;color:var(--ink2);margin-bottom:5px;}
 .progress-row .pr-top span:last-child{color:var(--muted);}
-
-/* =========================================================
-   TABLES
-   ========================================================= */
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;border:1px solid var(--line);}
 table.tbl{width:100%;border-collapse:collapse;font-size:.87rem;min-width:420px;}
-table.tbl th{background:#f8fafc;font-size:.71rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);font-weight:800;}
+table.tbl th{background:#f8fafc;font-size:.71rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+  text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);font-weight:800;}
 table.tbl td{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top;}
 table.tbl tr:last-child td{border-bottom:0;}
 table.tbl td.en{font-weight:700;color:var(--ink);}
 table.tbl td.vi{color:var(--ink2);}
 table.tbl td.ex{color:var(--muted);font-style:italic;}
 
-/* =========================================================
-   DICTATION
-   ========================================================= */
 .dict-box{background:#fcfdff;border:1px solid var(--line);border-radius:12px;padding:18px;font-size:1rem;line-height:2.3;}
 .dl{margin:0 0 16px;display:flex;gap:9px;flex-wrap:wrap;align-items:baseline;}
 .spk{font-weight:800;color:var(--blue-d);flex:0 0 auto;}
-.blank{
-  display:inline-block;min-width:118px;width:auto;border:0;border-bottom:2px solid var(--blue);
-  background:#eff6ff;border-radius:6px 6px 0 0;padding:4px 9px;font-size:.95rem;
-  color:var(--ink);outline:none;transition:background .15s,border-color .15s;
-}
+.blank{display:inline-block;min-width:118px;width:auto;border:0;border-bottom:2px solid var(--blue);
+  background:#eff6ff;border-radius:6px 6px 0 0;padding:4px 9px;font-size:.95rem;color:var(--ink);outline:none;
+  transition:background .15s,border-color .15s;}
 .blank:focus{background:#dbeafe;border-bottom-color:var(--blue-d);}
 .blank:disabled{background:#f1f5f9;border-bottom-color:var(--line2);color:var(--ink2);}
 .blank.is-correct{background:var(--green-l);border-bottom-color:var(--green);color:#14532d;}
 .blank.is-wrong{background:var(--red-l);border-bottom-color:var(--red);color:#7f1d1d;}
 
-/* =========================================================
-   PRONUNCIATION / SPEAKING
-   ========================================================= */
 .sent-list{list-style:none;padding:0;margin:12px 0;counter-reset:s;}
-.sent-list li{
-  counter-increment:s;position:relative;padding:12px 15px 12px 50px;
-  border:1px solid var(--line);border-radius:10px;background:#fcfdff;margin-bottom:9px;font-size:.95rem;
-}
-.sent-list li::before{
-  content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  width:25px;height:25px;border-radius:50%;background:var(--blue-l);color:var(--blue-d);
-  font-size:.74rem;font-weight:800;display:flex;align-items:center;justify-content:center;
-}
-
-.speak-stage{
-  background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:1px solid #bfdbfe;
-  border-radius:var(--r);padding:24px 20px;text-align:center;margin:16px 0;
-}
+.sent-list li{counter-increment:s;position:relative;padding:12px 15px 12px 50px;border:1px solid var(--line);
+  border-radius:10px;background:#fcfdff;margin-bottom:9px;font-size:.95rem;}
+.sent-list li::before{content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:25px;height:25px;border-radius:50%;background:var(--blue-l);color:var(--blue-d);font-size:.74rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;}
+.speak-stage{background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:1px solid #bfdbfe;border-radius:var(--r);
+  padding:24px 20px;text-align:center;margin:16px 0;}
 .speak-label{font-size:.68rem;font-weight:800;letter-spacing:.18em;color:var(--blue-d);margin-bottom:10px;}
-.speak-text{font-size:clamp(1.1rem,3.4vw,1.5rem);font-weight:800;color:#1e3a8a;line-height:1.4;min-height:2.2em;display:flex;align-items:center;justify-content:center;}
+.speak-text{font-size:clamp(1.1rem,3.4vw,1.5rem);font-weight:800;color:#1e3a8a;line-height:1.4;min-height:2.2em;
+  display:flex;align-items:center;justify-content:center;}
 .speak-text.hidden-text{color:#94a3b8;font-weight:600;font-size:1rem;font-style:italic;}
 .speak-progress{font-size:.8rem;color:var(--muted);font-weight:700;margin-top:10px;}
-
 .check-list{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:9px;}
 .check-list li{display:flex;align-items:flex-start;}
-.check-list label{display:flex;align-items:flex-start;gap:11px;font-size:.9rem;cursor:pointer;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;width:100%;transition:background .15s,border-color .15s;}
+.check-list label{display:flex;align-items:flex-start;gap:11px;font-size:.9rem;cursor:pointer;padding:10px 13px;
+  border:1px solid var(--line);border-radius:10px;background:#fff;width:100%;transition:background .15s,border-color .15s;}
 .check-list label:hover{background:#f8fafc;border-color:var(--line2);}
 .check-list input[type="checkbox"]{width:20px;height:20px;flex:0 0 20px;accent-color:var(--green);margin-top:2px;cursor:pointer;}
 .check-list input:checked + span{color:var(--green);font-weight:700;}
-
 .help-card{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;margin-top:12px;}
-.help-card .hc-head{background:#f1f5f9;padding:9px 14px;font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+.help-card .hc-head{background:#f1f5f9;padding:9px 14px;font-size:.72rem;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--muted);}
 .help-row{display:flex;flex-wrap:wrap;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:.9rem;}
 .help-row:last-child{border-bottom:0;}
 .help-row .hw{flex:1 1 180px;color:var(--ink2);}
 .help-row .hs{flex:1 1 180px;color:var(--blue-d);font-weight:800;}
 
-/* =========================================================
-   MISTAKES
-   ========================================================= */
-.mk-card{border:1px solid var(--red-b);border-left:5px solid var(--red);border-radius:var(--r-sm);padding:15px 17px;background:#fff;margin-bottom:14px;}
+.mk-card{border:1px solid var(--red-b);border-left:5px solid var(--red);border-radius:var(--r-sm);padding:15px 17px;
+  background:#fff;margin-bottom:14px;}
 .mk-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;}
-.mk-tag{font-size:.67rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;background:var(--red-l);color:var(--red);border-radius:999px;padding:4px 11px;}
+.mk-tag{font-size:.67rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;background:var(--red-l);color:var(--red);
+  border-radius:999px;padding:4px 11px;}
 .mk-date{font-size:.72rem;color:var(--muted);margin-left:auto;font-weight:600;}
 .mk-q{font-weight:700;font-size:.95rem;margin-bottom:9px;}
 .mk-rows{font-size:.87rem;color:var(--ink2);display:flex;flex-direction:column;gap:4px;}
 .mk-rows .lbl{color:var(--muted);font-weight:700;}
 .mk-vi{font-size:.85rem;color:var(--ink2);background:#f8fafc;border-radius:8px;padding:10px 13px;margin-top:10px;border-left:3px solid var(--sky);}
 .mk-retry{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line2);}
-
 .empty{text-align:center;padding:38px 20px;color:var(--muted);background:#fff;border:1px dashed var(--line2);border-radius:var(--r);}
 .empty .em-ico{font-size:2.3rem;display:block;margin-bottom:9px;}
 
-/* =========================================================
-   CONVERSATION
-   ========================================================= */
 .prompt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px;margin-top:6px;}
-.prompt-card{
-  border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;font-size:.86rem;
-  cursor:pointer;text-align:left;display:flex;gap:9px;align-items:flex-start;
-  transition:border-color .15s,background .15s,transform .12s;color:var(--ink2);font-weight:600;min-height:54px;
-}
+.prompt-card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff;font-size:.86rem;
+  cursor:pointer;text-align:left;display:flex;gap:9px;align-items:flex-start;transition:border-color .15s,background .15s,transform .12s;
+  color:var(--ink2);font-weight:600;min-height:54px;}
 .prompt-card:hover{border-color:var(--blue);background:#f8fafc;transform:translateY(-1px);}
 .prompt-card.done{background:var(--green-l);border-color:var(--green-b);color:#14532d;}
 .pc-mark{font-weight:900;flex:0 0 auto;color:#cbd5e1;}
 .prompt-card.done .pc-mark{color:var(--green);}
-
-.situation-box{
-  background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid var(--green-b);
-  border-radius:var(--r);padding:22px;text-align:center;margin:14px 0;
-}
+.situation-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid var(--green-b);border-radius:var(--r);
+  padding:22px;text-align:center;margin:14px 0;}
 .situation-label{font-size:.68rem;font-weight:800;letter-spacing:.18em;color:var(--green);margin-bottom:10px;}
 .situation-text{font-size:clamp(1.05rem,3.2vw,1.4rem);font-weight:800;color:#14532d;line-height:1.4;}
 
-/* =========================================================
-   LEVELS
-   ========================================================= */
 .level-track{display:flex;flex-direction:column;gap:9px;margin-top:12px;}
-.level-row{display:flex;align-items:center;gap:11px;font-size:.86rem;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fcfdff;}
+.level-row{display:flex;align-items:center;gap:11px;font-size:.86rem;padding:10px 14px;border-radius:10px;
+  border:1px solid var(--line);background:#fcfdff;}
 .level-row.current{border-color:var(--blue);background:var(--blue-l);font-weight:800;color:var(--blue-d);}
 .level-row.locked{opacity:.6;}
 .level-row .lr-xp{margin-left:auto;font-size:.75rem;color:var(--muted);font-weight:700;}
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
 @media (max-width:1000px){
   .hamburger{display:flex;}
-  .sidebar{top:0;height:100vh;padding-top:18px;transform:translateX(-100%);transition:transform .26s ease;z-index:90;box-shadow:8px 0 28px rgba(15,23,42,.3);}
+  .sidebar{top:0;height:100vh;padding-top:18px;transform:translateX(-100%);transition:transform .26s ease;z-index:90;
+    box-shadow:8px 0 28px rgba(15,23,42,.3);}
   .sidebar.open{transform:translateX(0);}
   .main{margin-left:0;padding:16px 14px 44px;}
   .brand-s{display:none;}
@@ -531,19 +351,13 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
   .match-left{flex:1 1 100%;}
   .p-hint{display:none;}
 }
-@media (max-width:360px){
-  .stat-grid{grid-template-columns:1fr;}
-}
-@media print{
-  .sidebar,.topbar,.backdrop,.player{display:none;}
-  .main{margin-left:0;}
-}
+@media (max-width:360px){.stat-grid{grid-template-columns:1fr;}}
+@media print{.sidebar,.topbar,.backdrop,.player{display:none;}.main{margin-left:0;}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- ===================== TOP BAR ===================== -->
 <header class="topbar">
   <button class="hamburger" id="hamburger" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="sidebar">
     <span></span><span></span><span></span>
@@ -564,7 +378,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
 <button class="backdrop" id="backdrop" hidden aria-label="Đóng menu"></button>
 
 <div class="layout">
-  <!-- ===================== SIDEBAR ===================== -->
   <nav class="sidebar" id="sidebar" aria-label="Điều hướng Unit 1">
     <div class="side-box">
       <div class="side-label">Tiến độ Unit 1</div>
@@ -577,10 +390,8 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
     </div>
   </nav>
 
-  <!-- ===================== MAIN ===================== -->
   <main class="main" id="main">
 
-    <!-- ============ 1. DASHBOARD ============ -->
     <section class="section" data-section="dashboard">
       <div class="hero">
         <div class="hero-kicker">UNIT 1</div>
@@ -595,17 +406,12 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
           <span class="goal">🎧 Listening</span>
         </div>
       </div>
-
       <div class="stat-grid" id="dashStats"></div>
-
       <div class="card">
         <h3 class="card-title">▶️ Continue Learning</h3>
         <p id="continueText" class="mb-0">Bạn đang ở đầu Unit 1. Hãy bắt đầu với <strong>Getting Ready</strong>.</p>
-        <div class="btn-row">
-          <button class="btn btn-primary" id="continueBtn" data-action="continue">Continue Learning →</button>
-        </div>
+        <div class="btn-row"><button class="btn btn-primary" id="continueBtn" data-action="continue">Continue Learning →</button></div>
       </div>
-
       <div class="card">
         <h3 class="card-title">🎧 Audio trong Unit này</h3>
         <p style="font-size:.89rem;color:var(--muted)">Năm file MP3 được dùng trong Unit 1. Trình phát nằm ngay trong từng phần học. Audio <strong>không tự động phát</strong>.</p>
@@ -622,19 +428,17 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
           </table>
         </div>
       </div>
-
       <div class="card">
         <h3 class="card-title">ℹ️ Cách ứng dụng chấm điểm</h3>
         <ul style="font-size:.9rem;color:var(--ink2)">
-          <li><strong>Bài có đáp án xác định</strong> (Getting Ready, Listening 1, Listening 2, Listening 3 — Task 1, Dictation, Review, Final Test) được chấm tự động.</li>
-          <li><strong>Bài không có đáp án đã kiểm chứng</strong> (Listening 3 — Task 2, câu 2–6) chạy ở <strong>Practice Mode — self-check</strong>. Ứng dụng ghi lại câu trả lời nhưng <em>không</em> tự bịa đáp án.</li>
-          <li>Sau khi Submit, bạn có thể bấm <strong>“Xem transcript”</strong> để đối chiếu với audio.</li>
-          <li>Tiến độ, XP, điểm và lỗi được lưu tự động trong trình duyệt (localStorage).</li>
+          <li><strong>Bài có đáp án xác định</strong> được chấm tự động.</li>
+          <li>Chỉ còn <strong>1 câu</strong> (Listening 3 — Task 2, Response 2) chạy <strong>Practice Mode — self-check</strong> vì các lựa chọn không khớp rõ với audio.</li>
+          <li>Sau khi Submit, có thể bấm <strong>“Xem transcript”</strong> để đối chiếu audio.</li>
+          <li>Tiến độ, XP, điểm và lỗi được lưu trong localStorage.</li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ 2. GETTING READY ============ -->
     <section class="section" data-section="getting-ready" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 2</span>
@@ -644,7 +448,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="mount-getting-ready"></div>
     </section>
 
-    <!-- ============ 3. LISTENING 1 ============ -->
     <section class="section" data-section="listening-1" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 3</span>
@@ -655,7 +458,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="mount-listening-1"></div>
     </section>
 
-    <!-- ============ 4. LISTENING 2 ============ -->
     <section class="section" data-section="listening-2" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 4</span>
@@ -667,7 +469,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="mount-listening-2-t2"></div>
     </section>
 
-    <!-- ============ 5. LISTENING 3 ============ -->
     <section class="section" data-section="listening-3" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 5</span>
@@ -679,36 +480,29 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="mount-listening-3-t2"></div>
     </section>
 
-    <!-- ============ 6. LISTENING STRATEGY ============ -->
     <section class="section" data-section="strategy" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 6</span>
         <h1>Listening Strategy</h1>
         <p class="sec-sub">Nghe hiểu mà không cần dịch từng từ</p>
       </header>
-
       <div class="card">
         <h3 class="card-title">🧭 Đừng dịch từng từ</h3>
-        <p style="font-size:.94rem;color:var(--ink2)">
-          Khi nghe small talk, bạn <strong>không cần hiểu 100% từng từ</strong>. Người bản xứ cũng bỏ qua nhiều từ.
-          Điều quan trọng là nắm được <em>ý chính</em> và <em>chức năng</em> của câu nói.
-        </p>
+        <p style="font-size:.94rem;color:var(--ink2)">Khi nghe small talk, bạn <strong>không cần hiểu 100% từng từ</strong>. Người bản xứ cũng bỏ qua nhiều từ. Điều quan trọng là nắm được <em>ý chính</em> và <em>chức năng</em> của câu nói.</p>
         <div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:5px solid var(--sky);padding:14px 16px;border-radius:10px;font-size:.9rem;color:#0c4a6e;">
           <strong>Mẹo:</strong> Thay vì cố dịch, hãy tự hỏi “Người này đang <em>làm gì</em>?” — chào, giới thiệu, hỏi thăm, hay muốn kết thúc câu chuyện?
         </div>
       </div>
-
       <div class="card">
         <h3 class="card-title">🎯 5 câu hỏi cần tự trả lời khi nghe</h3>
         <ol class="sent-list">
           <li><strong>Who is speaking?</strong> — Ai đang nói? Hai người đã quen nhau chưa?</li>
-          <li><strong>What is the topic?</strong> — Họ đang nói về chuyện gì? (công việc, trường học, thời tiết, kỳ nghỉ…)</li>
+          <li><strong>What is the topic?</strong> — Họ đang nói về chuyện gì?</li>
           <li><strong>Is the speaker asking or answering?</strong> — Người nói đang <em>hỏi</em> hay <em>trả lời</em>?</li>
-          <li><strong>Does the speaker want to continue?</strong> — Người nói có muốn tiếp tục câu chuyện không?</li>
+          <li><strong>Does the speaker want to continue?</strong> — Người nói có muốn tiếp tục không?</li>
           <li><strong>Does the speaker want to end?</strong> — Người nói có muốn kết thúc không?</li>
         </ol>
       </div>
-
       <div class="card">
         <h3 class="card-title">🔁 Listen Again</h3>
         <p style="font-size:.94rem;color:var(--ink2)">Nghe lần đầu để nắm ý chính. Nghe lần hai để bắt chi tiết. Nghe lần ba với tốc độ <strong>0.75x</strong> nếu cần.</p>
@@ -716,7 +510,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       </div>
     </section>
 
-    <!-- ============ 7. PRONUNCIATION ============ -->
     <section class="section" data-section="pronunciation" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 7</span>
@@ -724,7 +517,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
         <p class="sec-sub">Reduction of /h/ in he, him, his, her · CD 1-5 · 05) Unit 1.mp3</p>
       </header>
       <div id="player-pron"></div>
-
       <div class="card">
         <h3 class="card-title">Task 1 — Listen and repeat</h3>
         <ol class="sent-list">
@@ -735,28 +527,23 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
         </ol>
         <p style="font-size:.88rem;color:var(--muted);margin-bottom:0">Dùng nút <strong>0.75x</strong> trong trình phát để nghe chậm, sau đó nghe lại ở <strong>1.0x</strong>.</p>
       </div>
-
       <div class="card">
         <h3 class="card-title">Task 2 — Read the sentences to a partner</h3>
         <p style="font-size:.94rem;color:var(--ink2)">Read the sentences to a partner. Be sure to reduce the <strong>h</strong> sound.</p>
-
         <div class="speak-stage">
           <div class="speak-label">SENTENCE <span id="speakIdx">1</span> / 4</div>
           <div class="speak-text" id="speakText">Where does he go to school?</div>
           <div class="speak-progress" id="speakProg">Đã luyện: 0 / 4</div>
         </div>
-
         <div class="btn-row">
           <button class="btn btn-ghost" data-action="speak-prev">← Previous</button>
           <button class="btn btn-ghost" data-action="speak-toggle">🙈 Hide Sentence</button>
           <button class="btn btn-ghost" data-action="speak-next">Next →</button>
           <button class="btn btn-green" data-action="speak-mark">✓ Mark as Practiced</button>
         </div>
-
         <h4 class="mt-16">Checklist cho câu này</h4>
         <ul class="check-list" id="speakChecklist"></ul>
       </div>
-
       <div class="card">
         <h3 class="card-title">📖 Pronunciation Help</h3>
         <div class="help-card">
@@ -766,18 +553,12 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
           <div class="help-row"><span class="hw">Give <strong>him</strong> a call.</span><span class="hs">Givim a call.</span></div>
           <div class="help-row"><span class="hw">Tell <strong>her</strong> I called.</span><span class="hs">Teller I called.</span></div>
         </div>
-
         <div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:5px solid var(--sky);padding:14px 16px;border-radius:10px;font-size:.9rem;color:#0c4a6e;margin-top:14px;">
-          <strong>Giải thích:</strong><br>
-          Trong <em>natural connected speech</em>, âm /h/ trong các đại từ <strong>he, him, his, her</strong> khi
-          <strong>không được nhấn mạnh</strong> có thể được phát âm yếu đi hoặc lược bỏ.<br><br>
-          ⚠️ <strong>Lưu ý:</strong> <em>Không phải lúc nào /h/ cũng bị lược bỏ.</em> Khi đại từ được nhấn mạnh,
-          /h/ vẫn được phát âm rõ ràng. Đây chỉ là một đặc điểm rất phổ biến của lời nói tự nhiên, tốc độ nhanh.
+          <strong>Giải thích:</strong><br>Trong <em>natural connected speech</em>, âm /h/ trong các đại từ <strong>he, him, his, her</strong> khi <strong>không được nhấn mạnh</strong> có thể được phát âm yếu đi hoặc lược bỏ.<br><br>⚠️ <strong>Lưu ý:</strong> <em>Không phải lúc nào /h/ cũng bị lược bỏ.</em> Khi đại từ được nhấn mạnh, /h/ vẫn được phát âm rõ.
         </div>
       </div>
     </section>
 
-    <!-- ============ 8. DICTATION ============ -->
     <section class="section" data-section="dictation" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 8</span>
@@ -789,42 +570,34 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="mount-dict-task2"></div>
     </section>
 
-    <!-- ============ 9. CONVERSATION CORNER ============ -->
     <section class="section" data-section="conversation" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 9</span>
         <h1>Conversation Corner</h1>
         <p class="sec-sub">Seeing someone you know</p>
       </header>
-
       <div class="card">
         <p class="q-inst">Work in pairs. Imagine you see someone you’ve met only once before. Ask each other questions about what you’ve been doing.</p>
-
         <div class="situation-box">
           <div class="situation-label">SITUATION</div>
           <div class="situation-text" id="situationText">You meet a classmate you have only seen once before.</div>
         </div>
-
         <div class="btn-row">
           <button class="btn btn-primary" data-action="conv-start">▶ Start</button>
           <button class="btn btn-ghost" data-action="conv-new">🔀 New Situation</button>
           <button class="btn btn-green" data-action="conv-mark">✓ Mark as Practiced</button>
         </div>
-
         <div class="progress-row">
           <div class="pr-top"><span>Situations practised</span><span id="convCount">0 / 8</span></div>
           <div class="bar"><i id="convBar"></i></div>
         </div>
-
         <hr class="divider">
-
         <h3 class="card-title">💬 Useful prompts</h3>
         <p style="font-size:.87rem;color:var(--muted)">Bấm vào một câu để đưa nó lên bảng luyện nói phía trên.</p>
         <div class="prompt-grid" id="promptGrid"></div>
       </div>
     </section>
 
-    <!-- ============ 10. LANGUAGE BANK ============ -->
     <section class="section" data-section="bank" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 10</span>
@@ -834,7 +607,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="bankBody"></div>
     </section>
 
-    <!-- ============ 11. REVIEW ============ -->
     <section class="section" data-section="review" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 11</span>
@@ -842,14 +614,11 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
         <p class="sec-sub">Getting Ready · Listening · Pronunciation · Dictation · Conversation</p>
       </header>
       <div class="card">
-        <p style="font-size:.9rem;color:var(--muted);margin:0">
-          Phần ôn tập gồm nhiều dạng câu hỏi: trắc nghiệm, đúng/sai, nối, điền từ.
-        </p>
+        <p style="font-size:.9rem;color:var(--muted);margin:0">Phần ôn tập gồm nhiều dạng câu hỏi: trắc nghiệm, đúng/sai, nối, điền từ.</p>
       </div>
       <div id="mount-review"></div>
     </section>
 
-    <!-- ============ 12. FINAL TEST ============ -->
     <section class="section" data-section="final-test" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 12</span>
@@ -859,7 +628,6 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       <div id="mount-final"></div>
     </section>
 
-    <!-- ============ 13. MY MISTAKES ============ -->
     <section class="section" data-section="mistakes" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 13</span>
@@ -868,16 +636,13 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
       </header>
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
-          <p class="mb-0" style="font-size:.88rem;color:var(--muted)">
-            Chỉ những câu hỏi <strong>có đáp án xác định</strong> bị trả lời sai mới được lưu.
-          </p>
+          <p class="mb-0" style="font-size:.88rem;color:var(--muted)">Chỉ những câu hỏi <strong>có đáp án xác định</strong> bị trả lời sai mới được lưu.</p>
           <button class="btn btn-danger btn-sm" data-action="clear-mistakes">🗑 Clear Mistakes</button>
         </div>
         <div id="mistakesList"></div>
       </div>
     </section>
 
-    <!-- ============ 14. PROGRESS ============ -->
     <section class="section" data-section="progress" hidden>
       <header class="sec-head">
         <span class="sec-badge">Section 14</span>
@@ -894,64 +659,49 @@ table.tbl td.ex{color:var(--muted);font-style:italic;}
 "use strict";
 
 /* =========================================================================
-   1. DATA — AUDIO (kèm transcript đã xác minh từ audio scripts)
+   1. DATA — AUDIO (kèm transcript)
    ========================================================================= */
 const AUDIO = {
-  l1: {
-    cd: "CD 1-2", file: "02) Unit 1.mp3", src: "audio/02%29%20Unit%201.mp3",
-    transcript: [
-      { sp:"1", line:"A: Hi. I don't think we've met, have we? — B: No, I don't think so. My name's Mia. — A: Nice to meet you, Mia. I'm Tim Clark." },
-      { sp:"2", line:"A: Hey, you're Mike Thompson, right? — B: That's right. And you're Jenny? — A: Yeah! Jenny Lindsay. — B: Oh, sure. We met at Jake's wedding. — A: It's great to see you again!" },
-      { sp:"3", line:"A: Haven't we met somewhere? — B: No, I don't think so. — A: Are you from around here? — B: No, my name is Greg Brown. — A: Oh, I'm sorry. I was positive we'd met before." },
-      { sp:"4", line:"A: Jeff! Hi. Remember me? — B: Oh, hi! It's... uh... — A: Tara. That's right. We were in that computer class together." },
-      { sp:"5", line:"A: Oh, hi, you're Jonathan, aren't you? — B: Yes, and you're Wendy. — A: Yeah. We met at the conference in Hawaii last summer." },
-      { sp:"6", line:"A: Hi! Don't we work in the same building? — B: Yes, I think we do. — A: I'm Gary James. I'm in accounting. — B: Hi, Gary. I'm William Jones. I'm in marketing." }
-    ]
-  },
-  l2: {
-    cd: "CD 1-3", file: "03) Unit 1.mp3", src: "audio/03%29%20Unit%201.mp3",
-    transcript: [
-      { sp:"1", line:"A: Hey, Annie, that looks really nice on you. Is it new? — B: Yeah, I got it on sale at George Brothers Department Store... That color looks great. — A: Oh! Look at the time. I've got to run. Good seeing you!" },
-      { sp:"2", line:"A: What are you taking this year? — B: Mostly literature courses. — A: Oh, really? Are they any good? — B: They're not bad. Professor Scott's class... but his tests are so hard. — A: Really? Are they essay or short answer tests?" },
-      { sp:"3", line:"A: What an awful month we are having. — B: It's pretty bad, isn't it? So hot and humid... — A: That's true. Well, I think I'm going to get some more drinks. Enjoy the party!" },
-      { sp:"4", line:"A: So tell me, Kim. What's he like? — B: Well, he's a real character... always giving me little presents. — A: Yeah, probably. So how long have you known him, anyway?" },
-      { sp:"5", line:"A: So are you still doing the same thing, David? — B: Yeah, I am, unfortunately... stuck in that office. — A: No, it's not. The worst thing about it is you still have to hear about any jobs. I'll let you know." },
-      { sp:"6", line:"A: So, everybody's fine at home, Sarah? — B: Yes... My sister Jenny's getting married! — A: Sounds great. And how about your brother? What's he been doing lately?" }
-    ]
-  },
-  l3: {
-    cd: "CD 1-4", file: "04) Unit 1.mp3", src: "audio/04%29%20Unit%201.mp3",
-    transcript: [
-      { sp:"1", line:"Yes, I do. I really enjoy living here. So far the weather's been great, and people here are really pretty, and I love all the cafes and restaurants. The other thing I like is that the town's small, so it's easy to get to know people." },
-      { sp:"2", line:"Yes, I do. It's a very difficult language to learn. I've been studying it for two years. I tried to learn Japanese once, and it was really hard. These days, though, it's easier to learn a foreign language because you can buy some fantastic courses online and on DVD." },
-      { sp:"3", line:"I have two children, a girl and a boy. They're both going to school, so they keep us very busy. My husband comes from a big family and would love to have more children, but I think two is enough." },
-      { sp:"4", line:"I have a small design company. We design kitchens and bathrooms and things like that. There are just three of us in the company. Last year was a very quiet year for us, but it looks as if business is really improving this year." },
-      { sp:"5", line:"Oh, yeah. I've been having a great time since I arrived. Everyone's been very helpful, and I've made some wonderful new friends. I still have a few more days here, and I'm thinking of renting a car and driving up to the mountains." },
-      { sp:"6", line:"I'm from a town called Cairns, on the northeast coast of Australia. It's a small town, but I enjoy living there. It's not far from the Great Barrier Reef, which is one of the most beautiful places in the world. You should go there sometime." }
-    ]
-  },
-  pron: {
-    cd:"CD 1-5", file:"05) Unit 1.mp3", src:"audio/05%29%20Unit%201.mp3",
-    transcript: [
-      { sp:"1", line:"Where does he go to school?" },
-      { sp:"2", line:"I have to call his teacher." },
-      { sp:"3", line:"What's her job?" },
-      { sp:"4", line:"Have you known him for a long time?" }
-    ]
-  },
-  dict: {
-    cd:"CD 1-6", file:"06) Unit 1.mp3", src:"audio/06%29%20Unit%201.mp3",
-    transcript: [
-      { sp:"A", line:"Hi, haven't we met before?" },
-      { sp:"B", line:"Yeah, I think we met at Kate's wedding." },
-      { sp:"A", line:"That's right! Have you seen her lately?" },
-      { sp:"B", line:"No, I haven't seen her in months. But I talked with her husband last week." },
-      { sp:"A", line:"Oh, really? How's he doing?" },
-      { sp:"B", line:"He's doing really well. He told me that he's got a great new job." },
-      { sp:"A", line:"I'm happy to hear that. Well, I've got to go, but it was great to see you." },
-      { sp:"B", line:"Yeah, you too! If you see John again, tell him I said hello." }
-    ]
-  }
+  l1: { cd:"CD 1-2", file:"02) Unit 1.mp3", src:"audio/02%29%20Unit%201.mp3", transcript:[
+    { sp:"1", line:"A: Hi. I don't think we've met, have we? — B: No, I don't think so. My name's Mia. — A: Nice to meet you, Mia. I'm Tim Clark." },
+    { sp:"2", line:"A: Hey, you're Mike Thompson, right? — B: That's right. And you're Jenny? — A: Yeah! Jenny Lindsay. — B: Oh, sure. We met at Jake's wedding." },
+    { sp:"3", line:"A: Haven't we met somewhere? — B: No, I don't think so. — A: Are you from around here? — B: No, my name is Greg Brown. — A: Oh, I'm sorry. I was positive we'd met before." },
+    { sp:"4", line:"A: Jeff! Hi. Remember me? — B: Oh, hi! It's... uh... — A: Tara. That's right. We were in that computer class together." },
+    { sp:"5", line:"A: Oh, hi, you're Jonathan, aren't you? — B: Yes, and you're Wendy. — A: Yeah. We met at the conference in Hawaii last summer." },
+    { sp:"6", line:"A: Hi! Don't we work in the same building? — B: Yes, I think we do. — A: I'm Gary James. I'm in accounting. — B: Hi, Gary. I'm William Jones. I'm in marketing." }
+  ]},
+  l2: { cd:"CD 1-3", file:"03) Unit 1.mp3", src:"audio/03%29%20Unit%201.mp3", transcript:[
+    { sp:"1", line:"A: Hey, Annie, that looks really nice on you. Is it new? — B: Yeah, I got it on sale at George Brothers Department Store... That color looks great. — A: Oh! Look at the time. I've got to run. Good seeing you!" },
+    { sp:"2", line:"A: What are you taking this year? — B: Mostly literature courses. — A: Oh, really? Are they any good? — B: They're not bad. Professor Scott's class... but his tests are so hard. — A: Really? Are they essay or short answer tests?" },
+    { sp:"3", line:"A: What an awful month we are having. — B: It's pretty bad, isn't it? So hot and humid... — A: That's true. Well, I think I'm going to get some more drinks. Enjoy the party!" },
+    { sp:"4", line:"A: So tell me, Kim. What's he like? — B: Well, he's a real character... always giving me little presents. — A: Yeah, probably. So how long have you known him, anyway?" },
+    { sp:"5", line:"A: So are you still doing the same thing, David? — B: Yeah, I am, unfortunately... stuck in that office. — A: No, it's not. The worst thing about it is you still have to hear about any jobs. I'll let you know." },
+    { sp:"6", line:"A: So, everybody's fine at home, Sarah? — B: Yes... My sister Jenny's getting married! — A: Sounds great. And how about your brother? What's he been doing lately?" }
+  ]},
+  l3: { cd:"CD 1-4", file:"04) Unit 1.mp3", src:"audio/04%29%20Unit%201.mp3", transcript:[
+    { sp:"1", line:"Yes, I do. I really enjoy living here. So far the weather's been great, and people here are really pretty, and I love all the cafes and restaurants there. The other thing I like is that the town's small, so it's easy to get to know people." },
+    { sp:"2", line:"Yes, I do. It's a very difficult language to learn. I've been studying it for two years. I tried to learn Japanese once, and it was really hard. These days, though, it's easier to learn a foreign language because you can buy some fantastic courses online and on DVD." },
+    { sp:"3", line:"I have two children, a girl and a boy. They're both going to school, so they keep us very busy. My husband comes from a big family and would love to have more children, but I think two is enough." },
+    { sp:"4", line:"I have a small design company. We design kitchens and bathrooms and things like that. There are just three of us in the company. Last year was a very quiet year for us, but it looks as if business is really improving this year. Would you like to visit our office sometime?" },
+    { sp:"5", line:"Oh, yeah. I've been having a great time since I arrived. Everyone's been very helpful, and I've made some wonderful new friends. I still have a few more days here, and I'm thinking of renting a car and driving up to the mountains." },
+    { sp:"6", line:"I'm from a town called Cairns, on the northeast coast of Australia. It's a small town, but I enjoy living there. It's not far from the Great Barrier Reef, which is one of the most beautiful places in the world. You should go there sometime." }
+  ]},
+  pron: { cd:"CD 1-5", file:"05) Unit 1.mp3", src:"audio/05%29%20Unit%201.mp3", transcript:[
+    { sp:"1", line:"Where does he go to school?" },
+    { sp:"2", line:"I have to call his teacher." },
+    { sp:"3", line:"What's her job?" },
+    { sp:"4", line:"Have you known him for a long time?" }
+  ]},
+  dict: { cd:"CD 1-6", file:"06) Unit 1.mp3", src:"audio/06%29%20Unit%201.mp3", transcript:[
+    { sp:"A", line:"Hi, haven't we met before?" },
+    { sp:"B", line:"Yeah, I think we met at Kate's wedding." },
+    { sp:"A", line:"That's right! Have you seen her lately?" },
+    { sp:"B", line:"No, I haven't seen her in months. But I talked with her husband last week." },
+    { sp:"A", line:"Oh, really? How's he doing?" },
+    { sp:"B", line:"He's doing really well. He told me that he's got a great new job." },
+    { sp:"A", line:"I'm happy to hear that. Well, I've got to go, but it was great to see you." },
+    { sp:"B", line:"Yeah, you too! If you see John again, tell him I said hello." }
+  ]}
 };
 
 /* =========================================================================
@@ -979,9 +729,6 @@ const TRACKABLE = [
   "pronunciation","dictation","conversation","review","final-test"
 ];
 
-/* =========================================================================
-   3. DATA — LEVELS
-   ========================================================================= */
 const LEVELS = [
   { min:0,   name:"Level 1 — Beginner" },
   { min:60,  name:"Level 2 — Listener" },
@@ -991,11 +738,10 @@ const LEVELS = [
 ];
 
 /* =========================================================================
-   4. DATA — QUIZZES (đã điền đáp án xác minh)
+   3. DATA — QUIZZES
    ========================================================================= */
 const QUIZZES = {
 
-  /* -------------------- GETTING READY (graded) -------------------- */
   "getting-ready": {
     section:"getting-ready",
     title:"Getting Ready",
@@ -1003,31 +749,23 @@ const QUIZZES = {
     instruction:"Do you use these expressions to greet someone you know or to introduce yourself to someone you don’t know? Check (✓) the correct answer.",
     xp:10,
     items:[
-      { id:"gr1", type:"mc", question:"I don’t think we’ve met.",
-        options:["Greet","Introduce"], answer:1,
-        explanation:"Câu này dùng để <strong>tự giới thiệu</strong> với người mình chưa quen (“Tôi nghĩ chúng ta chưa gặp nhau”)." },
-      { id:"gr2", type:"mc", question:"Hi! I haven’t seen you for a long time!",
-        options:["Greet","Introduce"], answer:0,
-        explanation:"“I haven’t seen you for a long time” = đã lâu rồi không gặp → dùng để <strong>chào</strong> một người đã quen." },
-      { id:"gr3", type:"mc", question:"Hello. My name’s Kate.",
-        options:["Greet","Introduce"], answer:1,
-        explanation:"Nói tên của mình (“My name’s Kate”) là hành động <strong>tự giới thiệu</strong>." },
-      { id:"gr4", type:"mc", question:"Hi, nice to see you again.",
-        options:["Greet","Introduce"], answer:0,
-        explanation:"Từ “<strong>again</strong>” cho thấy hai người đã gặp nhau trước đó → đây là lời <strong>chào</strong>." },
-      { id:"gr5", type:"mc", question:"Hi. I’m Don. I just started working here.",
-        options:["Greet","Introduce"], answer:1,
-        explanation:"Nói tên và giới thiệu hoàn cảnh (“I just started working here”) → <strong>tự giới thiệu</strong>." },
-      { id:"gr6", type:"mc", question:"Betsy! How are you doing?",
-        options:["Greet","Introduce"], answer:0,
-        explanation:"Gọi tên người kia và hỏi thăm (“How are you doing?”) → <strong>chào</strong> một người đã quen." },
-      { id:"gr7", type:"mc", question:"Hey, aren’t you in my class? I’m Tom Crane.",
-        options:["Greet","Introduce"], answer:1,
-        explanation:"Người nói nêu tên mình (“I’m Tom Crane”) → <strong>tự giới thiệu</strong>." }
+      { id:"gr1", type:"mc", question:"I don’t think we’ve met.", options:["Greet","Introduce"], answer:1,
+        explanation:"Câu này dùng để <strong>tự giới thiệu</strong> với người mình chưa quen." },
+      { id:"gr2", type:"mc", question:"Hi! I haven’t seen you for a long time!", options:["Greet","Introduce"], answer:0,
+        explanation:"“I haven’t seen you for a long time” → <strong>chào</strong> một người đã quen." },
+      { id:"gr3", type:"mc", question:"Hello. My name’s Kate.", options:["Greet","Introduce"], answer:1,
+        explanation:"Nói tên của mình → <strong>tự giới thiệu</strong>." },
+      { id:"gr4", type:"mc", question:"Hi, nice to see you again.", options:["Greet","Introduce"], answer:0,
+        explanation:"Từ “<strong>again</strong>” cho thấy đã gặp nhau → <strong>chào</strong>." },
+      { id:"gr5", type:"mc", question:"Hi. I’m Don. I just started working here.", options:["Greet","Introduce"], answer:1,
+        explanation:"Nói tên + hoàn cảnh → <strong>tự giới thiệu</strong>." },
+      { id:"gr6", type:"mc", question:"Betsy! How are you doing?", options:["Greet","Introduce"], answer:0,
+        explanation:"Gọi tên + hỏi thăm → <strong>chào</strong>." },
+      { id:"gr7", type:"mc", question:"Hey, aren’t you in my class? I’m Tom Crane.", options:["Greet","Introduce"], answer:1,
+        explanation:"Nêu tên mình → <strong>tự giới thiệu</strong>." }
     ]
   },
 
-  /* -------------------- LISTENING 1 (graded — đã có đáp án) -------------------- */
   "listening-1": {
     section:"listening-1",
     title:"Listening 1 — Have they met before?",
@@ -1036,21 +774,20 @@ const QUIZZES = {
     xp:15,
     items:[
       { id:"l1q1", type:"mc", question:"Conversation 1", options:["Have met","Haven’t met"], answer:1,
-        explanation:"“I don’t think we’ve met, have we?” → hai người chưa từng gặp nhau." },
+        explanation:"“I don’t think we’ve met, have we?” → chưa từng gặp." },
       { id:"l1q2", type:"mc", question:"Conversation 2", options:["Have met","Haven’t met"], answer:0,
-        explanation:"“We met at Jake’s wedding” → đã gặp nhau trước đây." },
+        explanation:"“We met at Jake’s wedding” → đã gặp." },
       { id:"l1q3", type:"mc", question:"Conversation 3", options:["Have met","Haven’t met"], answer:1,
-        explanation:"“No, I don’t think so… I was positive we’d met before” → thực ra chưa gặp." },
+        explanation:"“No, I don’t think so… I was positive we’d met before” → chưa gặp." },
       { id:"l1q4", type:"mc", question:"Conversation 4", options:["Have met","Haven’t met"], answer:0,
-        explanation:"“We were in that computer class together” → đã gặp nhau." },
+        explanation:"“We were in that computer class together” → đã gặp." },
       { id:"l1q5", type:"mc", question:"Conversation 5", options:["Have met","Haven’t met"], answer:0,
         explanation:"“We met at the conference in Hawaii last summer” → đã gặp." },
       { id:"l1q6", type:"mc", question:"Conversation 6", options:["Have met","Haven’t met"], answer:1,
-        explanation:"Hai người giới thiệu tên với nhau → chưa từng gặp." }
+        explanation:"Hai người giới thiệu tên → chưa gặp." }
     ]
   },
 
-  /* -------------------- LISTENING 2 — TASK 1 (graded) -------------------- */
   "listening-2-t1": {
     section:"listening-2",
     title:"Listening 2 — Task 1",
@@ -1059,21 +796,20 @@ const QUIZZES = {
     xp:15,
     items:[
       { id:"l2t1q1", type:"mc", question:"Conversation 1", options:["clothes","school","work"], answer:0,
-        explanation:"“that looks really nice on you… color looks great” → nói về quần áo." },
+        explanation:"“that looks really nice on you… color looks great” → quần áo." },
       { id:"l2t1q2", type:"mc", question:"Conversation 2", options:["work","school","friends"], answer:1,
-        explanation:"“literature courses… Professor Scott’s class… tests” → nói về trường học." },
+        explanation:"“literature courses… Professor Scott’s class… tests” → trường học." },
       { id:"l2t1q3", type:"mc", question:"Conversation 3", options:["the weather","a vacation","health problems"], answer:0,
-        explanation:"“So hot and humid… not usually this hot in the fall” → nói về thời tiết." },
+        explanation:"“So hot and humid… not usually this hot in the fall” → thời tiết." },
       { id:"l2t1q4", type:"mc", question:"Conversation 4", options:["school","work","a new boyfriend"], answer:2,
-        explanation:"“What’s he like?… giving me little presents” → nói về bạn trai mới." },
+        explanation:"“What’s he like?… giving me little presents” → bạn trai mới." },
       { id:"l2t1q5", type:"mc", question:"Conversation 5", options:["school","work","apartments"], answer:1,
-        explanation:"“still doing the same thing… stuck in that office” → nói về công việc." },
+        explanation:"“still doing the same thing… stuck in that office” → công việc." },
       { id:"l2t1q6", type:"mc", question:"Conversation 6", options:["work","family","school"], answer:1,
-        explanation:"“My sister Jenny’s getting married… your brother?” → nói về gia đình." }
+        explanation:"“My sister Jenny’s getting married… your brother?” → gia đình." }
     ]
   },
 
-  /* -------------------- LISTENING 2 — TASK 2 (graded) -------------------- */
   "listening-2-t2": {
     section:"listening-2",
     title:"Listening 2 — Task 2",
@@ -1084,19 +820,18 @@ const QUIZZES = {
       { id:"l2t2q1", type:"mc", question:"Conversation 1", options:["Continue","End"], answer:1,
         explanation:"“Oh! Look at the time… I’ve got to run. Good seeing you!” → kết thúc." },
       { id:"l2t2q2", type:"mc", question:"Conversation 2", options:["Continue","End"], answer:0,
-        explanation:"“Really? Are they essay or short answer tests?” → hỏi tiếp → tiếp tục." },
+        explanation:"“Really? Are they essay or short answer tests?” → hỏi tiếp." },
       { id:"l2t2q3", type:"mc", question:"Conversation 3", options:["Continue","End"], answer:1,
         explanation:"“Well, I think I’m going to get some more drinks. Enjoy the party!” → kết thúc." },
       { id:"l2t2q4", type:"mc", question:"Conversation 4", options:["Continue","End"], answer:0,
-        explanation:"“So how long have you known him, anyway?” → hỏi tiếp → tiếp tục." },
+        explanation:"“So how long have you known him, anyway?” → hỏi tiếp." },
       { id:"l2t2q5", type:"mc", question:"Conversation 5", options:["Continue","End"], answer:0,
-        explanation:"“I’ll let you know” → giữ liên lạc, chưa kết thúc rõ ràng." },
+        explanation:"“I’ll let you know” → giữ liên lạc, chưa kết thúc." },
       { id:"l2t2q6", type:"mc", question:"Conversation 6", options:["Continue","End"], answer:0,
-        explanation:"“And how about your brother? What’s he been doing lately?” → hỏi tiếp → tiếp tục." }
+        explanation:"“And how about your brother? What’s he been doing lately?” → hỏi tiếp." }
     ]
   },
 
-  /* -------------------- LISTENING 3 — TASK 1 (graded — đã sửa Q2) -------------------- */
   "listening-3-t1": {
     section:"listening-3",
     title:"Listening 3 — Task 1",
@@ -1106,31 +841,26 @@ const QUIZZES = {
     items:[
       { id:"l3t1q1", type:"mc", question:"Conversation 1",
         options:["Are you here on vacation?","Do you like living here?"], answer:1,
-        explanation:"“Yes, I do. I really enjoy living here… the town’s small” → trả lời cho câu hỏi Yes/No “Do you like living here?”." },
-
+        explanation:"“Yes, I do. I really enjoy living here… the town’s small” → trả lời câu hỏi Yes/No." },
       { id:"l3t1q2", type:"mc", question:"Conversation 2",
         options:["Do you think English is difficult?","Why are you studying English?"], answer:0,
-        explanation:"“Yes, I do. It’s a very difficult language to learn…” → câu trả lời Yes/No. “Why are you studying English?” là câu hỏi mở, không thể trả lời bằng “Yes, I do”." },
-
+        explanation:"“Yes, I do. It’s a very difficult language to learn…” → câu hỏi Yes/No (không thể là “Why…”)." },
       { id:"l3t1q3", type:"mc", question:"Conversation 3",
         options:["How old are your children?","How many children do you have?"], answer:1,
-        explanation:"“I have two children, a girl and a boy” → trả lời về <strong>số lượng</strong> con." },
-
+        explanation:"“I have two children, a girl and a boy” → hỏi số lượng con." },
       { id:"l3t1q4", type:"mc", question:"Conversation 4",
         options:["What kind of work do you do?","What kind of work would you like?"], answer:0,
-        explanation:"“I have a small design company. We design kitchens and bathrooms” → mô tả <strong>công việc hiện tại</strong>." },
-
+        explanation:"“I have a small design company. We design kitchens and bathrooms” → nghề hiện tại." },
       { id:"l3t1q5", type:"mc", question:"Conversation 5",
         options:["When did you arrive?","Have you been having fun here?"], answer:1,
-        explanation:"“Oh, yeah. I’ve been having a great time since I arrived” → câu hỏi Yes/No về trải nghiệm." },
-
+        explanation:"“Oh, yeah. I’ve been having a great time since I arrived” → câu hỏi Yes/No." },
       { id:"l3t1q6", type:"mc", question:"Conversation 6",
         options:["Where did you go on vacation?","Where are you from?"], answer:1,
-        explanation:"“I’m from a town called Cairns, on the northeast coast of Australia” → trả lời về <strong>quê quán</strong>." }
+        explanation:"“I’m from a town called Cairns, on the northeast coast of Australia” → quê quán." }
     ]
   },
 
-  /* -------------------- LISTENING 3 — TASK 2 (practice) -------------------- */
+  /* ---- Task 2: 5 câu graded, 1 câu Practice Mode ---- */
   "listening-3-t2": {
     section:"listening-3",
     title:"Listening 3 — Task 2",
@@ -1140,21 +870,30 @@ const QUIZZES = {
     items:[
       { id:"l3t2q1", type:"mc", question:"Response 1",
         options:["I’m glad you like it here.","That’s too bad.","Me, neither."], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
+        explanation:"Speaker 1: “I really enjoy living here…” → “I’m glad you like it here.” là lời đáp tự nhiên." },
+
       { id:"l3t2q2", type:"mc", question:"Response 2",
-        options:["I like those DVDs, too.","Why don’t you like them?","I agree. They’re terrible."], answer:null },
+        options:["I like those DVDs, too.","Why don’t you like them?","I agree. They’re terrible."], answer:null,
+        explanation:"Các lựa chọn không khớp rõ ràng với nội dung speaker 2 (nói về việc học tiếng Anh). Giữ Practice Mode — tự đối chiếu audio." },
+
       { id:"l3t2q3", type:"mc", question:"Response 3",
-        options:["Thanks anyway.","I agree. Two is enough.","I’m glad you and your husband agree."], answer:null },
+        options:["Thanks anyway.","I agree. Two is enough.","I’m glad you and your husband agree."], answer:1,
+        explanation:"Speaker 3: “…I think two is enough.” → “I agree. Two is enough.” đồng tình đúng." },
+
       { id:"l3t2q4", type:"mc", question:"Response 4",
-        options:["Thanks. I’d love to.","Sorry. I’m busy that day.","I’d love to see your house."], answer:null },
+        options:["Thanks. I’d love to.","Sorry. I’m busy that day.","I’d love to see your house."], answer:0,
+        explanation:"Speaker 4: “Would you like to visit our office sometime?” → “Thanks. I’d love to.” là lời đáp tự nhiên. (B sai vì không có “day”; C sai vì speaker nói “office” chứ không phải “house”.)" },
+
       { id:"l3t2q5", type:"mc", question:"Response 5",
-        options:["You’ll love the beach.","What kind of car will you buy?","Good idea. The scenery is great there."], answer:null },
+        options:["You’ll love the beach.","What kind of car will you buy?","Good idea. The scenery is great there."], answer:2,
+        explanation:"Speaker 5: “…renting a car and driving up to the mountains.” → “Good idea. The scenery is great there.” phù hợp. (A nhắc “beach”; B hỏi “buy” trong khi speaker nói “rent”.)" },
+
       { id:"l3t2q6", type:"mc", question:"Response 6",
-        options:["Yeah, I think I will.","Really? Why not?","You’re right. I shouldn’t go there."], answer:null }
+        options:["Yeah, I think I will.","Really? Why not?","You’re right. I shouldn’t go there."], answer:0,
+        explanation:"Speaker 6: “You should go there sometime.” → “Yeah, I think I will.” là lời đồng ý tự nhiên." }
     ]
   },
 
-  /* -------------------- REVIEW -------------------- */
   "review": {
     section:"review",
     title:"Interactive Review",
@@ -1165,13 +904,13 @@ const QUIZZES = {
       { id:"rv1", type:"tf",
         question:"“Nice to see you again.” is used to introduce yourself to someone you have never met.",
         options:["True","False"], answer:1,
-        explanation:"Từ “again” cho thấy hai người đã gặp nhau trước đó → đây là lời <strong>chào</strong>, không phải tự giới thiệu." },
+        explanation:"Từ “again” cho thấy hai người đã gặp nhau → đây là lời <strong>chào</strong>." },
 
       { id:"rv2", type:"mc",
         question:"You meet a colleague you have never met before. Which is the best opening?",
         options:["I don’t think we’ve met. I’m Nam.","Hi! I haven’t seen you for a long time!","I’ve got to go."],
         answer:0,
-        explanation:"“I don’t think we’ve met” + nêu tên là cách mở đầu chuẩn khi gặp người chưa quen." },
+        explanation:"“I don’t think we’ve met” + nêu tên là cách mở đầu chuẩn." },
 
       { id:"rv3", type:"mc",
         question:"Listening 2, Task 1 — Conversation 1: what are the speakers talking about?",
@@ -1196,46 +935,56 @@ const QUIZZES = {
       { id:"rv7", type:"mc",
         question:"Listening 3, Task 1 — Conversation 2: which question are they answering?",
         options:["Do you think English is difficult?","Why are you studying English?"], answer:0,
-        explanation:"“Yes, I do. It’s a very difficult language to learn” → trả lời câu hỏi Yes/No." },
+        explanation:"“Yes, I do. It’s a very difficult language to learn” → câu hỏi Yes/No." },
 
       { id:"rv8", type:"mc",
+        question:"Listening 3, Task 2 — Response 3: which is the best response?",
+        options:["Thanks anyway.","I agree. Two is enough.","I’m glad you and your husband agree."], answer:1,
+        explanation:"Speaker 3: “I think two is enough.” → “I agree. Two is enough.”" },
+
+      { id:"rv9", type:"mc",
+        question:"Listening 3, Task 2 — Response 5: which is the best response?",
+        options:["You’ll love the beach.","What kind of car will you buy?","Good idea. The scenery is great there."], answer:2,
+        explanation:"Speaker 5 dự định “driving up to the mountains” → “The scenery is great there.”" },
+
+      { id:"rv10", type:"mc",
         question:"In natural connected speech, “What’s he like?” often sounds like…",
         options:["What’s ’e like?","What is he like?","What’s heee like?"], answer:0,
-        explanation:"“he” không được nhấn mạnh nên /h/ thường bị lược âm → nghe như “What’s ’e like?”." },
+        explanation:"“he” không nhấn mạnh → /h/ thường bị lược âm." },
 
-      { id:"rv9", type:"tf",
+      { id:"rv11", type:"tf",
         question:"The /h/ sound in he, him, his, her is ALWAYS omitted in English.",
         options:["True","False"], answer:1,
-        explanation:"<strong>Không phải lúc nào</strong> /h/ cũng bị lược bỏ. Khi đại từ được nhấn mạnh, /h/ vẫn được phát âm rõ." },
-
-      { id:"rv10", type:"fill",
-        question:"Complete: A: “Hi, haven’t we met ______?”",
-        accept:["before"], answer:"before",
-        explanation:"Câu mở đầu đầy đủ là “Hi, haven’t we met before?” — “before” nghĩa là “trước đây”." },
-
-      { id:"rv11", type:"fill",
-        question:"Complete: B: “Yeah, I think we met at ______ wedding.”",
-        accept:["kate's","kates","kate"], answer:"kate's",
-        explanation:"Người nói nhắc lại lần gặp trước: tại đám cưới của Kate." },
+        explanation:"<strong>Không phải lúc nào</strong> /h/ cũng bị lược bỏ. Khi nhấn mạnh, /h/ vẫn phát âm rõ." },
 
       { id:"rv12", type:"fill",
+        question:"Complete: A: “Hi, haven’t we met ______?”",
+        accept:["before"], answer:"before",
+        explanation:"“Hi, haven’t we met before?” — “before” = trước đây." },
+
+      { id:"rv13", type:"fill",
+        question:"Complete: B: “Yeah, I think we met at ______ wedding.”",
+        accept:["kate's","kates","kate"], answer:"kate's",
+        explanation:"Tại đám cưới của Kate." },
+
+      { id:"rv14", type:"fill",
         question:"Complete: B: “No, I haven’t seen her in ______.”",
         accept:["months"], answer:"months",
-        explanation:"“in months” = đã nhiều tháng rồi (không gặp)." },
+        explanation:"“in months” = đã nhiều tháng rồi." },
 
-      { id:"rv13", type:"mc",
+      { id:"rv15", type:"mc",
         question:"Which is the best way to end a conversation politely?",
         options:["I’ve got to go. It was great to see you.","What have you been doing lately?","Aren’t you in my class?"],
         answer:0,
-        explanation:"Nêu lý do phải đi + câu kết thân thiện tạo thành lời tạm biệt lịch sự." },
+        explanation:"Nêu lý do phải đi + câu kết thân thiện = tạm biệt lịch sự." },
 
-      { id:"rv14", type:"mc",
+      { id:"rv16", type:"mc",
         question:"Your partner says: “It was great to see you.” Best reply?",
         options:["Yeah, you too!","Nice to meet you.","I don’t think we’ve met."],
         answer:0,
-        explanation:"“Yeah, you too!” là lời đáp tự nhiên và lịch sự cho lời tạm biệt thân thiện." },
+        explanation:"“Yeah, you too!” là lời đáp tự nhiên." },
 
-      { id:"rv15", type:"match",
+      { id:"rv17", type:"match",
         question:"Match each expression with its function.",
         options:["Greeting","Introducing yourself","Continuing a conversation","Ending a conversation"],
         pairs:[
@@ -1245,124 +994,104 @@ const QUIZZES = {
           { left:"I’ve got to go.", right:"Ending a conversation" }
         ],
         answer:["Greeting","Introducing yourself","Continuing a conversation","Ending a conversation"],
-        explanation:"Mỗi mẫu câu gắn với một chức năng giao tiếp riêng: chào, tự giới thiệu, duy trì hoặc kết thúc câu chuyện." }
+        explanation:"Mỗi mẫu câu gắn với một chức năng giao tiếp riêng." }
     ]
   },
 
-  /* -------------------- FINAL TEST -------------------- */
   "final-test": {
     section:"final-test",
     title:"Final Test — Unit 1",
     subtitle:"20 câu hỏi · Điểm đạt 70%",
-    instruction:"Choose the best answer for each question. You will see your score, percentage and weak areas after submitting.",
+    instruction:"Choose the best answer for each question.",
     xp:50,
     passMark:70,
     items:[
       { id:"ft1", type:"mc", topic:"Greetings & Introductions",
         question:"“I don’t think we’ve met.” — What is this expression used for?",
         options:["Greeting someone you already know","Introducing yourself to someone you don’t know","Ending a conversation"],
-        answer:1, explanation:"Đây là câu mở đầu để <strong>tự giới thiệu</strong> với người chưa quen." },
-
+        answer:1, explanation:"Mở đầu để <strong>tự giới thiệu</strong> với người chưa quen." },
       { id:"ft2", type:"mc", topic:"Greetings & Introductions",
         question:"“Hi! I haven’t seen you for a long time!” — What is this expression used for?",
         options:["Introducing yourself","Greeting someone you already know","Saying goodbye"],
-        answer:1, explanation:"“Haven’t seen you for a long time” = đã lâu không gặp → <strong>chào</strong> người đã quen." },
-
+        answer:1, explanation:"Đã lâu không gặp → <strong>chào</strong> người đã quen." },
       { id:"ft3", type:"mc", topic:"Greetings & Introductions",
         question:"“Hello. My name’s Kate.” — What is this expression used for?",
         options:["Greeting someone you know","Introducing yourself","Ending a conversation"],
-        answer:1, explanation:"Nói tên của mình là hành động <strong>tự giới thiệu</strong>." },
-
+        answer:1, explanation:"Nói tên → <strong>tự giới thiệu</strong>." },
       { id:"ft4", type:"mc", topic:"Greetings & Introductions",
         question:"“Hi, nice to see you again.” — What is this expression used for?",
         options:["Greeting someone you already know","Introducing yourself","Asking for help"],
-        answer:0, explanation:"Từ “again” cho thấy hai người đã gặp nhau → đây là lời <strong>chào</strong>." },
-
+        answer:0, explanation:"Từ “again” → lời <strong>chào</strong>." },
       { id:"ft5", type:"mc", topic:"Greetings & Introductions",
         question:"“Betsy! How are you doing?” — What is this expression used for?",
         options:["Introducing yourself","Greeting someone you already know","Ending a conversation"],
-        answer:1, explanation:"Gọi tên + hỏi thăm “How are you doing?” là cách <strong>chào</strong> thân mật." },
-
+        answer:1, explanation:"Gọi tên + hỏi thăm → <strong>chào</strong> thân mật." },
       { id:"ft6", type:"mc", topic:"Greetings & Introductions",
         question:"“Hey, aren’t you in my class? I’m Tom Crane.” — What is this expression used for?",
         options:["Greeting someone you already know","Introducing yourself to someone you don’t know","Ending a conversation"],
-        answer:1, explanation:"Người nói nêu tên mình (“I’m Tom Crane”) → <strong>tự giới thiệu</strong>." },
-
+        answer:1, explanation:"Nêu tên mình → <strong>tự giới thiệu</strong>." },
       { id:"ft7", type:"mc", topic:"Language use",
         question:"Which is the best way to end a conversation politely?",
         options:["I’ve got to go. It was great to see you.","What have you been doing lately?","Aren’t you in my class?"],
-        answer:0, explanation:"Nêu lý do phải đi + câu kết thân thiện = lời tạm biệt lịch sự." },
-
+        answer:0, explanation:"Nêu lý do + câu kết thân thiện = tạm biệt lịch sự." },
       { id:"ft8", type:"mc", topic:"Language use",
         question:"Your partner says: “It was great to see you.” — What is the best reply?",
         options:["Yeah, you too!","Nice to meet you.","I don’t think we’ve met."],
-        answer:0, explanation:"“Yeah, you too!” là lời đáp tự nhiên, lịch sự." },
-
+        answer:0, explanation:"“Yeah, you too!” là lời đáp tự nhiên." },
       { id:"ft9", type:"mc", topic:"Language use",
         question:"Your partner says: “How have you been?” — What is the best reply?",
         options:["Pretty good, thanks. And you?","Nice to meet you.","See you later."],
-        answer:0, explanation:"Trả lời ngắn rồi hỏi lại (“And you?”) là cách duy trì câu chuyện." },
-
+        answer:0, explanation:"Trả lời ngắn rồi hỏi lại → duy trì câu chuyện." },
       { id:"ft10", type:"mc", topic:"Language use",
         question:"Which topic is usually SAFE for small talk?",
         options:["salary","the weather","age"],
-        answer:1, explanation:"Thời tiết là chủ đề trung tính, an toàn nhất. Lương và tuổi thường bị coi là riêng tư." },
-
+        answer:1, explanation:"Thời tiết là chủ đề trung tính. Lương/tuổi là riêng tư." },
       { id:"ft11", type:"mc", topic:"Listening comprehension",
         question:"Listening 2, Task 1 — Conversation 1: what are the speakers talking about?",
         options:["clothes","school","work"], answer:0,
         explanation:"“that looks really nice on you… color looks great” → quần áo." },
-
       { id:"ft12", type:"mc", topic:"Listening comprehension",
         question:"Listening 2, Task 1 — Conversation 2: what are the speakers talking about?",
         options:["work","school","friends"], answer:1,
         explanation:"“literature courses… Professor Scott’s class” → trường học." },
-
       { id:"ft13", type:"mc", topic:"Listening comprehension",
         question:"Listening 2, Task 2 — Conversation 1: what does the last speaker want to do?",
         options:["Continue the conversation","End the conversation"], answer:1,
         explanation:"“I’ve got to run. Good seeing you!” → kết thúc." },
-
       { id:"ft14", type:"mc", topic:"Listening comprehension",
         question:"Listening 3, Task 1 — Conversation 1: which question are they answering?",
         options:["Are you here on vacation?","Do you like living here?"], answer:1,
         explanation:"“I really enjoy living here” → hỏi có thích sống ở đây không." },
-
       { id:"ft15", type:"mc", topic:"Listening comprehension",
-        question:"Listening 3, Task 2 — Conversation 1: which is the best response?",
-        options:["I’m glad you like it here.","That’s too bad.","Me, neither."], answer:0,
-        explanation:"Đáp án được xác nhận từ tài liệu nguồn." },
-
+        question:"Listening 3, Task 2 — Response 3: which is the best response?",
+        options:["Thanks anyway.","I agree. Two is enough.","I’m glad you and your husband agree."], answer:1,
+        explanation:"Speaker 3: “…I think two is enough.” → “I agree. Two is enough.”" },
       { id:"ft16", type:"mc", topic:"Pronunciation awareness",
         question:"In natural connected speech, “What’s he like?” often sounds like…",
         options:["What’s ’e like?","What is he like?","What’s heee like?"], answer:0,
         explanation:"“he” không nhấn mạnh → /h/ thường bị lược âm." },
-
       { id:"ft17", type:"mc", topic:"Pronunciation awareness",
         question:"Which group of words commonly has /h/ reduced in connected speech?",
         options:["he, him, his, her","hat, hot, home","who, whom"], answer:0,
-        explanation:"Các <strong>đại từ</strong> he, him, his, her khi không nhấn mạnh thường bị lược âm /h/." },
-
+        explanation:"Đại từ he, him, his, her thường bị lược âm /h/." },
       { id:"ft18", type:"mc", topic:"Pronunciation awareness",
         question:"“Give him a call.” → In natural speech this sounds like…",
         options:["Givim a call.","Give himmm a call.","Give he a call."], answer:0,
-        explanation:"“him” không nhấn mạnh → /h/ mất và dính vào từ trước: “Givim a call”." },
-
+        explanation:"“him” không nhấn mạnh → “Givim a call”." },
       { id:"ft19", type:"tf", topic:"Pronunciation awareness",
         question:"Is it true that /h/ must always disappear in English?",
         options:["Yes, always.","No — it is common in fast connected speech, especially when the pronoun is unstressed."],
-        answer:1, explanation:"Không phải lúc nào /h/ cũng mất. Khi đại từ được <strong>nhấn mạnh</strong>, /h/ vẫn được phát âm rõ." },
-
+        answer:1, explanation:"Không phải lúc nào /h/ cũng mất. Khi nhấn mạnh, /h/ vẫn phát âm rõ." },
       { id:"ft20", type:"mc", topic:"Pronunciation awareness",
         question:"In connected speech, unstressed words are usually…",
         options:["pronounced more strongly","reduced","spelled differently"], answer:1,
-        explanation:"Trong lời nói tự nhiên, những từ không được nhấn mạnh thường bị phát âm <strong>yếu/reduced</strong>." }
+        explanation:"Từ không nhấn mạnh thường bị phát âm <strong>yếu/reduced</strong>." }
     ]
   }
 };
 
 /* =========================================================================
-   5. DATA — DICTATION (đã điền đáp án, chuyển sang chế độ chấm điểm)
+   4. DATA — DICTATION
    ========================================================================= */
 const DICTATION_LINES = [
   { sp:"A", seg:["Hi, haven’t we met before?"] },
@@ -1376,7 +1105,6 @@ const DICTATION_LINES = [
 ];
 const DICT_BLANKS = 16;
 
-/* Đáp án chính xác — verify từ audio script CD 1-6 */
 const DICT_ANSWERS = [
   null,
   { accept:["you"], answer:"you" },
@@ -1408,16 +1136,12 @@ const DICT_CONVERSATION = [
   { sp:"B", line:"Yeah, you too! If you see John again, … said hello." }
 ];
 
-/* =========================================================================
-   6. DATA — PRONUNCIATION
-   ========================================================================= */
 const PRON_SENTENCES = [
   "Where does he go to school?",
   "I have to call his teacher.",
   "What’s her job?",
   "Have you known him for a long time?"
 ];
-
 const PRON_CHECKLIST = [
   "I reduced the /h/ sound.",
   "I spoke naturally.",
@@ -1425,9 +1149,6 @@ const PRON_CHECKLIST = [
   "I practiced without stopping."
 ];
 
-/* =========================================================================
-   7. DATA — CONVERSATION CORNER
-   ========================================================================= */
 const SITUATIONS = [
   "You meet a classmate you have only seen once before.",
   "You see an old colleague at a coffee shop.",
@@ -1453,74 +1174,49 @@ const CONV_PROMPTS = [
   "See you later."
 ];
 
-/* =========================================================================
-   8. DATA — LANGUAGE BANK
-   ========================================================================= */
 const LANGUAGE_BANK = [
-  {
-    title:"Greetings",
-    icon:"👋",
-    rows:[
-      { en:"Hi!", vi:"Chào (thân mật)", ex:"Hi! How are you?" },
-      { en:"Hello.", vi:"Xin chào (trung tính, lịch sự)", ex:"Hello. My name’s Kate." },
-      { en:"Hey!", vi:"Này / Chào (rất thân mật)", ex:"Hey! Long time no see." },
-      { en:"Nice to see you again.", vi:"Rất vui được gặp lại bạn.", ex:"Hi, nice to see you again." },
-      { en:"How are you doing?", vi:"Bạn dạo này thế nào?", ex:"Betsy! How are you doing?" }
-    ]
-  },
-  {
-    title:"Introducing Yourself",
-    icon:"🙋",
-    rows:[
-      { en:"I don’t think we’ve met.", vi:"Tôi nghĩ chúng ta chưa gặp nhau.", ex:"I don’t think we’ve met. I’m Nam." },
-      { en:"My name’s Kate.", vi:"Tôi tên là Kate.", ex:"Hello. My name’s Kate." },
-      { en:"I’m Don.", vi:"Tôi là Don.", ex:"Hi. I’m Don." },
-      { en:"I just started working here.", vi:"Tôi vừa mới bắt đầu làm việc ở đây.", ex:"I’m Don. I just started working here." },
-      { en:"Aren’t you in my class?", vi:"Bạn có phải học cùng lớp tôi không?", ex:"Hey, aren’t you in my class?" }
-    ]
-  },
-  {
-    title:"Continuing a Conversation",
-    icon:"💬",
-    rows:[
-      { en:"Really?", vi:"Thật à? (thể hiện sự quan tâm)", ex:"Really? Tell me more." },
-      { en:"That’s right!", vi:"Đúng vậy!", ex:"That’s right! Have you seen her lately?" },
-      { en:"What have you been doing lately?", vi:"Dạo này bạn đang làm gì?", ex:"So, what have you been doing lately?" },
-      { en:"How have you been?", vi:"Bạn dạo này thế nào?", ex:"How have you been? It’s been a while." },
-      { en:"I agree.", vi:"Tôi đồng ý.", ex:"I agree. Two is enough." },
-      { en:"Thanks.", vi:"Cảm ơn.", ex:"Thanks. I’d love to." }
-    ]
-  },
-  {
-    title:"Ending a Conversation",
-    icon:"👋",
-    rows:[
-      { en:"I’ve got to go.", vi:"Tôi phải đi rồi.", ex:"Well, I’ve got to go." },
-      { en:"It was great to see you.", vi:"Rất vui được gặp bạn.", ex:"It was great to see you." },
-      { en:"See you.", vi:"Hẹn gặp lại.", ex:"See you later!" },
-      { en:"If you see John again, tell him I said hello.", vi:"Nếu bạn gặp lại John, cho tôi gửi lời hỏi thăm nhé.", ex:"If you see John again, tell him I said hello." }
-    ]
-  }
+  { title:"Greetings", icon:"👋", rows:[
+    { en:"Hi!", vi:"Chào (thân mật)", ex:"Hi! How are you?" },
+    { en:"Hello.", vi:"Xin chào (trung tính)", ex:"Hello. My name’s Kate." },
+    { en:"Hey!", vi:"Này / Chào (rất thân mật)", ex:"Hey! Long time no see." },
+    { en:"Nice to see you again.", vi:"Rất vui được gặp lại.", ex:"Hi, nice to see you again." },
+    { en:"How are you doing?", vi:"Bạn dạo này thế nào?", ex:"Betsy! How are you doing?" }
+  ]},
+  { title:"Introducing Yourself", icon:"🙋", rows:[
+    { en:"I don’t think we’ve met.", vi:"Tôi nghĩ chúng ta chưa gặp nhau.", ex:"I don’t think we’ve met. I’m Nam." },
+    { en:"My name’s Kate.", vi:"Tôi tên là Kate.", ex:"Hello. My name’s Kate." },
+    { en:"I’m Don.", vi:"Tôi là Don.", ex:"Hi. I’m Don." },
+    { en:"I just started working here.", vi:"Tôi vừa mới bắt đầu làm việc ở đây.", ex:"I’m Don. I just started working here." },
+    { en:"Aren’t you in my class?", vi:"Bạn có phải học cùng lớp tôi không?", ex:"Hey, aren’t you in my class?" }
+  ]},
+  { title:"Continuing a Conversation", icon:"💬", rows:[
+    { en:"Really?", vi:"Thật à?", ex:"Really? Tell me more." },
+    { en:"That’s right!", vi:"Đúng vậy!", ex:"That’s right! Have you seen her lately?" },
+    { en:"What have you been doing lately?", vi:"Dạo này bạn đang làm gì?", ex:"So, what have you been doing lately?" },
+    { en:"How have you been?", vi:"Bạn dạo này thế nào?", ex:"How have you been? It’s been a while." },
+    { en:"I agree.", vi:"Tôi đồng ý.", ex:"I agree. Two is enough." },
+    { en:"Thanks.", vi:"Cảm ơn.", ex:"Thanks. I’d love to." }
+  ]},
+  { title:"Ending a Conversation", icon:"👋", rows:[
+    { en:"I’ve got to go.", vi:"Tôi phải đi rồi.", ex:"Well, I’ve got to go." },
+    { en:"It was great to see you.", vi:"Rất vui được gặp bạn.", ex:"It was great to see you." },
+    { en:"See you.", vi:"Hẹn gặp lại.", ex:"See you later!" },
+    { en:"If you see John again, tell him I said hello.", vi:"Nếu gặp lại John, cho tôi gửi lời hỏi thăm.", ex:"If you see John again, tell him I said hello." }
+  ]}
 ];
 
 /* =========================================================================
-   9. STATE
+   5. STATE
    ========================================================================= */
-const STORE_KEY = "unit1_smalltalk_app_v3";
+const STORE_KEY = "unit1_smalltalk_app_v4";
 
 function defaultState(){
   return {
-    xp: 0,
-    awarded: {},
-    completed: {},
-    scores: {},
-    quizState: {},
-    mistakes: [],
+    xp: 0, awarded: {}, completed: {}, scores: {}, quizState: {}, mistakes: [],
     dictation: { answers:{}, submitted:false },
     pron: { index:0, hidden:false, practised:[], checks:{} },
     conversation: { situation:0, practised:[], started:false },
-    finalResult: null,
-    lastSection: "dashboard",
+    finalResult: null, lastSection: "dashboard",
     settings: { volume:1, speed:1 }
   };
 }
@@ -1537,25 +1233,17 @@ function loadState(){
       if(parsed[k] && typeof parsed[k] === "object" && !Array.isArray(parsed[k])
          && base[k] && typeof base[k] === "object" && !Array.isArray(base[k])){
         base[k] = Object.assign({}, base[k], parsed[k]);
-      } else {
-        base[k] = parsed[k];
-      }
+      } else { base[k] = parsed[k]; }
     });
     return base;
-  }catch(e){
-    console.warn("Không đọc được dữ liệu đã lưu:", e);
-    return defaultState();
-  }
+  }catch(e){ console.warn("Load error:", e); return defaultState(); }
 }
 
 function saveState(){
   try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
-  catch(e){ console.warn("Không lưu được dữ liệu:", e); }
+  catch(e){ console.warn("Save error:", e); }
 }
 
-/* =========================================================================
-   10. UTILITIES
-   ========================================================================= */
 function $(sel, root){ return (root||document).querySelector(sel); }
 function $$(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
 
@@ -1564,35 +1252,20 @@ function esc(s){
     .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 }
-
 function fmtTime(t){
   if(!isFinite(t) || t < 0) return "0:00";
-  const m = Math.floor(t/60);
-  const s = Math.floor(t%60);
+  const m = Math.floor(t/60), s = Math.floor(t%60);
   return m + ":" + (s < 10 ? "0" : "") + s;
 }
-
 function normalizeText(s){
-  return String(s == null ? "" : s)
-    .toLowerCase()
+  return String(s == null ? "" : s).toLowerCase()
     .replace(/[’‘`´]/g,"'")
     .replace(/[.,!?;:"()\[\]{}\-–—_]/g," ")
-    .replace(/\s+/g," ")
-    .trim();
+    .replace(/\s+/g," ").trim();
 }
+function isPracticeItem(item){ return item.answer === null || item.answer === undefined; }
+function quizHasPractice(items){ return items.some(isPracticeItem); }
 
-function isPracticeItem(item){
-  return item.answer === null || item.answer === undefined;
-}
-
-function quizHasPractice(items){
-  return items.some(isPracticeItem);
-}
-function quizHasGraded(items){
-  return items.some(function(i){ return !isPracticeItem(i); });
-}
-
-/* Kiểm tra một ô dictation */
 function checkDictBlank(n, val){
   const spec = DICT_ANSWERS[n];
   if(!spec) return true;
@@ -1600,7 +1273,6 @@ function checkDictBlank(n, val){
   return spec.accept.some(function(a){ return normalizeText(a) === v; });
 }
 
-/* Tạo block transcript */
 function transcriptHTML(audioKey){
   const a = AUDIO[audioKey];
   if(!a || !a.transcript) return "";
@@ -1615,7 +1287,7 @@ function transcriptHTML(audioKey){
 }
 
 /* =========================================================================
-   11. AUDIO PLAYERS
+   6. AUDIO PLAYERS
    ========================================================================= */
 const audioEls = {};
 
@@ -1631,14 +1303,13 @@ function playerHTML(playerId, audioKey){
     '<audio preload="metadata" src="' + a.src + '"></audio>' +
     '<div class="p-main">' +
       '<button class="p-btn" data-p="toggle" aria-label="Play / Pause">▶</button>' +
-      '<button class="p-btn small" data-p="replay" aria-label="Replay từ đầu" title="Replay">↺</button>' +
+      '<button class="p-btn small" data-p="replay" aria-label="Replay" title="Replay">↺</button>' +
       '<span class="p-time" data-p="current">0:00</span>' +
       '<input class="p-range" type="range" min="0" max="1000" value="0" step="1" data-p="seek" aria-label="Tua audio">' +
       '<span class="p-time" data-p="duration">0:00</span>' +
     '</div>' +
     '<div class="p-sub">' +
-      '<div class="p-vol">' +
-        '<span aria-hidden="true">🔊</span>' +
+      '<div class="p-vol"><span aria-hidden="true">🔊</span>' +
         '<input class="p-range" type="range" min="0" max="1" step="0.01" value="1" data-p="volume" aria-label="Âm lượng">' +
       '</div>' +
       '<div class="p-speeds" role="group" aria-label="Tốc độ phát">' +
@@ -1661,12 +1332,12 @@ function initPlayers(){
     const id = box.dataset.player;
     audioEls[id] = audio;
 
-    const seekEl   = box.querySelector('[data-p="seek"]');
-    const curEl    = box.querySelector('[data-p="current"]');
-    const durEl    = box.querySelector('[data-p="duration"]');
+    const seekEl = box.querySelector('[data-p="seek"]');
+    const curEl  = box.querySelector('[data-p="current"]');
+    const durEl  = box.querySelector('[data-p="duration"]');
     const toggleEl = box.querySelector('[data-p="toggle"]');
-    const volEl    = box.querySelector('[data-p="volume"]');
-    const errEl    = box.querySelector(".p-err");
+    const volEl = box.querySelector('[data-p="volume"]');
+    const errEl = box.querySelector(".p-err");
 
     audio.volume = state.settings.volume;
     audio.playbackRate = state.settings.speed;
@@ -1675,42 +1346,29 @@ function initPlayers(){
       b.classList.toggle("active", Number(b.dataset.speed) === Number(state.settings.speed));
     });
 
-    function setToggleIcon(){
-      toggleEl.textContent = audio.paused ? "▶" : "❚❚";
-    }
+    function setIcon(){ toggleEl.textContent = audio.paused ? "▶" : "❚❚"; }
 
     toggleEl.addEventListener("click", function(){
-      if(audio.paused){
-        const p = audio.play();
-        if(p && p.catch) p.catch(function(){});
-      } else {
-        audio.pause();
-      }
+      if(audio.paused){ const p = audio.play(); if(p && p.catch) p.catch(function(){}); }
+      else audio.pause();
     });
-
     box.querySelector('[data-p="replay"]').addEventListener("click", function(){
       audio.currentTime = 0;
-      const p = audio.play();
-      if(p && p.catch) p.catch(function(){});
+      const p = audio.play(); if(p && p.catch) p.catch(function(){});
     });
-
     box.querySelector('[data-p="retry"]').addEventListener("click", function(){
-      errEl.hidden = true;
-      audio.load();
+      errEl.hidden = true; audio.load();
     });
-
     seekEl.addEventListener("input", function(){
       if(isFinite(audio.duration) && audio.duration > 0){
         audio.currentTime = (Number(seekEl.value) / 1000) * audio.duration;
       }
     });
-
     volEl.addEventListener("input", function(){
       audio.volume = Number(volEl.value);
       state.settings.volume = audio.volume;
       saveState();
     });
-
     box.querySelectorAll(".spd").forEach(function(btn){
       btn.addEventListener("click", function(){
         const sp = Number(btn.dataset.speed);
@@ -1721,41 +1379,27 @@ function initPlayers(){
         btn.classList.add("active");
       });
     });
-
-    audio.addEventListener("play", setToggleIcon);
-    audio.addEventListener("pause", setToggleIcon);
-    audio.addEventListener("ended", function(){ setToggleIcon(); seekEl.value = 0; });
-
+    audio.addEventListener("play", setIcon);
+    audio.addEventListener("pause", setIcon);
+    audio.addEventListener("ended", function(){ setIcon(); seekEl.value = 0; });
     audio.addEventListener("loadedmetadata", function(){
-      durEl.textContent = fmtTime(audio.duration);
-      errEl.hidden = true;
+      durEl.textContent = fmtTime(audio.duration); errEl.hidden = true;
     });
-
     audio.addEventListener("timeupdate", function(){
       curEl.textContent = fmtTime(audio.currentTime);
       if(isFinite(audio.duration) && audio.duration > 0){
         seekEl.value = Math.round((audio.currentTime / audio.duration) * 1000);
       }
     });
-
     audio.addEventListener("error", function(){
-      errEl.hidden = false;
-      durEl.textContent = "0:00";
-      curEl.textContent = "0:00";
+      errEl.hidden = false; durEl.textContent = "0:00"; curEl.textContent = "0:00";
     });
-
-    setToggleIcon();
+    setIcon();
   });
 }
 
 function injectPlayers(){
-  const map = {
-    "player-l1": "l1",
-    "player-l2": "l2",
-    "player-l3": "l3",
-    "player-pron": "pron",
-    "player-dict": "dict"
-  };
+  const map = { "player-l1":"l1","player-l2":"l2","player-l3":"l3","player-pron":"pron","player-dict":"dict" };
   Object.keys(map).forEach(function(id){
     const host = document.getElementById(id);
     if(host) host.innerHTML = playerHTML(id, map[id]);
@@ -1763,7 +1407,7 @@ function injectPlayers(){
 }
 
 /* =========================================================================
-   12. QUIZ ENGINE
+   7. QUIZ ENGINE
    ========================================================================= */
 const quizRuntime = {};
 
@@ -1777,7 +1421,6 @@ function getQuizState(quizId){
   }
   return quizRuntime[quizId];
 }
-
 function persistQuiz(quizId){
   const st = quizRuntime[quizId];
   state.quizState[quizId] = { answers: JSON.parse(JSON.stringify(st.answers)), submitted: st.submitted };
@@ -1785,11 +1428,8 @@ function persistQuiz(quizId){
 }
 
 const AUDIO_KEY_MAP = {
-  "listening-1":"l1",
-  "listening-2-t1":"l2",
-  "listening-2-t2":"l2",
-  "listening-3-t1":"l3",
-  "listening-3-t2":"l3"
+  "listening-1":"l1","listening-2-t1":"l2","listening-2-t2":"l2",
+  "listening-3-t1":"l3","listening-3-t2":"l3"
 };
 
 function renderItem(quizId, item, idx, st){
@@ -1804,9 +1444,7 @@ function renderItem(quizId, item, idx, st){
       if(st.submitted && !isPracticeItem(item)){
         if(oi === item.answer) cls += " is-correct";
         else if(chosen) cls += " is-wrong";
-      } else if(chosen){
-        cls += " is-checked";
-      }
+      } else if(chosen){ cls += " is-checked"; }
       h += '<label class="' + cls + '">' +
              '<input type="radio" name="' + quizId + '-q' + idx + '" value="' + oi + '"' +
              ' data-quiz="' + quizId + '" data-item="' + idx + '"' +
@@ -1816,7 +1454,6 @@ function renderItem(quizId, item, idx, st){
     });
     h += '</div>';
   }
-
   else if(item.type === "fill"){
     const val = st.answers[idx] || "";
     let cls = "fill-input";
@@ -1829,14 +1466,12 @@ function renderItem(quizId, item, idx, st){
          ' placeholder="Nhập từ còn thiếu…" autocomplete="off" spellcheck="false"' +
          (st.submitted ? " disabled" : "") + '>';
   }
-
   else if(item.type === "match"){
     const sel = st.answers[idx] || {};
     h += '<div class="match-rows">';
     item.pairs.forEach(function(p, pi){
       const chosen = sel[pi] || "";
-      let selCls = "match-sel";
-      let mark = "";
+      let selCls = "match-sel"; let mark = "";
       if(st.submitted){
         const ok = chosen === p.right;
         selCls += ok ? " is-correct" : " is-wrong";
@@ -1855,7 +1490,6 @@ function renderItem(quizId, item, idx, st){
     });
     h += '</div>';
   }
-
   h += feedbackHTML(quizId, item, idx, st);
   h += '</li>';
   return h;
@@ -1863,7 +1497,6 @@ function renderItem(quizId, item, idx, st){
 
 function feedbackHTML(quizId, item, idx, st){
   if(!st.submitted) return '<div class="fb-slot"></div>';
-
   const ans = st.answers[idx];
 
   if(isPracticeItem(item)){
@@ -1871,9 +1504,7 @@ function feedbackHTML(quizId, item, idx, st){
     if(ans === undefined || ans === null || ans === "" ||
        (typeof ans === "object" && Object.keys(ans).length === 0)){
       msg = "Chưa chọn câu trả lời nào.";
-    } else {
-      msg = "Câu trả lời của bạn đã được ghi lại.";
-    }
+    } else { msg = "Câu trả lời của bạn đã được ghi lại."; }
     return '<div class="fb fb-practice">' +
              '<div class="fb-line">📝 <strong>Practice Mode — self-check</strong></div>' +
              '<div class="fb-row">' + msg + ' Hãy tự đối chiếu với audio/giáo trình.</div>' +
@@ -1894,8 +1525,7 @@ function feedbackHTML(quizId, item, idx, st){
     return '<div class="fb ' + (allOk ? "fb-ok" : "fb-err") + '">' +
              '<div class="fb-line"><span class="fb-icon">' + (allOk ? "✓" : "✗") + '</span>' +
              '<strong>' + (allOk ? "Correct!" : "Incorrect") + '</strong></div>' +
-             rows +
-             (item.explanation ? '<div class="fb-vi">' + item.explanation + '</div>' : "") +
+             rows + (item.explanation ? '<div class="fb-vi">' + item.explanation + '</div>' : "") +
            '</div>';
   }
 
@@ -1943,25 +1573,16 @@ function renderQuiz(quizId){
   const allPractice = qz.items.every(isPracticeItem);
 
   let h = '<div class="card quiz-card" id="quizcard-' + quizId + '">';
-
   h += '<div class="q-head">';
   h += '<h2 class="q-title">' + esc(qz.title) + '</h2>';
   if(qz.subtitle) h += '<p class="q-sub">' + esc(qz.subtitle) + '</p>';
   h += '</div>';
-
   if(qz.instruction) h += '<p class="q-inst">' + esc(qz.instruction) + '</p>';
 
   if(allPractice){
-    h += '<div class="practice-note">' +
-           '<strong>Practice Mode — self-check.</strong> ' +
-           'Hoạt động này <strong>không có đáp án đã được kiểm chứng</strong>, ' +
-           'và ứng dụng không tự suy đoán đáp án. Câu trả lời của bạn sẽ được ghi lại.' +
-         '</div>';
+    h += '<div class="practice-note"><strong>Practice Mode — self-check.</strong> Hoạt động này <strong>không có đáp án đã được kiểm chứng</strong>. Câu trả lời sẽ được ghi lại.</div>';
   } else if(quizHasPractice(qz.items)){
-    h += '<div class="practice-note">' +
-           '<strong>Lưu ý:</strong> Một số câu trong bài này <strong>không có đáp án đã kiểm chứng</strong> ' +
-           '(hiển thị “Practice Mode — self-check”). Những câu còn lại được chấm điểm tự động.' +
-         '</div>';
+    h += '<div class="practice-note"><strong>Lưu ý:</strong> Một số câu trong bài này <strong>không có đáp án đã kiểm chứng</strong> (hiển thị “Practice Mode — self-check”). Những câu còn lại được chấm điểm tự động.</div>';
   }
 
   h += '<ol class="q-list">';
@@ -1974,13 +1595,10 @@ function renderQuiz(quizId){
        (allPractice ? "📝 Ghi lại câu trả lời" : "✅ Submit") + '</button>';
   h += '<button class="btn btn-ghost" data-action="reset-quiz" data-quiz="' + quizId + '">↺ Reset Exercise</button>';
   h += '</div>';
-
   h += '<div id="result-' + quizId + '" aria-live="polite">' + renderResult(quizId) + '</div>';
-
   if(st.submitted && AUDIO_KEY_MAP[quizId]){
     h += transcriptHTML(AUDIO_KEY_MAP[quizId]);
   }
-
   h += '</div>';
   return h;
 }
@@ -2010,7 +1628,6 @@ function computeScore(quizId){
       if(ans === item.answer) correct++;
     }
   });
-
   const pct = graded > 0 ? Math.round((correct / graded) * 100) : 0;
   return { correct: correct, graded: graded, pct: pct, practiceAnswered: practiceAnswered };
 }
@@ -2019,7 +1636,6 @@ function renderResult(quizId){
   const qz = QUIZZES[quizId];
   const st = getQuizState(quizId);
   if(!st.submitted) return "";
-
   const r = computeScore(quizId);
 
   if(r.graded === 0){
@@ -2032,8 +1648,7 @@ function renderResult(quizId){
 
   const hasPass = typeof qz.passMark === "number";
   const passed = hasPass ? r.pct >= qz.passMark : null;
-  let cls = "result";
-  let title = "📊 Kết quả";
+  let cls = "result", title = "📊 Kết quả";
   if(hasPass){
     cls += passed ? " ok" : " no";
     title = passed ? "🏆 PASSED" : "⚠️ NOT PASSED";
@@ -2060,14 +1675,10 @@ function renderResult(quizId){
         ok = item.pairs.every(function(p, pi){ return sel[pi] === p.right; });
       } else if(item.type === "fill"){
         ok = checkFill(item, st.answers[i]);
-      } else {
-        ok = st.answers[i] === item.answer;
-      }
+      } else { ok = st.answers[i] === item.answer; }
       if(ok) topics[t].c++;
     });
-
     const weak = Object.keys(topics).filter(function(t){ return topics[t].c / topics[t].n < 0.7; });
-
     h += '<div class="res-list"><strong>Kết quả theo chủ đề:</strong><ul>';
     Object.keys(topics).forEach(function(t){
       const o = topics[t];
@@ -2075,14 +1686,10 @@ function renderResult(quizId){
       h += '<li>' + esc(t) + ': ' + o.c + '/' + o.n + ' (' + p + '%)</li>';
     });
     h += '</ul>';
-    if(weak.length){
-      h += '<strong>⚠️ Weak areas:</strong> ' + weak.map(esc).join(", ");
-    } else {
-      h += '<strong>✅ Không có chủ đề yếu — làm rất tốt!</strong>';
-    }
+    h += weak.length ? '<strong>⚠️ Weak areas:</strong> ' + weak.map(esc).join(", ")
+                     : '<strong>✅ Không có chủ đề yếu — làm rất tốt!</strong>';
     h += '</div>';
   }
-
   h += '</div>';
   return h;
 }
@@ -2091,32 +1698,24 @@ function submitQuiz(quizId){
   const qz = QUIZZES[quizId];
   const st = getQuizState(quizId);
   if(st.submitted) return;
-
   st.submitted = true;
 
   qz.items.forEach(function(item, i){
     if(isPracticeItem(item)) return;
     const ans = st.answers[i];
     let ok = false;
-
     if(item.type === "match"){
       const sel = ans || {};
       ok = item.pairs.every(function(p, pi){ return sel[pi] === p.right; });
     } else if(item.type === "fill"){
       ok = checkFill(item, ans);
-    } else {
-      ok = ans === item.answer;
-    }
+    } else { ok = ans === item.answer; }
 
-    if(ok){
-      removeMistake(quizId, item.id);
-    } else {
-      saveMistake(quizId, item, ans);
-    }
+    if(ok) removeMistake(quizId, item.id);
+    else saveMistake(quizId, item, ans);
   });
 
   const r = computeScore(quizId);
-
   if(r.graded > 0){
     addXP(qz.xp || 10, "quiz-" + quizId);
     if(r.pct === 100) addXP(20, "perfect-" + quizId);
@@ -2127,15 +1726,12 @@ function submitQuiz(quizId){
   } else {
     addXP(qz.xp || 10, "practice-" + quizId);
   }
-
   if(quizId === "final-test"){
     state.finalResult = {
       correct: r.correct, graded: r.graded, pct: r.pct,
-      passed: r.pct >= (qz.passMark || 70),
-      date: new Date().toISOString()
+      passed: r.pct >= (qz.passMark || 70), date: new Date().toISOString()
     };
   }
-
   persistQuiz(quizId);
   markSectionDone(quizId);
   rerenderQuiz(quizId);
@@ -2144,8 +1740,7 @@ function submitQuiz(quizId){
 
 function resetQuiz(quizId){
   const st = getQuizState(quizId);
-  st.answers = {};
-  st.submitted = false;
+  st.answers = {}; st.submitted = false;
   delete state.quizState[quizId];
   delete state.scores[quizId];
   if(quizId === "final-test") state.finalResult = null;
@@ -2162,14 +1757,10 @@ function rerenderQuiz(quizId){
 function markSectionDone(quizId){
   const qz = QUIZZES[quizId];
   if(!qz) return;
-
   const groupMap = {
-    "listening-2-t1":"listening-2",
-    "listening-2-t2":"listening-2",
-    "listening-3-t1":"listening-3",
-    "listening-3-t2":"listening-3"
+    "listening-2-t1":"listening-2","listening-2-t2":"listening-2",
+    "listening-3-t1":"listening-3","listening-3-t2":"listening-3"
   };
-
   const group = groupMap[quizId];
   if(group){
     const ids = Object.keys(QUIZZES).filter(function(k){ return QUIZZES[k].section === group; });
@@ -2177,26 +1768,22 @@ function markSectionDone(quizId){
     if(allDone) markComplete(group);
     return;
   }
-
   markComplete(qz.section);
 }
 
 /* =========================================================================
-   13. MISTAKES
+   8. MISTAKES
    ========================================================================= */
 function saveMistake(quizId, item, learnerRaw){
   const id = quizId + "::" + item.id;
   const qz = QUIZZES[quizId];
-
   let learnerText = "(chưa trả lời)";
   let correctText = "";
 
   if(item.type === "match"){
     correctText = item.pairs.map(function(p){ return p.right; }).join(" · ");
     const sel = learnerRaw || {};
-    learnerText = item.pairs.map(function(p, pi){
-      return (sel[pi] || "(chưa chọn)");
-    }).join(" · ");
+    learnerText = item.pairs.map(function(p, pi){ return (sel[pi] || "(chưa chọn)"); }).join(" · ");
   } else if(item.type === "fill"){
     correctText = item.answer;
     learnerText = (learnerRaw === undefined || learnerRaw === null || learnerRaw === "")
@@ -2214,18 +1801,12 @@ function saveMistake(quizId, item, learnerRaw){
     existing.date = new Date().toISOString();
   } else {
     state.mistakes.push({
-      id: id,
-      quizId: quizId,
-      itemId: item.id,
-      activity: qz.title,
-      question: item.question,
+      id: id, quizId: quizId, itemId: item.id,
+      activity: qz.title, question: item.question,
       options: item.options ? item.options.slice() : null,
-      type: item.type,
-      learnerText: learnerText,
-      correctText: correctText,
+      type: item.type, learnerText: learnerText, correctText: correctText,
       explanation: item.explanation || "",
-      date: new Date().toISOString(),
-      attempts: 1
+      date: new Date().toISOString(), attempts: 1
     });
   }
   saveState();
@@ -2245,22 +1826,17 @@ function renderMistakes(){
   if(!host) return;
 
   if(!state.mistakes.length){
-    host.innerHTML = '<div class="empty">' +
-      '<span class="em-ico" aria-hidden="true">🎉</span>' +
+    host.innerHTML = '<div class="empty"><span class="em-ico" aria-hidden="true">🎉</span>' +
       '<strong>Chưa có lỗi nào được lưu.</strong>' +
-      '<p style="margin-top:6px">Những câu hỏi có đáp án xác định mà bạn trả lời sai sẽ xuất hiện ở đây.</p>' +
-      '</div>';
+      '<p style="margin-top:6px">Những câu hỏi có đáp án xác định mà bạn trả lời sai sẽ xuất hiện ở đây.</p></div>';
     return;
   }
 
   host.innerHTML = state.mistakes.map(function(m){
     const rs = retryBox[m.id];
     let h = '<div class="mk-card">';
-    h += '<div class="mk-head">' +
-           '<span class="mk-tag">' + esc(m.activity) + '</span>' +
-           '<span class="mk-date">' + new Date(m.date).toLocaleDateString("vi-VN") +
-           ' · ' + (m.attempts || 1) + ' lần</span>' +
-         '</div>';
+    h += '<div class="mk-head"><span class="mk-tag">' + esc(m.activity) + '</span>' +
+         '<span class="mk-date">' + new Date(m.date).toLocaleDateString("vi-VN") + ' · ' + (m.attempts || 1) + ' lần</span></div>';
     h += '<div class="mk-q">' + esc(m.question) + '</div>';
     h += '<div class="mk-rows">' +
            '<div><span class="lbl">Your answer:</span> ' + esc(m.learnerText) + '</div>' +
@@ -2287,9 +1863,7 @@ function renderMistakes(){
         } else {
           h += '<div class="fb fb-err"><div class="fb-line"><span class="fb-icon">✗</span><strong>Vẫn chưa đúng</strong></div>' +
                '<div class="fb-row"><span class="lbl">Correct answer:</span> <strong>' + esc(m.correctText) + '</strong></div></div>';
-          h += '<div class="btn-row" style="margin-top:12px">' +
-                 '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button>' +
-               '</div>';
+          h += '<div class="btn-row" style="margin-top:12px"><button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button></div>';
         }
       }
     } else {
@@ -2311,27 +1885,21 @@ function renderMistakes(){
                '</label>';
         });
         h += '</div>';
-
         if(!rs.checked){
           h += '<div class="btn-row" style="margin-top:12px">' +
                  '<button class="btn btn-primary btn-sm" data-action="mistake-check" data-mid="' + esc(m.id) + '">Check answer</button>' +
                  '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Cancel</button>' +
                '</div>';
         } else if(rs.result === "correct"){
-          h += '<div class="fb fb-ok"><div class="fb-line"><span class="fb-icon">✓</span>' +
-               '<strong>Correct!</strong> Câu này đã được xoá khỏi danh sách lỗi.</div></div>';
+          h += '<div class="fb fb-ok"><div class="fb-line"><span class="fb-icon">✓</span><strong>Correct!</strong> Câu này đã được xoá khỏi danh sách lỗi.</div></div>';
         } else {
           h += '<div class="fb fb-err"><div class="fb-line"><span class="fb-icon">✗</span><strong>Vẫn chưa đúng</strong></div>' +
                '<div class="fb-row"><span class="lbl">Correct answer:</span> <strong>' + esc(m.correctText) + '</strong></div></div>';
-          h += '<div class="btn-row" style="margin-top:12px">' +
-                 '<button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button>' +
-               '</div>';
+          h += '<div class="btn-row" style="margin-top:12px"><button class="btn btn-ghost btn-sm" data-action="mistake-cancel" data-mid="' + esc(m.id) + '">Try again</button></div>';
         }
       }
     }
-    h += '</div>';
-
-    h += '</div>';
+    h += '</div></div>';
     return h;
   }).join("");
 }
@@ -2347,7 +1915,7 @@ function clearMistakes(){
 }
 
 /* =========================================================================
-   14. PROGRESS / XP
+   9. PROGRESS / XP
    ========================================================================= */
 function addXP(amount, key){
   if(key){
@@ -2359,32 +1927,20 @@ function addXP(amount, key){
   refreshUI();
   return amount;
 }
-
 function markComplete(sectionId){
   if(!sectionId) return;
-  if(!state.completed[sectionId]){
-    state.completed[sectionId] = true;
-    saveState();
-  }
+  if(!state.completed[sectionId]){ state.completed[sectionId] = true; saveState(); }
 }
-
-function levelIndex(xp){
-  let idx = 0;
-  LEVELS.forEach(function(l, i){ if(xp >= l.min) idx = i; });
-  return idx;
-}
+function levelIndex(xp){ let idx = 0; LEVELS.forEach(function(l, i){ if(xp >= l.min) idx = i; }); return idx; }
 function levelName(xp){ return LEVELS[levelIndex(xp)].name; }
-
 function overallProgress(){
   const done = TRACKABLE.filter(function(s){ return state.completed[s]; }).length;
   return Math.round((done / TRACKABLE.length) * 100);
 }
-
 function groupProgress(ids){
   const done = ids.filter(function(s){ return state.completed[s]; }).length;
   return Math.round((done / ids.length) * 100);
 }
-
 function averageScore(){
   const keys = Object.keys(state.scores);
   if(!keys.length) return null;
@@ -2393,7 +1949,7 @@ function averageScore(){
 }
 
 /* =========================================================================
-   15. SECTION RENDERERS
+   10. SECTION RENDERERS
    ========================================================================= */
 function renderDashboard(){
   const pct = overallProgress();
@@ -2410,7 +1966,7 @@ function renderDashboard(){
     { l:"XP", v: String(state.xp), s: levelName(state.xp) },
     { l:"Current Level", v: "Lv " + (levelIndex(state.xp)+1), s: levelName(state.xp) },
     { l:"Completed Activities", v: String(done), s: "Bài tập & luyện tập" },
-    { l:"Mistakes", v: String(state.mistakes.length), s: state.mistakes.length ? "Xem ở mục My Mistakes" : "Chưa có lỗi nào" },
+    { l:"Mistakes", v: String(state.mistakes.length), s: state.mistakes.length ? "Xem ở My Mistakes" : "Chưa có lỗi nào" },
     { l:"Average Score", v: avg === null ? "—" : avg + "<small>%</small>", s: avg === null ? "Chưa có bài chấm điểm" : "Các bài có đáp án" },
     { l:"Final Test", v: fr ? fr.pct + "<small>%</small>" : "—", s: fr ? (fr.passed ? "🏆 Đã đạt" : "Chưa đạt") : "Chưa làm" },
     { l:"Conversation", v: state.conversation.practised.length + "<small>/8</small>", s: "Tình huống đã luyện" }
@@ -2456,7 +2012,7 @@ function renderDashboard(){
     btn.dataset.target = next;
     btn.textContent = "Continue Learning → " + (sec ? sec.label : "");
   } else {
-    txt.innerHTML = "🎉 <strong>Bạn đã hoàn thành tất cả các phần của Unit 1!</strong> Hãy ôn lại My Mistakes hoặc làm lại Final Test.";
+    txt.innerHTML = "🎉 <strong>Bạn đã hoàn thành tất cả các phần của Unit 1!</strong>";
     btn.dataset.target = "final-test";
     btn.textContent = "Làm lại Final Test →";
   }
@@ -2469,12 +2025,9 @@ function renderSpeak(){
   el.textContent = p.hidden ? "••••••••••" : PRON_SENTENCES[idx];
   el.classList.toggle("hidden-text", !!p.hidden);
   document.getElementById("speakIdx").textContent = String(idx + 1);
-  document.getElementById("speakProg").textContent =
-    "Đã luyện: " + p.practised.length + " / " + PRON_SENTENCES.length;
-
+  document.getElementById("speakProg").textContent = "Đã luyện: " + p.practised.length + " / " + PRON_SENTENCES.length;
   const toggleBtn = document.querySelector('[data-action="speak-toggle"]');
   if(toggleBtn) toggleBtn.textContent = p.hidden ? "👁 Show Sentence" : "🙈 Hide Sentence";
-
   const checks = p.checks[idx] || [false,false,false,false];
   document.getElementById("speakChecklist").innerHTML = PRON_CHECKLIST.map(function(c, i){
     return '<li><label>' +
@@ -2503,7 +2056,6 @@ function markPronPractised(){
 function renderDictation(){
   const host = document.getElementById("mount-dictation");
   if(!host) return;
-
   const d = state.dictation;
 
   let h = '<div class="card">';
@@ -2528,9 +2080,8 @@ function renderDictation(){
   DICTATION_LINES.forEach(function(line){
     h += '<p class="dl"><span class="spk">' + line.sp + ':</span>';
     line.seg.forEach(function(part){
-      if(typeof part === "string"){
-        h += '<span>' + esc(part) + '</span>';
-      } else {
+      if(typeof part === "string"){ h += '<span>' + esc(part) + '</span>'; }
+      else {
         const n = part.b;
         const v = d.answers[n] || "";
         const ok = d.submitted ? checkDictBlank(n, v) : null;
@@ -2553,12 +2104,8 @@ function renderDictation(){
       const user = d.answers[i] || "(trống)";
       const spec = DICT_ANSWERS[i];
       const ok = checkDictBlank(i, d.answers[i] || "");
-      h += '<tr>' +
-             '<td>' + i + '</td>' +
-             '<td>' + esc(user) + '</td>' +
-             '<td><strong>' + esc(spec.answer) + '</strong></td>' +
-             '<td style="font-weight:900;color:' + (ok ? 'var(--green)' : 'var(--red)') + '">' + (ok ? "✓" : "✗") + '</td>' +
-           '</tr>';
+      h += '<tr><td>' + i + '</td><td>' + esc(user) + '</td><td><strong>' + esc(spec.answer) + '</strong></td>' +
+           '<td style="font-weight:900;color:' + (ok ? 'var(--green)' : 'var(--red)') + '">' + (ok ? "✓" : "✗") + '</td></tr>';
     }
     h += '</tbody></table></div></div>';
   }
@@ -2574,10 +2121,7 @@ function renderDictation(){
   h += '<button class="btn btn-ghost" data-action="dict-reset">↺ Reset Exercise</button>';
   h += '</div>';
 
-  if(d.submitted){
-    h += transcriptHTML("dict");
-  }
-
+  if(d.submitted){ h += transcriptHTML("dict"); }
   h += '</div>';
   host.innerHTML = h;
 
@@ -2591,19 +2135,16 @@ function renderDictTask2(){
   let h = '<div class="card">';
   h += '<h2 class="q-title">Task 2 — Practice the conversation with a partner</h2>';
   h += '<p class="q-inst">Practice the conversation with a partner. Be sure to reduce the <strong>h</strong> sound.</p>';
-
   h += '<div class="btn-row">';
   h += '<button class="btn ' + (dictTask2.mode === "A" ? "btn-primary" : "btn-ghost") + '" data-action="dict-mode" data-mode="A">Partner A</button>';
   h += '<button class="btn ' + (dictTask2.mode === "B" ? "btn-primary" : "btn-ghost") + '" data-action="dict-mode" data-mode="B">Partner B</button>';
   h += '</div>';
-
   h += '<div class="btn-row">';
   h += '<button class="btn btn-ghost" data-action="dict-toggle">' + (dictTask2.visible ? "🙈 Hide Conversation" : "👁 Show Conversation") + '</button>';
   h += '<button class="btn btn-ghost" data-action="dict-next">▶ Next Line</button>';
   h += '<button class="btn btn-ghost" data-action="dict-again">🔁 Practice Again</button>';
   h += '<button class="btn btn-green" data-action="dict-mark">✓ Mark as Practiced</button>';
   h += '</div>';
-
   h += '<div class="dict-box">';
   DICT_CONVERSATION.forEach(function(l, i){
     const isMine = (l.sp === dictTask2.mode);
@@ -2612,23 +2153,17 @@ function renderDictTask2(){
     h += '<p class="dl" style="' + (active ? 'background:#eff6ff;border-radius:8px;padding:6px 8px;' : '') + '">' +
            '<span class="spk">' + l.sp + ':</span>' +
            '<span style="' + (isMine ? 'font-weight:800;color:#1e3a8a;' : 'color:#64748b;') + '">' +
-           (show ? esc(l.line) : "••••••••") +
-           '</span>' +
-         '</p>';
+           (show ? esc(l.line) : "••••••••") + '</span></p>';
   });
-  h += '</div>';
-  h += '</div>';
+  h += '</div></div>';
   return h;
 }
 
 function renderConversation(){
   const c = state.conversation;
   document.getElementById("situationText").textContent = SITUATIONS[c.situation % SITUATIONS.length];
-
   document.getElementById("convCount").textContent = c.practised.length + " / " + SITUATIONS.length;
-  document.getElementById("convBar").style.width =
-    Math.round((c.practised.length / SITUATIONS.length) * 100) + "%";
-
+  document.getElementById("convBar").style.width = Math.round((c.practised.length / SITUATIONS.length) * 100) + "%";
   document.getElementById("promptGrid").innerHTML = CONV_PROMPTS.map(function(p, i){
     const done = c.practised.indexOf(i) !== -1;
     return '<button class="prompt-card' + (done ? " done" : "") + '" data-action="conv-prompt" data-idx="' + i + '">' +
@@ -2642,28 +2177,22 @@ function renderBank(){
   const host = document.getElementById("bankBody");
   if(!host) return;
   host.innerHTML = LANGUAGE_BANK.map(function(cat){
-    return '<div class="card">' +
-             '<h3 class="card-title">' + cat.icon + ' ' + esc(cat.title) + '</h3>' +
+    return '<div class="card"><h3 class="card-title">' + cat.icon + ' ' + esc(cat.title) + '</h3>' +
              '<div class="table-wrap"><table class="tbl">' +
                '<thead><tr><th>English</th><th>Nghĩa tiếng Việt</th><th>Ví dụ</th></tr></thead>' +
                '<tbody>' +
                  cat.rows.map(function(r){
-                   return '<tr>' +
-                            '<td class="en">' + esc(r.en) + '</td>' +
-                            '<td class="vi">' + esc(r.vi) + '</td>' +
-                            '<td class="ex">' + esc(r.ex) + '</td>' +
-                          '</tr>';
+                   return '<tr><td class="en">' + esc(r.en) + '</td>' +
+                          '<td class="vi">' + esc(r.vi) + '</td>' +
+                          '<td class="ex">' + esc(r.ex) + '</td></tr>';
                  }).join("") +
-               '</tbody>' +
-             '</table></div>' +
-           '</div>';
+               '</tbody></table></div></div>';
   }).join("");
 }
 
 function renderProgress(){
   const host = document.getElementById("progressBody");
   if(!host) return;
-
   const pct = overallProgress();
   const avg = averageScore();
   const fr = state.finalResult;
@@ -2677,13 +2206,11 @@ function renderProgress(){
     { n:"Conversation", p: Math.round((state.conversation.practised.length / SITUATIONS.length) * 100) }
   ];
 
-  let h = '<div class="card">';
-  h += '<h3 class="card-title">📈 Progress bars</h3>';
+  let h = '<div class="card"><h3 class="card-title">📈 Progress bars</h3>';
   bars.forEach(function(b){
     h += '<div class="progress-row">' +
            '<div class="pr-top"><span>' + b.n + '</span><span>' + b.p + '%</span></div>' +
-           '<div class="bar"><i style="width:' + b.p + '%"></i></div>' +
-         '</div>';
+           '<div class="bar"><i style="width:' + b.p + '%"></i></div></div>';
   });
   h += '</div>';
 
@@ -2712,8 +2239,7 @@ function renderProgress(){
            (scoreTxt ? '<span style="font-size:.78rem;font-weight:700;color:var(--blue)">' + scoreTxt + '</span>' : "") +
            '<span style="font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:999px;' +
              (done ? 'background:var(--green-l);color:#14532d' : 'background:#f1f5f9;color:var(--muted)') + '">' +
-             (done ? "✓ Done" : "Not yet") + '</span>' +
-         '</div>';
+             (done ? "✓ Done" : "Not yet") + '</span></div>';
   });
   h += '</div>';
 
@@ -2724,21 +2250,19 @@ function renderProgress(){
     h += '<div class="level-row' + (i === cur ? " current" : "") + (reached ? "" : " locked") + '">' +
            '<span>' + (reached ? "✅" : "🔒") + '</span>' +
            '<span>' + esc(l.name) + '</span>' +
-           '<span class="lr-xp">' + l.min + ' XP</span>' +
-         '</div>';
+           '<span class="lr-xp">' + l.min + ' XP</span></div>';
   });
   h += '</div></div>';
 
   h += '<div class="card"><h3 class="card-title">⚙️ Dữ liệu</h3>' +
        '<p style="font-size:.88rem;color:var(--muted)">Toàn bộ tiến độ, điểm, XP và lỗi được lưu trong trình duyệt của bạn (localStorage).</p>' +
-       '<div class="btn-row"><button class="btn btn-danger" data-action="reset-all">🗑 Reset All Progress</button></div>' +
-       '</div>';
+       '<div class="btn-row"><button class="btn btn-danger" data-action="reset-all">🗑 Reset All Progress</button></div></div>';
 
   host.innerHTML = h;
 }
 
 /* =========================================================================
-   16. NAVIGATION
+   11. NAVIGATION
    ========================================================================= */
 function buildNav(){
   const list = document.getElementById("navList");
@@ -2753,21 +2277,15 @@ function buildNav(){
 
 function showSection(id){
   if(!SECTIONS.some(function(s){ return s.id === id; })) id = "dashboard";
-
-  $$(".section").forEach(function(sec){
-    sec.hidden = sec.dataset.section !== id;
-  });
-
+  $$(".section").forEach(function(sec){ sec.hidden = sec.dataset.section !== id; });
   $$(".nav-btn").forEach(function(b){
     const on = b.dataset.target === id;
     b.classList.toggle("active", on);
     if(on) b.setAttribute("aria-current","page");
     else b.removeAttribute("aria-current");
   });
-
   state.lastSection = id;
   saveState();
-
   if(id === "dashboard") renderDashboard();
   if(id === "pronunciation") renderSpeak();
   if(id === "dictation") renderDictation();
@@ -2776,7 +2294,6 @@ function showSection(id){
   if(id === "mistakes") renderMistakes();
   if(id === "progress") renderProgress();
   if(id === "strategy" || id === "bank") markComplete(id);
-
   window.scrollTo({ top:0, behavior:"smooth" });
   closeSidebar();
 }
@@ -2784,19 +2301,14 @@ function showSection(id){
 function refreshUI(){
   const xpTop = document.getElementById("xpTop");
   if(xpTop) xpTop.textContent = state.xp;
-
   const lvlTop = document.getElementById("lvlTop");
   if(lvlTop) lvlTop.textContent = "Level " + (levelIndex(state.xp) + 1);
-
   const pct = overallProgress();
   const sideBar = document.getElementById("sideBar");
   const sideVal = document.getElementById("sideVal");
   if(sideBar) sideBar.style.width = pct + "%";
   if(sideVal) sideVal.textContent = pct + "%";
-
-  $$("[data-tick]").forEach(function(el){
-    el.classList.toggle("on", !!state.completed[el.dataset.tick]);
-  });
+  $$("[data-tick]").forEach(function(el){ el.classList.toggle("on", !!state.completed[el.dataset.tick]); });
 }
 
 function openSidebar(){
@@ -2815,23 +2327,19 @@ function toggleSidebar(){
 }
 
 /* =========================================================================
-   17. RESET
+   12. RESET
    ========================================================================= */
 function resetAll(){
   if(!window.confirm("Xoá TOÀN BỘ tiến độ (XP, điểm, lỗi, phần đã hoàn thành)? Hành động này không thể hoàn tác.")) return;
-
   try{ localStorage.removeItem(STORE_KEY); }catch(e){}
   state = defaultState();
-
   Object.keys(quizRuntime).forEach(function(k){ delete quizRuntime[k]; });
   Object.keys(retryBox).forEach(function(k){ delete retryBox[k]; });
   dictTask2.mode = "A"; dictTask2.visible = true; dictTask2.line = 0;
-
   Object.keys(QUIZZES).forEach(function(qid){
     const host = document.getElementById("mount-" + qid);
     if(host) host.innerHTML = renderQuiz(qid);
   });
-
   renderDictation();
   renderSpeak();
   renderConversation();
@@ -2843,14 +2351,12 @@ function resetAll(){
 }
 
 /* =========================================================================
-   18. EVENT DELEGATION
+   13. EVENT DELEGATION
    ========================================================================= */
 document.addEventListener("change", function(e){
   const t = e.target;
-
   if(t.matches('input[type="radio"][data-quiz]')){
-    const qid = t.dataset.quiz;
-    const idx = Number(t.dataset.item);
+    const qid = t.dataset.quiz, idx = Number(t.dataset.item);
     const st = getQuizState(qid);
     if(st.submitted) return;
     st.answers[idx] = Number(t.value);
@@ -2862,11 +2368,8 @@ document.addEventListener("change", function(e){
     }
     return;
   }
-
   if(t.matches("select.match-sel[data-quiz]")){
-    const qid = t.dataset.quiz;
-    const idx = Number(t.dataset.item);
-    const pi = Number(t.dataset.pair);
+    const qid = t.dataset.quiz, idx = Number(t.dataset.item), pi = Number(t.dataset.pair);
     const st = getQuizState(qid);
     if(st.submitted) return;
     if(!st.answers[idx] || typeof st.answers[idx] !== "object") st.answers[idx] = {};
@@ -2874,34 +2377,27 @@ document.addEventListener("change", function(e){
     persistQuiz(qid);
     return;
   }
-
   if(t.matches('input.fill-input[data-quiz]')){
-    const qid = t.dataset.quiz;
-    const idx = Number(t.dataset.item);
+    const qid = t.dataset.quiz, idx = Number(t.dataset.item);
     const st = getQuizState(qid);
     if(st.submitted) return;
     st.answers[idx] = t.value;
     persistQuiz(qid);
     return;
   }
-
   if(t.matches("input.blank[data-blank]")){
     const n = Number(t.dataset.blank);
     state.dictation.answers[n] = t.value;
-    saveState();
-    updateDictCount();
+    saveState(); updateDictCount();
     return;
   }
-
   if(t.matches('input[data-action="pron-check"]')){
-    const idx = Number(t.dataset.idx);
-    const ci = Number(t.dataset.ci);
+    const idx = Number(t.dataset.idx), ci = Number(t.dataset.ci);
     if(!state.pron.checks[idx]) state.pron.checks[idx] = [false,false,false,false];
     state.pron.checks[idx][ci] = t.checked;
     saveState();
     return;
   }
-
   if(t.matches('input[data-action="retry-pick"]')){
     const mid = t.dataset.mid;
     if(!retryBox[mid]) retryBox[mid] = {};
@@ -2919,8 +2415,7 @@ document.addEventListener("input", function(e){
     updateDictCount();
   }
   if(t.matches('input.fill-input[data-quiz]')){
-    const qid = t.dataset.quiz;
-    const idx = Number(t.dataset.item);
+    const qid = t.dataset.quiz, idx = Number(t.dataset.item);
     const st = getQuizState(qid);
     if(st.submitted) return;
     st.answers[idx] = t.value;
@@ -2941,7 +2436,7 @@ function updateDictCount(){
 }
 
 /* =========================================================================
-   19. CLICK HANDLING
+   14. CLICK HANDLING
    ========================================================================= */
 document.addEventListener("click", function(e){
   const el = e.target.closest("[data-action]");
@@ -2949,27 +2444,14 @@ document.addEventListener("click", function(e){
   const action = el.dataset.action;
 
   switch(action){
-
-    case "nav":
-      showSection(el.dataset.target);
-      break;
-
-    case "continue":
-      showSection(el.dataset.target || "getting-ready");
-      break;
-
-    case "submit-quiz":
-      submitQuiz(el.dataset.quiz);
-      break;
-
-    case "reset-quiz":
-      resetQuiz(el.dataset.quiz);
-      break;
+    case "nav": showSection(el.dataset.target); break;
+    case "continue": showSection(el.dataset.target || "getting-ready"); break;
+    case "submit-quiz": submitQuiz(el.dataset.quiz); break;
+    case "reset-quiz": resetQuiz(el.dataset.quiz); break;
 
     case "dict-submit": {
       if(state.dictation.submitted) break;
       state.dictation.submitted = true;
-
       let correct = 0;
       for(let i = 1; i <= DICT_BLANKS; i++){
         const ok = checkDictBlank(i, state.dictation.answers[i] || "");
@@ -2985,29 +2467,21 @@ document.addEventListener("click", function(e){
             existing.date = new Date().toISOString();
           } else {
             state.mistakes.push({
-              id: mid,
-              quizId: "dictation",
-              itemId: "blank" + i,
-              activity: "Dictation — Task 1",
-              question: "Blank " + i + " (CD 1-6)",
-              options: null,
-              type: "fill",
-              learnerText: userVal,
-              correctText: spec.answer,
+              id: mid, quizId: "dictation", itemId: "blank" + i,
+              activity: "Dictation — Task 1", question: "Blank " + i + " (CD 1-6)",
+              options: null, type: "fill",
+              learnerText: userVal, correctText: spec.answer,
               explanation: "Chấp nhận: " + spec.accept.join(" / "),
-              date: new Date().toISOString(),
-              attempts: 1
+              date: new Date().toISOString(), attempts: 1
             });
           }
         }
       }
-
       const pct = Math.round((correct / DICT_BLANKS) * 100);
       state.scores["dictation"] = {
         correct: correct, graded: DICT_BLANKS, pct: pct,
         label:"Dictation", date: new Date().toISOString()
       };
-
       addXP(20, "dictation");
       if(pct === 100) addXP(20, "perfect-dictation");
       markComplete("dictation");
@@ -3029,24 +2503,18 @@ document.addEventListener("click", function(e){
       dictTask2.mode = el.dataset.mode;
       document.getElementById("mount-dict-task2").innerHTML = renderDictTask2();
       break;
-
     case "dict-toggle":
       dictTask2.visible = !dictTask2.visible;
       document.getElementById("mount-dict-task2").innerHTML = renderDictTask2();
       break;
-
     case "dict-next":
       dictTask2.line = (dictTask2.line + 1) % DICT_CONVERSATION.length;
       document.getElementById("mount-dict-task2").innerHTML = renderDictTask2();
       break;
-
     case "dict-again":
-      dictTask2.line = 0;
-      dictTask2.visible = true;
-      dictTask2.mode = "A";
+      dictTask2.line = 0; dictTask2.visible = true; dictTask2.mode = "A";
       document.getElementById("mount-dict-task2").innerHTML = renderDictTask2();
       break;
-
     case "dict-mark":
       addXP(10, "dict-task2");
       markComplete("dictation");
@@ -3060,34 +2528,26 @@ document.addEventListener("click", function(e){
       state.pron.index = (state.pron.index - 1 + PRON_SENTENCES.length) % PRON_SENTENCES.length;
       saveState(); renderSpeak();
       break;
-
     case "speak-next":
       state.pron.index = (state.pron.index + 1) % PRON_SENTENCES.length;
       saveState(); renderSpeak();
       break;
-
     case "speak-toggle":
       state.pron.hidden = !state.pron.hidden;
       saveState(); renderSpeak();
       break;
-
-    case "speak-mark":
-      markPronPractised();
-      break;
+    case "speak-mark": markPronPractised(); break;
 
     case "conv-new":
       state.conversation.situation = (state.conversation.situation + 1) % SITUATIONS.length;
-      saveState();
-      renderConversation();
+      saveState(); renderConversation();
       break;
-
     case "conv-start":
       state.conversation.started = true;
       addXP(5, "conv-start");
       saveState();
       el.textContent = "▶ Started!";
       break;
-
     case "conv-mark": {
       const s = state.conversation.situation;
       if(state.conversation.practised.indexOf(s) === -1){
@@ -3102,11 +2562,9 @@ document.addEventListener("click", function(e){
       refreshUI();
       break;
     }
-
     case "conv-prompt": {
       const i = Number(el.dataset.idx);
-      const txt = CONV_PROMPTS[i];
-      document.getElementById("situationText").textContent = txt;
+      document.getElementById("situationText").textContent = CONV_PROMPTS[i];
       window.scrollTo({ top: 0, behavior:"smooth" });
       break;
     }
@@ -3117,13 +2575,11 @@ document.addEventListener("click", function(e){
       renderMistakes();
       break;
     }
-
     case "mistake-check": {
       const mid = el.dataset.mid;
       const rs = retryBox[mid];
       const m = state.mistakes.find(function(x){ return x.id === mid; });
       if(!rs || !m) return;
-
       let isCorrect = false;
       if(m.options){
         if(rs.answer === undefined) return;
@@ -3134,39 +2590,27 @@ document.addEventListener("click", function(e){
         const correctVal = normalizeText(m.correctText);
         isCorrect = (userVal === correctVal) && userVal !== "";
       }
-
       rs.checked = true;
       if(isCorrect){
         rs.result = "correct";
         state.mistakes = state.mistakes.filter(function(x){ return x.id !== mid; });
         addXP(5, "retry-" + mid);
-        saveState();
-        renderMistakes();
-        refreshUI();
+        saveState(); renderMistakes(); refreshUI();
       } else {
         rs.result = "wrong";
         renderMistakes();
       }
       break;
     }
-
     case "mistake-cancel": {
       const mid = el.dataset.mid;
       delete retryBox[mid];
       renderMistakes();
       break;
     }
-
-    case "clear-mistakes":
-      clearMistakes();
-      break;
-
-    case "reset-all":
-      resetAll();
-      break;
-
-    default:
-      break;
+    case "clear-mistakes": clearMistakes(); break;
+    case "reset-all": resetAll(); break;
+    default: break;
   }
 });
 
@@ -3175,17 +2619,15 @@ document.addEventListener("keydown", function(e){
 });
 
 /* =========================================================================
-   20. BOOT
+   15. BOOT
    ========================================================================= */
 function boot(){
   injectPlayers();
   buildNav();
-
   Object.keys(QUIZZES).forEach(function(qid){
     const host = document.getElementById("mount-" + qid);
     if(host) host.innerHTML = renderQuiz(qid);
   });
-
   initPlayers();
   renderDictation();
   renderSpeak();
@@ -3201,16 +2643,13 @@ function boot(){
   const start = SECTIONS.some(function(s){ return s.id === state.lastSection; })
     ? state.lastSection : "dashboard";
   showSection(start);
-
   renderDashboard();
   refreshUI();
 }
 
 if(document.readyState === "loading"){
   document.addEventListener("DOMContentLoaded", boot);
-} else {
-  boot();
-}
+} else { boot(); }
 </script>
 </body>
 </html>
